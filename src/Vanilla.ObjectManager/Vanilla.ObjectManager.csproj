@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Vanilla.ObjectManager</RootNamespace>
     <AssemblyName>Vanilla.ObjectManager</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -22,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -41,11 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastucture\IProcessConnection.cs" />
-    <Compile Include="Infrastucture\IProcessMemoryReader.cs" />
-    <Compile Include="Infrastucture\ProcessConnection.cs" />
+    <Compile Include="Infrastucture\Constants.cs" />
+    <Compile Include="Infrastucture\Helpers.cs" />
+    <Compile Include="Infrastucture\Offsets.cs" />
+    <Compile Include="Infrastucture\Offsets2.cs" />
     <Compile Include="Infrastucture\ProcessMemoryReader.cs" />
     <Compile Include="Infrastucture\Win32Imports.cs" />
+    <Compile Include="Model\WowPlayer.cs" />
+    <Compile Include="Model\WowUnit.cs" />
     <Compile Include="ObjectManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

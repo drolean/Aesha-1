@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using Vanilla.ObjectManager.Infrastucture;
+using System.Linq;
 
 namespace Vanilla.ObjectManager
 {
@@ -8,14 +8,16 @@ namespace Vanilla.ObjectManager
     {
         static void Main(string[] args)
         {
-            var wowProcessId = Process.GetProcessesByName("WoW")[0].Id;
-            var connection = new ProcessConnection(wowProcessId, new ProcessMemoryReader());
-            connection.OpenProcessAndThread();
+            var process = Process.GetProcessesByName("WoW").First();  
+            var objectManager = new ObjectManager(process);
             
-            var objectManager = new ObjectManager(connection);
-            Console.WriteLine("Attaching to pid: " + wowProcessId);
+            objectManager.Pulse();
 
-            objectManager.GetObjects();
+            var me = objectManager.Me;
+            var players = objectManager.Players;
+            var units = objectManager.Units;
+
+            Console.ReadLine();
             
         }
     }

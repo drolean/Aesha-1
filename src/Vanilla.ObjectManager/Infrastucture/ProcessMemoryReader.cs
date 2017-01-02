@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Vanilla.ObjectManager.Infrastucture
 {
-    public sealed class ProcessMemoryReader : IProcessMemoryReader
+    public sealed class ProcessMemoryReader
     {
         private IntPtr _processPtr;
         
@@ -20,6 +20,17 @@ namespace Vanilla.ObjectManager.Infrastucture
 
             return buf[0];
         }
+
+        public static float ReadFloat(IntPtr hProcess, uint dwAddress, bool bReverse)
+        {
+            byte[] numArray = ReadBytes(hProcess, dwAddress, 4);
+            if (numArray == null)
+                throw new Exception("ReadFloat failed.");
+            if (bReverse)
+                Array.Reverse((Array)numArray);
+            return BitConverter.ToSingle(numArray, 0);
+        }
+
 
         private static byte[] ReadBytes(IntPtr hProcess, uint dwAddress, int nSize)
         {
@@ -66,9 +77,21 @@ namespace Vanilla.ObjectManager.Infrastucture
             }
         }
 
+        private static int ReadInt(IntPtr hProcess, uint dwAddress, bool bReverse)
+        {
+            var buffer = ReadBytes(hProcess, dwAddress, sizeof(int));
+            if (buffer == null)
+                throw new Exception("ReadUInt failed.");
+
+            if (bReverse)
+                Array.Reverse(buffer);
+
+            return BitConverter.ToInt32(buffer, 0);
+        }
+
         private static uint ReadUInt(IntPtr hProcess, uint dwAddress, bool bReverse)
         {
-            byte[] buffer = ReadBytes(hProcess, dwAddress, sizeof(uint));
+            var buffer = ReadBytes(hProcess, dwAddress, sizeof(uint));
             if (buffer == null)
                 throw new Exception("ReadUInt failed.");
 
@@ -78,14 +101,76 @@ namespace Vanilla.ObjectManager.Infrastucture
             return BitConverter.ToUInt32(buffer, 0);
         }
 
+        private static ulong ReadUInt64(IntPtr hProcess, uint dwAddress, bool bReverse)
+        {
+            var numArray = ReadBytes(hProcess, dwAddress, 8);
+            if (numArray == null)
+                throw new Exception("ReadUInt64 failed.");
+            if (bReverse)
+                Array.Reverse(numArray);
+            return BitConverter.ToUInt64(numArray, 0);
+        }
+
+        private static string ReadString(IntPtr hProcess, uint dwAddress, int length)
+        {
+            var num = IntPtr.Zero;
+            string stringAnsi;
+            try
+            {
+                var nSize = length;
+                num = Marshal.AllocHGlobal(nSize + 1);
+                Marshal.WriteByte(num, length, (byte)0);
+                if (ReadRawMemory(hProcess, dwAddress, num, nSize) != nSize)
+                    throw new Exception();
+                stringAnsi = Marshal.PtrToStringAnsi(num);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+            finally
+            {
+                if (num != IntPtr.Zero)
+                    Marshal.FreeHGlobal(num);
+            }
+            return stringAnsi;
+        }
+
         public byte ReadByte(uint dwAddress)
         {
             return ReadByte(_processPtr, dwAddress);
         }
 
-        public uint ReadUInt(uint dwAddress, bool bReverse = false)
+        public byte[] ReadBytes(uint dwAddress, int length)
         {
-            return ReadUInt(_processPtr, dwAddress, bReverse);
+            return ReadBytes(_processPtr,dwAddress,length);
         }
+
+        public int ReadInt(uint dwAddress)
+        {
+            return ReadInt(_processPtr, dwAddress, false);
+        }
+
+        public uint ReadUInt(uint dwAddress)
+        {
+            return ReadUInt(_processPtr, dwAddress, false);
+        }
+
+        public float ReadFloat(uint dwAddress)
+        {
+            return ReadFloat(_processPtr, dwAddress, false);
+        }
+
+        public ulong ReadUInt64(uint dwAddress)
+        {
+            return ReadUInt64(_processPtr, dwAddress, false);
+        }
+
+        public string ReadString(uint dwAddress, int length)
+        {
+            return ReadString(_processPtr,dwAddress,length);
+        }
+
+
     }
 }

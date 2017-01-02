@@ -1,52 +1,93 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using Vanilla.ObjectManager.Infrastucture;
+using Vanilla.ObjectManager.Model;
 
 namespace Vanilla.ObjectManager
 {
     public class ObjectManager
     {
-        public ObjectManager(ProcessConnection connection)
+
+        private Process _process;
+        private  ProcessMemoryReader _reader;
+
+        private const uint StandardRightsRequired = 0x000F0000;
+        private const uint Synchronize = 0x00100000;
+        private const uint ProcessAllAccess = StandardRightsRequired | Synchronize | 0xFFF;
+
+        private List<IWowObject> _objects;
+       
+        public ObjectManager(Process process)
         {
-            _processConnection = connection;
+            OpenProcess(process);
         }
 
-        private enum ObjTypes : byte
+        private void OpenProcess(Process process)
         {
-            None = 0,
-            Item = 1,
-            Container = 2,
-            Unit = 3,
-            Player = 4,
-            GameObject = 5,
-            DynamicObject = 6,
-            Corpse = 7
+            _process = process;
+
+            var processPtr = Win32Imports.OpenProcess(ProcessAllAccess, false, process.Id);
+            _reader = new ProcessMemoryReader();
+            _reader.Open(processPtr);
         }
 
-        private static readonly uint objectManagerOffset = 0x00B41414;
-        private static readonly uint firstObjectOffset = 0xac;
-        private static readonly uint nextObjectOffset = 0x3c;
-        private static readonly uint objectTypeOffset = 0x14;
-        private readonly ProcessConnection _processConnection;
-
-        public void GetObjects()
+        public WowPlayer Me
         {
-            var objectManager = _processConnection.Memory.ReadUInt(objectManagerOffset);
-            var currentObject = _processConnection.Memory.ReadUInt(objectManager + firstObjectOffset);
+            get { return Players.SingleOrDefault(p => p.IsActivePlayer); }
+        }
 
+        public IEnumerable<WowPlayer> Players
+        {
+            get { return _objects.Where(o => o.Type == ObjectType.Player).Select(p => (WowPlayer) p).ToList(); }
+        }
+
+        public IEnumerable<WowUnit> Units
+        {
+            get { return _objects.Where(o => o.Type == ObjectType.Unit).Select(u => (WowUnit) u).ToList(); }
+        }
+
+        public void Pulse()
+        {
+            _objects = new List<IWowObject>();
+
+            var objectManager = _reader.ReadUInt((uint)Offsets.WowObjectManager.Base);
+            var currentObject = _reader.ReadUInt(objectManager + (uint)Offsets.WowObjectManager.FirstObject);
+           
             while (currentObject != 0 && (currentObject & 1) == 0)
             {
-                var objectType = _processConnection.Memory.ReadByte(currentObject + objectTypeOffset);
-                var objectTypeName = Enum.GetName(typeof(ObjTypes), objectType);
-                
-                Console.WriteLine($"Found a object of type {objectTypeName} at 0x{currentObject:X8}");
+                var objectType = _reader.ReadByte(currentObject + (uint)Offsets.WowObjectManager.ObjectType);
+                switch (objectType)
+                {
+                    case (byte)ObjectType.Unit:
+                    {
+                        var unit = new WowUnit(_reader, currentObject);
+                        _objects.Add(unit);
+                        break;
+                    }
+                    case (byte)ObjectType.Player:
+                    {
+                        var player = new WowPlayer(_process, _reader, currentObject);
+                        _objects.Add(player);
+                        break;
+                    }
+                }
 
-                var nextObject = _processConnection.Memory.ReadUInt(currentObject + nextObjectOffset);
+                var nextObject = _reader.ReadUInt(currentObject + (uint)Offsets.WowObjectManager.NextObject);
 
                 if (nextObject == currentObject)
                     break;
                 
                 currentObject = nextObject;
             }
+
         }
+
+        //var unitFieldsAddress = _reader.ReadUInt(objectAddress + (uint)Offsets.WowObject.DataPTR);
+        //var dump = _reader.ReadBytes(unitFieldsAddress, 20000);
+        //uint buffId = 687;
+        //var buffIndex = dump.FindPattern(buffId);
+
     }
 }
