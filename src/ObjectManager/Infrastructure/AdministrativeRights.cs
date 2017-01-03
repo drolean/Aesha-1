@@ -1,7 +1,7 @@
 ﻿using System.Security;
 using System.Security.Principal;
 
-namespace ObjectManager.Infrastucture
+namespace ObjectManager.Infrastructure
 {
     internal class AdministrativeRights
     {
