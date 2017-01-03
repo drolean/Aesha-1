@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using ObjectManager.Infrastructure;
 
 namespace ObjectManager.Model
@@ -73,12 +75,29 @@ namespace ObjectManager.Model
                 
             }
         }
-        public ulong SummonedBy => _reader.ReadUInt64(_objectBaseAddress + (uint)Offsets.WowUnit.UNIT_FIELD_SUMMONEDBY);
-        public ulong CreatedBy => _reader.ReadUInt64(_objectBaseAddress + (uint) Offsets.WowUnit.UNIT_FIELD_CREATEDBY);
-        public ulong Target => _reader.ReadUInt64(_objectBaseAddress + (uint) Offsets.WowUnit.UNIT_FIELD_TARGET);
-        public uint CharmedBy => _reader.ReadUInt(_objectBaseAddress + (uint) Offsets.WowUnit.UNIT_FIELD_CHARMEDBY);
+        public ulong SummonedBy => _reader.ReadUInt64(_unitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_SUMMONEDBY);
+        public ulong CreatedBy => _reader.ReadUInt64(_unitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_CREATEDBY);
+        public ulong Target => _reader.ReadUInt64(_unitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_TARGET);
+        public uint CharmedBy => _reader.ReadUInt(_unitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_CHARMEDBY);
 
-        public uint[] Auras { get; set; }
+        public int[] Auras
+        {
+            get
+            {
+                var auras = new List<int>();
+                uint auraPosition = 0;
+                for (uint i = 0; i < 47; i++)
+                {
+                    auraPosition += 4;
+                    var aura = _reader.ReadInt(_unitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_AURA + auraPosition);
+                    if (aura > 0)
+                        auras.Add(aura);
+                }
+
+                return auras.ToArray();
+            }
+
+        }
 
         public override string ToString()
         {

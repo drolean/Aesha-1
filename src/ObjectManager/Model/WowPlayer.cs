@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using ObjectManager.Infrastructure;
 
 namespace ObjectManager.Model
@@ -26,6 +27,11 @@ namespace ObjectManager.Model
                 var activePlayerGuid = _reader.ReadUInt64(currentManager + (uint)Offsets.WowObjectManager.PLAYER_GUID);
                 return Guid == activePlayerGuid;
             }
+        }
+
+        public WowUnit Pet
+        {
+            get { return ObjectManager.Units.SingleOrDefault(u => u.SummonedBy == Guid); }
         }
 
         public override string Name {
@@ -59,11 +65,12 @@ namespace ObjectManager.Model
             }
         }
 
-        public RaceFlags Race {
+        public RaceFlags Race
+        {
             get
             {
-                var ret = _reader.ReadUInt(_unitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_BYTES_0);
-                return (RaceFlags)(ret & 0xFF);
+                var ret = _reader.ReadUInt(_unitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_BYTES_0);
+                return (RaceFlags) (ret & 0xFF);
             }
         }
 

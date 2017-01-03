@@ -31,6 +31,13 @@ namespace ObjectManager
                 throw new ArgumentNullException(nameof(process));
 
             OpenProcess(process);
+
+            //read loginstate
+            var state = _reader.ReadString((uint) 0xB41478, 10);
+            //login
+            //charselect
+
+
             _cancellationSource = new CancellationTokenSource();
             _pulseTask = new Task(async () =>
             {
@@ -118,10 +125,11 @@ namespace ObjectManager
             }
         }
 
-        //var unitFieldsAddress = _reader.ReadUInt(objectAddress + (uint)Offsets.WowObject.DataPTR);
-        //var dump = _reader.ReadBytes(unitFieldsAddress, 20000);
+        //var bob = _reader.ReadUInt(_objectBaseAddress + (uint)Offsets.WowUnit.UNIT_FIELD_AURA);
+        //var dump = _reader.ReadBytes(_unitFieldsAddress, 20000);
         //uint buffId = 687;
         //var buffIndex = dump.FindPattern(buffId);
+
 
     }
 }
