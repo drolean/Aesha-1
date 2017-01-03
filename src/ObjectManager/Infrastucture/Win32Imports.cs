@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Vanilla.ObjectManager.Infrastucture
+namespace ObjectManager.Infrastucture
 {
     public static class Win32Imports
     {

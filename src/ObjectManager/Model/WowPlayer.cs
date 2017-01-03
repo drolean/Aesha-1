@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
-using Vanilla.ObjectManager.Infrastucture;
+using ObjectManager.Infrastucture;
 
-namespace Vanilla.ObjectManager.Model
+namespace ObjectManager.Model
 {
     public class WowPlayer : WowUnit
     {

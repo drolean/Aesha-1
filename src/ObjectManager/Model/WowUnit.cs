@@ -1,7 +1,7 @@
 ﻿using System;
-using Vanilla.ObjectManager.Infrastucture;
+using ObjectManager.Infrastucture;
 
-namespace Vanilla.ObjectManager.Model
+namespace ObjectManager.Model
 {
     public class WowUnit : IWowObject
     {

@@ -1,4 +1,4 @@
-﻿namespace Vanilla.ObjectManager.Infrastucture
+﻿namespace ObjectManager.Infrastucture
 {
 
     public static class Offsets

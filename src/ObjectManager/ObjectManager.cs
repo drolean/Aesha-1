@@ -5,28 +5,31 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Vanilla.ObjectManager.Infrastucture;
-using Vanilla.ObjectManager.Model;
+using ObjectManager.Infrastucture;
+using ObjectManager.Model;
 
-namespace Vanilla.ObjectManager
+namespace ObjectManager
 {
-    public class ObjectManager
+    public static class ObjectManager
     {
-
-        private Process _process;
-        private  ProcessMemoryReader _reader;
+        private static Process _process;
+        private static ProcessMemoryReader _reader;
 
         private const uint StandardRightsRequired = 0x000F0000;
         private const uint Synchronize = 0x00100000;
         private const uint ProcessAllAccess = StandardRightsRequired | Synchronize | 0xFFF;
 
-        private ConcurrentDictionary<ulong, IWowObject> _objects;
-        private readonly CancellationTokenSource _cancellationSource;
-        private readonly Task _pulseTask;
-        
-
-        public ObjectManager(Process process)
+        private static ConcurrentDictionary<ulong, IWowObject> _objects = new ConcurrentDictionary<ulong, IWowObject>();
+        private static CancellationTokenSource _cancellationSource;
+        private static Task _pulseTask;
+       
+        public static void Start(Process process)
         {
+            AdministrativeRights.Ensure();
+
+            if (process == null)
+                throw new ArgumentNullException(nameof(process));
+
             OpenProcess(process);
             _cancellationSource = new CancellationTokenSource();
             _pulseTask = new Task(async () =>
@@ -37,21 +40,18 @@ namespace Vanilla.ObjectManager
                     await Task.Delay(new TimeSpan(0, 0, 0, 0, 10));
                 }
             }, _cancellationSource.Token);
-        }
 
-        public void Start()
-        {
             Pulse();
             _pulseTask.Start();
         }
 
-        public void Stop()
+        public static void Stop()
         {
             _cancellationSource.Cancel();
             _objects = new ConcurrentDictionary<ulong,IWowObject>();
         }
 
-        private void OpenProcess(Process process)
+        private static void OpenProcess(Process process)
         {
             _process = process;
 
@@ -60,22 +60,22 @@ namespace Vanilla.ObjectManager
             _reader.Open(processPtr);
         }
 
-        public WowPlayer Me
+        public static WowPlayer Me
         {
             get { return Players.SingleOrDefault(p => p.IsActivePlayer); }
         }
 
-        public IEnumerable<WowPlayer> Players
+        public static IEnumerable<WowPlayer> Players
         {
             get{return _objects.Where(o => o.Value.Type == ObjectType.Player).Select(p => (WowPlayer) p.Value).ToList();}
         }
 
-        public IEnumerable<WowUnit> Units
+        public static IEnumerable<WowUnit> Units
         {
             get { return _objects.Where(o => o.Value.Type == ObjectType.Unit).Select(u => (WowUnit) u.Value).ToList(); }
         }
 
-        private void Pulse()
+        private static void Pulse()
         {
             var objectManager = _reader.ReadUInt((uint) Offsets.WowObjectManager.BASE);
             var currentObject = _reader.ReadUInt(objectManager + (uint) Offsets.WowObjectManager.FIRST_OBJECT);
@@ -116,7 +116,6 @@ namespace Vanilla.ObjectManager
                 IWowObject deadObject;
                 _objects.TryRemove(guid, out deadObject);
             }
-            
         }
 
         //var unitFieldsAddress = _reader.ReadUInt(objectAddress + (uint)Offsets.WowObject.DataPTR);

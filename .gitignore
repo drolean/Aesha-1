@@ -1,2 +1,7 @@
 src/Vanilla.ObjectManager/bin/
 src/Vanilla.ObjectManager/obj/
+src/ObjectManager/bin/
+src/ObjectManager/obj/
+src/ObjectManager.Sample/bin/
+src/ObjectManager.Sample/obj/
+src/.vs/

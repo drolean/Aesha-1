@@ -5,10 +5,10 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AD53AC8F-0B8A-4DC2-838B-C8A04641B96C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Vanilla.ObjectManager</RootNamespace>
-    <AssemblyName>Vanilla.ObjectManager</AssemblyName>
+    <RootNamespace>ObjectManager</RootNamespace>
+    <AssemblyName>ObjectManager</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastucture\AdministrativeRights.cs" />
     <Compile Include="Infrastucture\Enums.cs" />
     <Compile Include="Infrastucture\Helpers.cs" />
     <Compile Include="Infrastucture\Offsets.cs" />
@@ -52,7 +57,6 @@
     <Compile Include="Model\WowPlayer.cs" />
     <Compile Include="Model\WowUnit.cs" />
     <Compile Include="ObjectManager.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
