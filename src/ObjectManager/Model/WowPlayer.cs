@@ -23,7 +23,7 @@ namespace ObjectManager.Model
             get
             {
                 var currentManager = _reader.ReadUInt((uint)Offsets.WowObjectManager.BASE);
-                var activePlayerGuid = _reader.ReadUInt64(currentManager + (uint)Offsets.WowObjectManager.LOCAL_GUID);
+                var activePlayerGuid = _reader.ReadUInt64(currentManager + (uint)Offsets.WowObjectManager.PLAYER_GUID);
                 return Guid == activePlayerGuid;
             }
         }

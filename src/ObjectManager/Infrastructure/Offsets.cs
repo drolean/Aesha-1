@@ -9,7 +9,8 @@
             BASE = 0x00B41414,
             FIRST_OBJECT = 0xac,
             NEXT_OBJECT = 0x3c,
-            LOCAL_GUID = 0xC0,
+            LOCAL_GUID = 0xC,
+            PLAYER_GUID = 0xC0,
             DESCRIPTOR = 0x8
         }
 
