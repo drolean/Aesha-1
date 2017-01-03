@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ObjectManager.Infrastucture
+namespace ObjectManager.Infrastructure
 {
     public static class Helpers
     {

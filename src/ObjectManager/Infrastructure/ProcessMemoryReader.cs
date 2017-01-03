@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace ObjectManager.Infrastucture
+namespace ObjectManager.Infrastructure
 {
     public sealed class ProcessMemoryReader
     {

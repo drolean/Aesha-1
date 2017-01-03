@@ -1,4 +1,4 @@
-﻿namespace ObjectManager.Infrastucture
+﻿namespace ObjectManager.Infrastructure
 {
     public enum ObjectType : byte
     {

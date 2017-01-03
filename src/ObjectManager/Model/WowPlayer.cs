@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using ObjectManager.Infrastucture;
+using ObjectManager.Infrastructure;
 
 namespace ObjectManager.Model
 {
