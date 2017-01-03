@@ -23,8 +23,8 @@ namespace Vanilla.ObjectManager.Model
         {
             get
             {
-                var currentManager = _reader.ReadUInt((uint)Offsets.WowObjectManager.Base);
-                var activePlayerGuid = _reader.ReadUInt64(currentManager + (uint)Offsets.WowObjectManager.LocalGUID);
+                var currentManager = _reader.ReadUInt((uint)Offsets.WowObjectManager.BASE);
+                var activePlayerGuid = _reader.ReadUInt64(currentManager + (uint)Offsets.WowObjectManager.LOCAL_GUID);
                 return Guid == activePlayerGuid;
             }
         }
@@ -32,30 +32,30 @@ namespace Vanilla.ObjectManager.Model
         public override string Name {
             get
             {
-                var nameStoreAddress = (uint)_wowProcess.MainModule.BaseAddress + (uint)Offsets.UnitName.PlayerNameCachePointer;
+                var nameStoreAddress = (uint)_wowProcess.MainModule.BaseAddress + (uint)Offsets.WowPlayerNameCache.NAME_CACHE_BASE;
                 var baseAddress = _reader.ReadUInt(nameStoreAddress);
-                var currentGuid = _reader.ReadUInt64(baseAddress + (uint)Offsets.UnitName.PlayerNameGUIDOffset);
+                var currentGuid = _reader.ReadUInt64(baseAddress + (uint)Offsets.WowObjectManager.LOCAL_GUID);
 
                 while (currentGuid != Guid)
                 {
                     baseAddress = _reader.ReadUInt(baseAddress);
-                    currentGuid = _reader.ReadUInt64(baseAddress + (uint)Offsets.UnitName.PlayerNameGUIDOffset);
+                    currentGuid = _reader.ReadUInt64(baseAddress + (uint)Offsets.WowObjectManager.LOCAL_GUID);
                 }
 
-                return _reader.ReadString(baseAddress + (uint)Offsets.UnitName.PlayerNameStringOffset, 50);
+                return _reader.ReadString(baseAddress + (uint)Offsets.WowPlayerNameCache.NAME_CACHE_STRING, 50);
             }
         }
 
         public override ObjectType Type => ObjectType.Player;
 
-        public uint Xp => _reader.ReadUInt(_unitFieldsAddress + (uint) Offsets.WoWPlayerFields.PLAYER_XP);
-        public uint XpRequired => _reader.ReadUInt(_unitFieldsAddress + (uint)Offsets.WoWPlayerFields.PLAYER_NEXT_LEVEL_XP);
+        public uint Xp => _reader.ReadUInt(_unitFieldsAddress + (uint) Offsets.WowPlayer.PLAYER_XP);
+        public uint XpRequired => _reader.ReadUInt(_unitFieldsAddress + (uint)Offsets.WowPlayer.PLAYER_NEXT_LEVEL_XP);
 
         public ClassFlags Class
         {
             get
             {
-                var ret = _reader.ReadUInt(_unitFieldsAddress + (uint) Offsets.WowUnitFields.ClassAndRace);
+                var ret = _reader.ReadUInt(_unitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_BYTES_0);
                 return (ClassFlags)((ret >> 8) & 0xFF);
             }
         }
@@ -63,7 +63,7 @@ namespace Vanilla.ObjectManager.Model
         public RaceFlags Race {
             get
             {
-                var ret = _reader.ReadUInt(_unitFieldsAddress + (uint)Offsets.WowUnitFields.ClassAndRace);
+                var ret = _reader.ReadUInt(_unitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_BYTES_0);
                 return (RaceFlags)(ret & 0xFF);
             }
         }

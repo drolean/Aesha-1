@@ -11,7 +11,7 @@ namespace Vanilla.ObjectManager
             var process = Process.GetProcessesByName("WoW").First();  
             var objectManager = new ObjectManager(process);
             
-            objectManager.Pulse();
+            objectManager.Start();
 
             var me = objectManager.Me;
             var players = objectManager.Players;

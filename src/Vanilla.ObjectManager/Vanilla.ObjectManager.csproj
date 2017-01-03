@@ -44,10 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastucture\Constants.cs" />
+    <Compile Include="Infrastucture\Enums.cs" />
     <Compile Include="Infrastucture\Helpers.cs" />
     <Compile Include="Infrastucture\Offsets.cs" />
-    <Compile Include="Infrastucture\Offsets2.cs" />
     <Compile Include="Infrastucture\ProcessMemoryReader.cs" />
     <Compile Include="Infrastucture\Win32Imports.cs" />
     <Compile Include="Model\WowPlayer.cs" />

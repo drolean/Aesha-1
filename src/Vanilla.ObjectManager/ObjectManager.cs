@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Vanilla.ObjectManager.Infrastucture;
 using Vanilla.ObjectManager.Model;
 
@@ -17,11 +20,35 @@ namespace Vanilla.ObjectManager
         private const uint Synchronize = 0x00100000;
         private const uint ProcessAllAccess = StandardRightsRequired | Synchronize | 0xFFF;
 
-        private List<IWowObject> _objects;
-       
+        private ConcurrentDictionary<ulong, IWowObject> _objects;
+        private readonly CancellationTokenSource _cancellationSource;
+        private readonly Task _pulseTask;
+        
+
         public ObjectManager(Process process)
         {
             OpenProcess(process);
+            _cancellationSource = new CancellationTokenSource();
+            _pulseTask = new Task(async () =>
+            {
+                while (true)
+                {
+                    Pulse();
+                    await Task.Delay(new TimeSpan(0, 0, 0, 0, 10));
+                }
+            }, _cancellationSource.Token);
+        }
+
+        public void Start()
+        {
+            Pulse();
+            _pulseTask.Start();
+        }
+
+        public void Stop()
+        {
+            _cancellationSource.Cancel();
+            _objects = new ConcurrentDictionary<ulong,IWowObject>();
         }
 
         private void OpenProcess(Process process)
@@ -40,48 +67,56 @@ namespace Vanilla.ObjectManager
 
         public IEnumerable<WowPlayer> Players
         {
-            get { return _objects.Where(o => o.Type == ObjectType.Player).Select(p => (WowPlayer) p).ToList(); }
+            get{return _objects.Where(o => o.Value.Type == ObjectType.Player).Select(p => (WowPlayer) p.Value).ToList();}
         }
 
         public IEnumerable<WowUnit> Units
         {
-            get { return _objects.Where(o => o.Type == ObjectType.Unit).Select(u => (WowUnit) u).ToList(); }
+            get { return _objects.Where(o => o.Value.Type == ObjectType.Unit).Select(u => (WowUnit) u.Value).ToList(); }
         }
 
-        public void Pulse()
+        private void Pulse()
         {
-            _objects = new List<IWowObject>();
+            var objectManager = _reader.ReadUInt((uint) Offsets.WowObjectManager.BASE);
+            var currentObject = _reader.ReadUInt(objectManager + (uint) Offsets.WowObjectManager.FIRST_OBJECT);
+            var activeGuidList = new List<ulong>();
 
-            var objectManager = _reader.ReadUInt((uint)Offsets.WowObjectManager.Base);
-            var currentObject = _reader.ReadUInt(objectManager + (uint)Offsets.WowObjectManager.FirstObject);
-           
             while (currentObject != 0 && (currentObject & 1) == 0)
             {
-                var objectType = _reader.ReadByte(currentObject + (uint)Offsets.WowObjectManager.ObjectType);
+                var objectType = _reader.ReadByte(currentObject + (uint) Offsets.WowObject.OBJECT_FIELD_TYPE);
                 switch (objectType)
                 {
-                    case (byte)ObjectType.Unit:
+                    case (byte) ObjectType.Unit:
                     {
                         var unit = new WowUnit(_reader, currentObject);
-                        _objects.Add(unit);
+                        _objects.GetOrAdd(unit.Guid, unit);
+                        activeGuidList.Add(unit.Guid);
                         break;
                     }
-                    case (byte)ObjectType.Player:
+                    case (byte) ObjectType.Player:
                     {
                         var player = new WowPlayer(_process, _reader, currentObject);
-                        _objects.Add(player);
+                        _objects.GetOrAdd(player.Guid, player);
+                        activeGuidList.Add(player.Guid);
                         break;
                     }
                 }
 
-                var nextObject = _reader.ReadUInt(currentObject + (uint)Offsets.WowObjectManager.NextObject);
+                var nextObject = _reader.ReadUInt(currentObject + (uint) Offsets.WowObjectManager.NEXT_OBJECT);
 
                 if (nextObject == currentObject)
                     break;
-                
+
                 currentObject = nextObject;
             }
 
+            var deadGuids = _objects.Keys.Where(k => !activeGuidList.Contains(k)).Select(k => k);
+            foreach (var guid in deadGuids)
+            {
+                IWowObject deadObject;
+                _objects.TryRemove(guid, out deadObject);
+            }
+            
         }
 
         //var unitFieldsAddress = _reader.ReadUInt(objectAddress + (uint)Offsets.WowObject.DataPTR);
