@@ -6,11 +6,16 @@
         {
             Current = current;
             Max = max;
-            Percentage = (current / max) * 100;
+            Percentage = Current == 0 && Max == 0 ? 0 : (current/max)*100;
         }
 
         public int Current { get; }
         public int Max { get; }
         public int Percentage { get; }
+
+        public override string ToString()
+        {
+            return Max == 0 ? "NotApplicable" : $"({Current}/{Max}) {Percentage}%";
+        }
     }
 }

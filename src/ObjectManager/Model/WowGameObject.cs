@@ -21,9 +21,9 @@ namespace ObjectManager.Model
         public override Location Location {
             get
             {
-                var x = _reader.Read<float>(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_POS_X);
-                var y = _reader.Read<float>(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_POS_Y);
-                var z = _reader.Read<float>(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_POS_Z);
+                var x = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_POS_X);
+                var y = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_POS_Y);
+                var z = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_POS_Z);
 
                 return new Location(x, y, z);
             }

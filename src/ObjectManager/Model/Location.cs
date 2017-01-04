@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ObjectManager.Model
+﻿namespace ObjectManager.Model
 {
     public class Location
     {
@@ -19,5 +13,10 @@ namespace ObjectManager.Model
         public float X { get;}
         public float Y { get; }
         public float Z { get; }
+
+        public override string ToString()
+        {
+            return $"{X:##.000}/{Y:##.000}";
+        }
     }
 }

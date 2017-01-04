@@ -11,10 +11,10 @@ namespace ObjectManager.Model
         {
             _reader = reader;
             BaseAddress = objectBaseAddress;
-            UnitFieldsAddress = _reader.Read<uint>(BaseAddress + (uint)Offsets.WowObjectManager.DESCRIPTOR);
+            UnitFieldsAddress = _reader.ReadUInt(BaseAddress + (uint)Offsets.WowObjectManager.DESCRIPTOR);
         }
 
-        public ulong Guid => _reader.Read<ulong>(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_GUID);
+        public ulong Guid => _reader.ReadUInt64(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_GUID);
         public uint BaseAddress { get; }
         public virtual ObjectType Type => ObjectType.None;
         public virtual string Name => string.Empty;
@@ -23,15 +23,15 @@ namespace ObjectManager.Model
         {
             get
             {
-                var x = _reader.Read<float>(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_X);
-                var y = _reader.Read<float>(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_Y);
-                var z = _reader.Read<float>(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_Z);
+                var x = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_X);
+                var y = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_Y);
+                var z = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_Z);
 
                 return new Location(x, y, z);
             }
         }
 
-        public float Rotation => _reader.Read<float>(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_ROTATION);
+        public float Rotation => _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_ROTATION);
         
     }
 }

@@ -12,5 +12,10 @@
         public int Current { get; }
         public int Max { get; }
         public int Percentage { get; }
+
+        public override string ToString()
+        {
+            return $"({Current}/{Max}) {Percentage}%";
+        }
     }
 }

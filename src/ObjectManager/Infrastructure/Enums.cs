@@ -30,7 +30,7 @@
         GasCloud
     }
 
-    public enum ClassFlags : uint
+    public enum UnitClassTypes : uint
     {
         None = 0,
         Warrior = 1,
@@ -45,7 +45,7 @@
         Druid = 11,
     }
 
-    public enum RaceFlags : uint
+    public enum UnitRaceTypes : uint
     {
         Human = 1,
         Orc,
@@ -62,6 +62,18 @@
         Naga,
         Broken,
         Skeleton = 15,
+    }
+
+    public enum UnitClassificationTypes : int
+    {
+        NotSpecified = -1,
+        Normal = 0,
+        Elite = 1,
+        RareElite = 2,
+        WorldBoss = 3,
+        Rare = 4,
+        Trivial = 5,
+        Minus = 6
     }
 
 }

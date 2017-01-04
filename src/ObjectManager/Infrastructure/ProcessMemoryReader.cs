@@ -7,6 +7,7 @@ namespace ObjectManager.Infrastructure
     public sealed class ProcessMemoryReader
     {
         private readonly IntPtr _processPtr;
+
         private const uint StandardRightsRequired = 0x000F0000;
         private const uint Synchronize = 0x00100000;
         private const uint ProcessAllAccess = StandardRightsRequired | Synchronize | 0xFFF;
@@ -14,39 +15,114 @@ namespace ObjectManager.Infrastructure
         public ProcessMemoryReader(Process process)
         {
             _processPtr = Win32Imports.OpenProcess(ProcessAllAccess, false, process.Id);
+
         }
-        
-        public T Read<T>(uint address) where T : struct
+
+        public byte ReadByte( uint dwAddress)
         {
-            var buffer = IntPtr.Zero;
+            byte[] buf = ReadBytes(dwAddress, sizeof(byte));
+            if (buf == null)
+                throw new Exception("ReadByte failed.");
+
+            return buf[0];
+        }
+
+
+
+        public float ReadFloat( uint dwAddress)
+        {
+            byte[] numArray = ReadBytes(dwAddress, 4);
+            if (numArray == null)
+                throw new Exception("ReadFloat failed.");
+           
+            return BitConverter.ToSingle(numArray, 0);
+        }
+
+
+        public byte[] ReadBytes( uint dwAddress, int nSize)
+        {
+            var lpBuffer = IntPtr.Zero;
+            byte[] results;
+
             try
             {
-                var size = Marshal.SizeOf(typeof(T));
-                buffer = Marshal.AllocHGlobal(size);
+                lpBuffer = Marshal.AllocHGlobal(nSize);
 
-                ReadRawMemory(address, buffer, size);
-                return (T) Marshal.PtrToStructure(buffer, typeof(T));
+                var iBytesRead = ReadRawMemory(dwAddress, lpBuffer, nSize);
+                if (iBytesRead != nSize)
+                    throw new Exception("ReadProcessMemory error in ReadBytes");
+
+                results = new byte[iBytesRead];
+                Marshal.Copy(lpBuffer, results, 0, iBytesRead);
+            }
+            catch
+            {
+                return null;
             }
             finally
             {
-                if (buffer != IntPtr.Zero)
-                    Marshal.FreeHGlobal(buffer);
+                if (lpBuffer != IntPtr.Zero)
+                    Marshal.FreeHGlobal(lpBuffer);
             }
 
+            return results;
         }
-        
-        public string ReadString(uint address, int length)
+
+        public int ReadRawMemory( uint dwAddress, IntPtr lpBuffer, int nSize)
         {
-            var buffer = IntPtr.Zero;
+            try
+            {
+                var lpBytesRead = 0;
+                if (!Win32Imports.ReadProcessMemory(_processPtr, dwAddress, lpBuffer, nSize, out lpBytesRead))
+                    throw new Exception("ReadProcessMemory failed");
+
+                return lpBytesRead;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public int ReadInt( uint dwAddress)
+        {
+            var buffer = ReadBytes(dwAddress, sizeof(int));
+            if (buffer == null)
+                throw new Exception("ReadUInt failed.");
+
+            return BitConverter.ToInt32(buffer, 0);
+        }
+
+        public uint ReadUInt( uint dwAddress)
+        {
+            var buffer = ReadBytes(dwAddress, sizeof(uint));
+            if (buffer == null)
+                throw new Exception("ReadUInt failed.");
+
+            return BitConverter.ToUInt32(buffer, 0);
+        }
+
+        public ulong ReadUInt64( uint dwAddress)
+        {
+            var numArray = ReadBytes(dwAddress, 8);
+            if (numArray == null)
+                throw new Exception("ReadUInt64 failed.");
+
+            return BitConverter.ToUInt64(numArray, 0);
+        }
+
+        public string ReadString( uint dwAddress, int length)
+        {
+            var num = IntPtr.Zero;
             string stringAnsi;
             try
             {
-                var allocationSize = length;
-                buffer = Marshal.AllocHGlobal(allocationSize + 1);
-                Marshal.WriteByte(buffer, length, (byte)0);
-                if (ReadRawMemory(address, buffer, allocationSize) != allocationSize)
+                var nSize = length;
+                num = Marshal.AllocHGlobal(nSize + 1);
+                Marshal.WriteByte(num, length, (byte)0);
+                if (ReadRawMemory(dwAddress, num, nSize) != nSize)
                     throw new Exception();
-                stringAnsi = Marshal.PtrToStringAnsi(buffer);
+                stringAnsi = Marshal.PtrToStringAnsi(num);
             }
             catch
             {
@@ -54,27 +130,12 @@ namespace ObjectManager.Infrastructure
             }
             finally
             {
-                if (buffer != IntPtr.Zero)
-                    Marshal.FreeHGlobal(buffer);
+                if (num != IntPtr.Zero)
+                    Marshal.FreeHGlobal(num);
             }
             return stringAnsi;
         }
+        
 
-
-        private int ReadRawMemory(uint address, IntPtr buffer, int size)
-        {
-            try
-            {
-                var lpBytesRead = 0;
-                if (!Win32Imports.ReadProcessMemory(_processPtr, address, buffer, size, out lpBytesRead))
-                    throw new Exception("ReadProcessMemory failed");
-
-                return (int)lpBytesRead;
-            }
-            catch
-            {
-                return 0;
-            }
-        }
     }
 }

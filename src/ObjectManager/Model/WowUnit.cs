@@ -22,8 +22,8 @@ namespace ObjectManager.Model
         {
             get
             {
-                var current = _reader.Read<uint>(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_HEALTH);
-                var max = _reader.Read<uint>(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_MAXHEALTH);
+                var current = _reader.ReadUInt(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_HEALTH);
+                var max = _reader.ReadUInt(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_MAXHEALTH);
 
                 return new Health((int) current, (int) max);
             }
@@ -33,25 +33,47 @@ namespace ObjectManager.Model
         {
             get
             {
-                var current = _reader.Read<uint>(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_POWER1);
-                var max = _reader.Read<uint>(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_MAXPOWER1);
+                var current = _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_POWER1);
+                var max = _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_MAXPOWER1);
+                
+                return new Power((int)current, (int)max);
+            }
+        }
+
+        public Power Energy
+        {
+            get
+            {
+                var current = _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_POWER3);
+                var max = _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_MAXPOWER3);
 
                 return new Power((int)current, (int)max);
             }
         }
-        
+
+        public Power Rage
+        {
+            get
+            {
+                var current = _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_POWER4);
+                var max = _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_MAXPOWER4);
+
+                return new Power((int)current, (int)max);
+            }
+        }
+
 
         public override string Name
         {
             get
             {
-                var unitNameAddress1 = _reader.Read<uint>(_objectBaseAddress + (uint) Offsets.WowUnit.UNIT_FIELD_NAME_1);
-                var unitNameAddress2 = _reader.Read<uint>(unitNameAddress1 + (uint) Offsets.WowUnit.UNIT_FIELD_NAME_2);
+                var unitNameAddress1 = _reader.ReadUInt(_objectBaseAddress + (uint) Offsets.WowUnit.UNIT_FIELD_NAME_1);
+                var unitNameAddress2 = _reader.ReadUInt(unitNameAddress1 + (uint) Offsets.WowUnit.UNIT_FIELD_NAME_2);
                 return _reader.ReadString(unitNameAddress2, 50);
             }
         }
 
-        public int Level => (int)_reader.Read<uint>(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_LEVEL);
+        public int Level => (int)_reader.ReadUInt(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_LEVEL);
         public override ObjectType Type => ObjectType.Unit;
         
         public CreatureType CreatureType
@@ -60,8 +82,8 @@ namespace ObjectManager.Model
             {
                 try
                 {
-                    var creatureCache = _reader.Read<uint>(_objectBaseAddress + (uint) Offsets.WowCreatureCache.CREATURE_CACHE_BASE);
-                    return (CreatureType) _reader.Read<uint>(creatureCache + (uint) Offsets.WowCreatureCache.CREATURE_CACHE_TYPE);
+                    var creatureCache = _reader.ReadUInt(_objectBaseAddress + (uint) Offsets.WowCreatureCache.CREATURE_CACHE_BASE);
+                    return (CreatureType) _reader.ReadUInt(creatureCache + (uint) Offsets.WowCreatureCache.CREATURE_CACHE_TYPE);
                 }
                 catch (Exception)
                 {
@@ -72,19 +94,19 @@ namespace ObjectManager.Model
             }
         }
 
-        public int Classification
+        public UnitClassificationTypes Classification
         {
             get
             {
                 try
                 {
-                    var creatureCache = _reader.Read<uint>(_objectBaseAddress + (uint)Offsets.WowCreatureCache.CREATURE_CACHE_BASE);
-                    return _reader.Read<int>(creatureCache + (uint)Offsets.WowCreatureCache.CREATURE_CACHE_CLASS);
+                    var creatureCache = _reader.ReadUInt(_objectBaseAddress + (uint)Offsets.WowCreatureCache.CREATURE_CACHE_BASE);
+                    return (UnitClassificationTypes)_reader.ReadInt(creatureCache + (uint)Offsets.WowCreatureCache.CREATURE_CACHE_CLASS);
                 }
                 catch (Exception)
                 {
 
-                    return -1;
+                    return UnitClassificationTypes.NotSpecified;
                 }
                 
             }
@@ -94,8 +116,8 @@ namespace ObjectManager.Model
         {
             get
             {
-                var targetGuid = _reader.Read<ulong>(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_TARGET);
-                return ObjectManager.Units.SingleOrDefault(u => u.Guid == targetGuid);
+                var targetGuid = _reader.ReadUInt64(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_TARGET);
+                return (WowUnit)ObjectManager.Objects.SingleOrDefault(u => u.Guid == targetGuid);
             }
         }
 
@@ -103,8 +125,8 @@ namespace ObjectManager.Model
         {
             get
             {
-                var summonedBy = _reader.Read<ulong>(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_SUMMONEDBY);
-                return ObjectManager.Units.SingleOrDefault(u => u.Guid == summonedBy);
+                var summonedBy = _reader.ReadUInt64(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_SUMMONEDBY);
+                return (WowUnit)ObjectManager.Objects.SingleOrDefault(u => u.Guid == summonedBy);
             }
         }
 
@@ -112,8 +134,8 @@ namespace ObjectManager.Model
         {
             get
             {
-                var createdBy = _reader.Read<ulong>(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_CREATEDBY);
-                return ObjectManager.Units.SingleOrDefault(u => u.Guid == createdBy);
+                var createdBy = _reader.ReadUInt64(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_CREATEDBY);
+                return (WowUnit)ObjectManager.Objects.SingleOrDefault(u => u.Guid == createdBy);
             }
         }
 
@@ -121,8 +143,8 @@ namespace ObjectManager.Model
         {
             get
             {
-                var charmedBy = _reader.Read<ulong>(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_CHARMEDBY);
-                return ObjectManager.Units.SingleOrDefault(u => u.Guid == charmedBy);
+                var charmedBy = _reader.ReadUInt64(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_CHARMEDBY);
+                return (WowUnit)ObjectManager.Objects.SingleOrDefault(u => u.Guid == charmedBy);
             }
         }
         
@@ -130,14 +152,22 @@ namespace ObjectManager.Model
         {
             get
             {
+
+                //var bob = _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_AURA);
+                //var dump = _reader.ReadBytes(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_AURA, 20000);
+                //uint buffId = 1244;
+                //var buffIndex = dump.FindPattern(buffId);
+
                 var auras = new List<Spell>();
                 uint auraPosition = 0;
                 for (uint i = 0; i < 47; i++)
                 {
-                    auraPosition += 4;
-                    var aura = _reader.Read<int>(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_AURA + auraPosition);
+                   
+                    var aura = _reader.ReadInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_AURA + auraPosition);
                     if (aura > 0)
                         auras.Add(new Spell(aura));
+
+                    auraPosition += 4;
                 }
 
                 return auras;
@@ -149,13 +179,13 @@ namespace ObjectManager.Model
         {
             get
             {
-                var npc = _reader.Read<bool>(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_NPC_FLAGS);
-                var lootable = (_reader.Read<uint>(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 0x0D) != 0;
-                var skinnable = (_reader.Read<uint>(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 0x4000000) != 0;
-                var tapped = (_reader.Read<uint>(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 4) != 0;
-                var tappedByMe = (_reader.Read<uint>(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 8) != 0;
+               // var npc = _reader.ReadByte(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_NPC_FLAGS);
+                var lootable = (_reader.ReadUInt(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 0x0D) != 0;
+                var skinnable = (_reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 0x4000000) != 0;
+                var tapped = (_reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 4) != 0;
+                var tappedByMe = (_reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 8) != 0;
 
-                return new UnitAttributes(npc, lootable, skinnable, tapped, tappedByMe);
+                return new UnitAttributes(false, lootable, skinnable, tapped, tappedByMe);
 
             }
         }
