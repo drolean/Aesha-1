@@ -15,10 +15,6 @@ namespace ObjectManager
         private static Process _process;
         private static ProcessMemoryReader _reader;
 
-        private const uint StandardRightsRequired = 0x000F0000;
-        private const uint Synchronize = 0x00100000;
-        private const uint ProcessAllAccess = StandardRightsRequired | Synchronize | 0xFFF;
-
         private static ConcurrentDictionary<ulong, IWowObject> _objects = new ConcurrentDictionary<ulong, IWowObject>();
         private static CancellationTokenSource _cancellationSource;
         private static Task _pulseTask;
@@ -30,7 +26,8 @@ namespace ObjectManager
             if (process == null)
                 throw new ArgumentNullException(nameof(process));
 
-            OpenProcess(process);
+            _reader = new ProcessMemoryReader(process);
+            _process = process;
 
             //read loginstate
             var state = _reader.ReadString((uint) 0xB41478, 10);
@@ -58,15 +55,6 @@ namespace ObjectManager
             _objects = new ConcurrentDictionary<ulong,IWowObject>();
         }
 
-        private static void OpenProcess(Process process)
-        {
-            _process = process;
-
-            var processPtr = Win32Imports.OpenProcess(ProcessAllAccess, false, process.Id);
-            _reader = new ProcessMemoryReader();
-            _reader.Open(processPtr);
-        }
-
         public static WowPlayer Me
         {
             get { return Players.SingleOrDefault(p => p.IsActivePlayer); }
@@ -84,13 +72,13 @@ namespace ObjectManager
 
         private static void Pulse()
         {
-            var objectManager = _reader.ReadUInt((uint) Offsets.WowObjectManager.BASE);
-            var currentObject = _reader.ReadUInt(objectManager + (uint) Offsets.WowObjectManager.FIRST_OBJECT);
+            var objectManager = _reader.Read<uint>((uint) Offsets.WowObjectManager.BASE);
+            var currentObject = _reader.Read<uint>(objectManager + (uint) Offsets.WowObjectManager.FIRST_OBJECT);
             var activeGuidList = new List<ulong>();
 
             while (currentObject != 0 && (currentObject & 1) == 0)
             {
-                var objectType = _reader.ReadByte(currentObject + (uint) Offsets.WowObject.OBJECT_FIELD_TYPE);
+                var objectType = _reader.Read<byte>(currentObject + (uint) Offsets.WowObject.OBJECT_FIELD_TYPE);
                 switch (objectType)
                 {
                     case (byte) ObjectType.Unit:
@@ -109,7 +97,7 @@ namespace ObjectManager
                     }
                 }
 
-                var nextObject = _reader.ReadUInt(currentObject + (uint) Offsets.WowObjectManager.NEXT_OBJECT);
+                var nextObject = _reader.Read<uint>(currentObject + (uint) Offsets.WowObjectManager.NEXT_OBJECT);
 
                 if (nextObject == currentObject)
                     break;

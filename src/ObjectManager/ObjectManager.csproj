@@ -54,6 +54,11 @@
     <Compile Include="Infrastructure\Offsets.cs" />
     <Compile Include="Infrastructure\ProcessMemoryReader.cs" />
     <Compile Include="Infrastructure\Win32Imports.cs" />
+    <Compile Include="Model\Health.cs" />
+    <Compile Include="Model\Location.cs" />
+    <Compile Include="Model\Power.cs" />
+    <Compile Include="Model\Spell.cs" />
+    <Compile Include="Model\UnitAttributes.cs" />
     <Compile Include="Model\WowPlayer.cs" />
     <Compile Include="Model\WowUnit.cs" />
     <Compile Include="ObjectManager.cs" />
