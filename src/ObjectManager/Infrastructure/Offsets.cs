@@ -23,7 +23,7 @@
             OBJECT_FIELD_Y = 0x9B8,
             OBJECT_FIELD_X = OBJECT_FIELD_Y + 0x4,
             OBJECT_FIELD_Z = OBJECT_FIELD_Y + 0x8,
-            OBJECT_FIELD_ROTATION = OBJECT_FIELD_X + 0x10
+            OBJECT_FIELD_ROTATION = OBJECT_FIELD_X + 0x10,
         };
 
         // Descriptors: 0x0083A328

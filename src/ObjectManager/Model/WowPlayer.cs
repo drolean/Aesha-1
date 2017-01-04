@@ -53,14 +53,14 @@ namespace ObjectManager.Model
 
         public override ObjectType Type => ObjectType.Player;
 
-        public uint Xp => _reader.Read<uint>(_unitFieldsAddress + (uint) Offsets.WowPlayer.PLAYER_XP);
-        public uint XpRequired => _reader.Read<uint>(_unitFieldsAddress + (uint)Offsets.WowPlayer.PLAYER_NEXT_LEVEL_XP);
+        public uint Xp => _reader.Read<uint>(UnitFieldsAddress + (uint) Offsets.WowPlayer.PLAYER_XP);
+        public uint XpRequired => _reader.Read<uint>(UnitFieldsAddress + (uint)Offsets.WowPlayer.PLAYER_NEXT_LEVEL_XP);
 
         public ClassFlags Class
         {
             get
             {
-                var ret = _reader.Read<uint>(_unitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_BYTES_0);
+                var ret = _reader.Read<uint>(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_BYTES_0);
                 return (ClassFlags)((ret >> 8) & 0xFF);
             }
         }
@@ -69,7 +69,7 @@ namespace ObjectManager.Model
         {
             get
             {
-                var ret = _reader.Read<uint>(_unitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_BYTES_0);
+                var ret = _reader.Read<uint>(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_FIELD_BYTES_0);
                 return (RaceFlags) (ret & 0xFF);
             }
         }
@@ -78,13 +78,5 @@ namespace ObjectManager.Model
         {
             return $"{Name} (Level {Level} {Race} {Class})";
         }
-    }
-
-    public interface IWowObject
-    {
-        ulong Guid { get; }
-        uint BaseAddress { get; }
-        ObjectType Type { get;}
-
     }
 }

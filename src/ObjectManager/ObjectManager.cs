@@ -62,12 +62,35 @@ namespace ObjectManager
 
         public static IEnumerable<WowPlayer> Players
         {
-            get{return _objects.Where(o => o.Value.Type == ObjectType.Player).Select(p => (WowPlayer) p.Value).ToList();}
+            get
+            {
+                return 
+                    _objects.Where(o => o.Value.Type == ObjectType.Player)
+                        .Select(p => (WowPlayer) p.Value)
+                        .ToList();
+            }
         }
 
         public static IEnumerable<WowUnit> Units
         {
-            get { return _objects.Where(o => o.Value.Type == ObjectType.Unit).Select(u => (WowUnit) u.Value).ToList(); }
+            get
+            {
+                return
+                    _objects.Where(o => o.Value.Type == ObjectType.Unit && ((WowUnit) o.Value).Attributes.NPC == false)
+                        .Select(u => (WowUnit) u.Value)
+                        .ToList();
+            }
+        }
+
+        public static IEnumerable<WowUnit> Npcs
+        {
+            get
+            {
+                return 
+                    _objects.Where(o => o.Value.Type == ObjectType.Unit && ((WowUnit) o.Value).Attributes.NPC)
+                        .Select(u => (WowUnit) u.Value)
+                        .ToList();
+            }
         }
 
         private static void Pulse()
@@ -93,6 +116,17 @@ namespace ObjectManager
                         var player = new WowPlayer(_process, _reader, currentObject);
                         _objects.GetOrAdd(player.Guid, player);
                         activeGuidList.Add(player.Guid);
+                        break;
+                    }
+                    case (byte)ObjectType.Item:
+                    {
+                        break;
+                    }
+                    case (byte)ObjectType.GameObject:
+                    {
+                        var obj = new WowGameObject(_reader, currentObject);
+                        _objects.GetOrAdd(obj.Guid, obj);
+                        activeGuidList.Add(obj.Guid);
                         break;
                     }
                 }
