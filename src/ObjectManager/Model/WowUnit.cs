@@ -179,13 +179,17 @@ namespace ObjectManager.Model
         {
             get
             {
-               // var npc = _reader.ReadByte(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_NPC_FLAGS);
+                //not working yet
+                var npc = _reader.ReadUInt(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_NPC_FLAGS) != 0;
+                var repairNpc = (_reader.ReadInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_NPC_FLAGS) & 0x00001000) != 0;
+
+
                 var lootable = (_reader.ReadUInt(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 0x0D) != 0;
                 var skinnable = (_reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 0x4000000) != 0;
                 var tapped = (_reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 4) != 0;
                 var tappedByMe = (_reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 8) != 0;
 
-                return new UnitAttributes(false, lootable, skinnable, tapped, tappedByMe);
+                return new UnitAttributes(npc, lootable, skinnable, tapped, tappedByMe);
 
             }
         }

@@ -18,8 +18,10 @@ namespace ObjectManager.Sample
             var me = ObjectManager.Me;
             var players = ObjectManager.Players;
             var units = ObjectManager.Units;
+            var objects = ObjectManager.Objects;
+            var npcs = ObjectManager.Npcs;
 
-            var t = me.Target;
+            var target = me.Target;
 
             var imps = units.Where(x => x.CreatureType == CreatureType.Demon && x.Level == 4);
             foreach (var imp in imps)
