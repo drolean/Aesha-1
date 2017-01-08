@@ -42,6 +42,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -51,6 +52,7 @@
     <Compile Include="Infrastructure\AdministrativeRights.cs" />
     <Compile Include="Infrastructure\Enums.cs" />
     <Compile Include="Infrastructure\Helpers.cs" />
+    <Compile Include="Infrastructure\KeyboardCommandDispatcher.cs" />
     <Compile Include="Infrastructure\Offsets.cs" />
     <Compile Include="Infrastructure\ProcessMemoryReader.cs" />
     <Compile Include="Infrastructure\Win32Imports.cs" />

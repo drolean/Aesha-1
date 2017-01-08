@@ -3,6 +3,11 @@
 
     public static class Offsets
     {
+        public enum WowGame
+        {
+            MouseOverGuid = 0x00B4E2C8,
+            TargetLastTargetGuid = 0x00B4E2E8
+        }
 
         public enum WowObjectManager
         {

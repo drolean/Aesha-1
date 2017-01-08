@@ -68,6 +68,29 @@ namespace ObjectManager.Infrastructure
             return results;
         }
 
+        public bool WriteBytes(uint dwAddress, byte[] lpBytes, int nSize)
+        {
+            IntPtr num1 = IntPtr.Zero;
+            try
+            {
+                num1 = Marshal.AllocHGlobal(Marshal.SizeOf((object)lpBytes[0]) * nSize);
+                Marshal.Copy(lpBytes, 0, num1, nSize);
+                int num2 = WriteRawMemory(dwAddress, num1, nSize);
+                if (nSize != num2)
+                    throw new Exception("WriteBytes failed!  Number of bytes actually written differed from request.");
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                if (num1 != IntPtr.Zero)
+                    Marshal.FreeHGlobal(num1);
+            }
+            return true;
+        }
+
         public int ReadRawMemory( uint dwAddress, IntPtr lpBuffer, int nSize)
         {
             try
@@ -82,6 +105,14 @@ namespace ObjectManager.Infrastructure
             {
                 return 0;
             }
+        }
+
+        private int WriteRawMemory( uint dwAddress, IntPtr lpBuffer, int nSize)
+        {
+            IntPtr iBytesWritten = IntPtr.Zero;
+            if (!Win32Imports.WriteProcessMemory(_processPtr, dwAddress, lpBuffer, nSize, out iBytesWritten))
+                return 0;
+            return (int)iBytesWritten;
         }
 
         public int ReadInt( uint dwAddress)
@@ -109,6 +140,12 @@ namespace ObjectManager.Infrastructure
                 throw new Exception("ReadUInt64 failed.");
 
             return BitConverter.ToUInt64(numArray, 0);
+        }
+
+        public void WriteUInt64(uint dwAddress, ulong value)
+        {
+            byte[] bytes = BitConverter.GetBytes(value);
+            WriteBytes(dwAddress, bytes, 8);
         }
 
         public string ReadString( uint dwAddress, int length)

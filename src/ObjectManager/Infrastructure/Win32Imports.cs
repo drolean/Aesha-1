@@ -24,5 +24,13 @@ namespace ObjectManager.Infrastructure
             IntPtr lpBuffer,
             int nSize,
             out int lpBytesRead);
+
+        [DllImport("kernel32", EntryPoint = "WriteProcessMemory")]
+        public static extern bool WriteProcessMemory(
+            IntPtr hProcess, 
+            uint dwAddress, 
+            IntPtr lpBuffer, 
+            int nSize, 
+            out IntPtr iBytesWritten);
     }
 }

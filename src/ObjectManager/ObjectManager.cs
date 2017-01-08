@@ -18,7 +18,7 @@ namespace ObjectManager
         private static ConcurrentDictionary<ulong, IWowObject> _objects = new ConcurrentDictionary<ulong, IWowObject>();
         private static CancellationTokenSource _cancellationSource;
         private static Task _pulseTask;
-       
+
         public static void Start(Process process)
         {
             AdministrativeRights.Ensure();
@@ -52,7 +52,7 @@ namespace ObjectManager
         public static void Stop()
         {
             _cancellationSource.Cancel();
-            _objects = new ConcurrentDictionary<ulong,IWowObject>();
+            _objects = new ConcurrentDictionary<ulong, IWowObject>();
         }
 
         public static WowPlayer Me
@@ -64,11 +64,31 @@ namespace ObjectManager
         {
             get
             {
-                return 
+                return
                     _objects.Where(o => o.Value.Type == ObjectType.Player)
                         .Select(p => (WowPlayer) p.Value)
                         .ToList();
             }
+        }
+
+        public static void SetTarget(ulong guid)
+        {
+            _reader.WriteUInt64((uint)Offsets.WowGame.TargetLastTargetGuid, guid);
+        }
+
+        public static WowUnit GetMouseOverTarget()
+        {
+            try
+            {
+                var guid = _reader.ReadUInt64((uint)Offsets.WowGame.MouseOverGuid);
+                var unit = _objects.SingleOrDefault(o => o.Value.Guid == guid);
+                return (WowUnit)unit.Value;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
 
         public static IEnumerable<WowUnit> Units
