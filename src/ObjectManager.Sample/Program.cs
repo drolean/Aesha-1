@@ -15,20 +15,25 @@ namespace ObjectManager.Sample
         {
 
            var process = Process.GetProcessesByName("WoW").FirstOrDefault();
-           // ObjectManager.Start(process);
+             ObjectManager.Start(process);
+            //ObjectManager.SetPlayerFacing();
+            //var facing = ObjectManager.Me.Rotation;
+            //return;
 
-           // var me = ObjectManager.Me;
-           // //var players = ObjectManager.Players;
-           // var units = ObjectManager.Units;
-           // //var objects = ObjectManager.Objects;
-           // //var npcs = ObjectManager.Npcs;
 
-           //// ObjectManager.Test();
 
-           // var firstUnit = units.FirstOrDefault(u => u.Name == "Kobold Vermin");
-           // ObjectManager.SetTarget(firstUnit.Guid);
+            // var me = ObjectManager.Me;
+            // //var players = ObjectManager.Players;
+            // var units = ObjectManager.Units;
+            // //var objects = ObjectManager.Objects;
+            // //var npcs = ObjectManager.Npcs;
 
-           // var target = me.Target;
+            //// ObjectManager.Test();
+
+            // var firstUnit = units.FirstOrDefault(u => u.Name == "Kobold Vermin");
+            // ObjectManager.SetTarget(firstUnit.Guid);
+
+            // var target = me.Target;
 
             //var imps = units.Where(x => x.CreatureType == CreatureType.Demon && x.Level == 4);
             //foreach (var imp in imps)
@@ -36,30 +41,30 @@ namespace ObjectManager.Sample
             //    var x = imp.SummonedBy;
             //}
 
-            var reader = new ProcessMemoryReader(process);
-            var kcd = new KeyboardCommandDispatcher();
+            //var reader = new ProcessMemoryReader(process);
+            //var kcd = new KeyboardCommandDispatcher();
 
-            var x = reader.ReadInt(0x00884CC8);
-            var y = reader.ReadInt(0x00884CCC);
+            //var x = reader.ReadInt(0x00884CC8);
+            //var y = reader.ReadInt(0x00884CCC);
 
-            reader.WriteUInt64(0x00884CC8, 10);
-            reader.WriteUInt64(0x00884CCC, 10);
-
-
-          //  var requiredX = 10;
-
-          //  var xMovementsRequired = Math.Abs(x - 10);
-          ////  var yMovementsRequired = Math.Abs(absY - 1000);
+            //reader.WriteUInt64(0x00884CC8, 10);
+            //reader.WriteUInt64(0x00884CCC, 10);
 
 
-          //  for (var i = 0; i < xMovementsRequired;i++)
-          //  {
-          //      x = x < requiredX ? x + i : x - i;
-          //      kcd.MoveMouse(process, new Point((int) (x + i), y));
-          //  }
+            //  var requiredX = 10;
 
-                
-         //   kcd.SendShiftClick(process,new Point(1062,564));
+            //  var xMovementsRequired = Math.Abs(x - 10);
+            ////  var yMovementsRequired = Math.Abs(absY - 1000);
+
+
+            //  for (var i = 0; i < xMovementsRequired;i++)
+            //  {
+            //      x = x < requiredX ? x + i : x - i;
+            //      kcd.MoveMouse(process, new Point((int) (x + i), y));
+            //  }
+
+
+            //   kcd.SendShiftClick(process,new Point(1062,564));
 
 
             //while (true)
@@ -70,11 +75,12 @@ namespace ObjectManager.Sample
             //    Thread.Sleep(1000);
             //}
 
-            
 
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Main());
+
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Main());
         }
     }
 }

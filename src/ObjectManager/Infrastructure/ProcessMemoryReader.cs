@@ -68,6 +68,12 @@ namespace ObjectManager.Infrastructure
             return results;
         }
 
+        public bool WriteFloat(uint dwAddress, float value)
+        {
+            var bytes = BitConverter.GetBytes(value);
+            return WriteBytes(dwAddress, bytes, 4);
+        }
+
         public bool WriteBytes(uint dwAddress, byte[] lpBytes, int nSize)
         {
             IntPtr num1 = IntPtr.Zero;

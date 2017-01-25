@@ -147,7 +147,12 @@ namespace ObjectManager.Model
                 return (WowUnit)ObjectManager.Objects.SingleOrDefault(u => u.Guid == charmedBy);
             }
         }
-        
+
+        public float Distance
+        {
+            get { return Location.GetDistanceTo(ObjectManager.Me.Location); }
+        }
+
         public List<Spell> Auras
         {
             get

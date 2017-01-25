@@ -32,5 +32,17 @@ namespace ObjectManager.Infrastructure
             IntPtr lpBuffer, 
             int nSize, 
             out IntPtr iBytesWritten);
+
+        [DllImport("kernel32")]
+        public static extern uint SuspendThread(IntPtr hThread);
+
+        [DllImport("kernel32")]
+        public static extern uint ResumeThread(IntPtr hThread);
+
+        [DllImport("USER32.DLL")]
+        public static extern int PostMessage(IntPtr hwnd, uint msg, int character, uint lparam);
+
+        [DllImport("user32.dll")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
     }
 }

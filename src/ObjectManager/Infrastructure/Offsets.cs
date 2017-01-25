@@ -6,7 +6,8 @@
         public enum WowGame
         {
             MouseOverGuid = 0x00B4E2C8,
-            TargetLastTargetGuid = 0x00B4E2E8
+            TargetLastTargetGuid = 0x00B4E2E8,
+            PlayerFacing = 0x86326C
         }
 
         public enum WowObjectManager
@@ -28,7 +29,7 @@
             OBJECT_FIELD_Y = 0x9B8,
             OBJECT_FIELD_X = OBJECT_FIELD_Y + 0x4,
             OBJECT_FIELD_Z = OBJECT_FIELD_Y + 0x8,
-            OBJECT_FIELD_ROTATION = OBJECT_FIELD_X + 0x10,
+            OBJECT_FIELD_ROTATION = 0x9C4,
         };
 
         // Descriptors: 0x0083A328

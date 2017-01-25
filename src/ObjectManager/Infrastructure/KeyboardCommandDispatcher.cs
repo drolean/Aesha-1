@@ -129,6 +129,7 @@ namespace ObjectManager.Infrastructure
 
         private const uint WM_KEYDOWN = 0x100;
         private const uint WM_KEYUP = 0x101;
+        private const uint WM_CHAR = 0x102;
         private const uint WM_LBUTTONDOWN = 0x201;
         private const uint WM_LBUTTONUP = 0x202;
         private const uint WM_RBUTTONDOWN = 0x204;
@@ -185,6 +186,14 @@ namespace ObjectManager.Infrastructure
         }
 
 
+        public void SendG(Process process)
+        {
+            PostMessage(process.MainWindowHandle, WM_KEYDOWN, 0x00000047, 0x00220001);
+            PostMessage(process.MainWindowHandle, WM_CHAR, 0x00000067, 0x00220001);
+            PostMessage(process.MainWindowHandle, WM_KEYUP, 0x00000047, 0xC0220001);
+        }
+
+
 
         public void SendKey(Process process, VirtualKeyCodes key, uint repeatCount = 1, uint previousState = 0)
         {
@@ -194,6 +203,8 @@ namespace ObjectManager.Infrastructure
             var processWindowHandle = FindWindowEx(process.MainWindowHandle, IntPtr.Zero, null, null);
             var lparam = CreateParam(repeatCount, (uint)key, 0, 0, previousState);
             PostMessage(processWindowHandle, WM_KEYDOWN, (int)key, lparam);
+            PostMessage(processWindowHandle, WM_KEYUP, (int) key, lparam);
+
         }
 
         private uint CreateMouseParam(Point point)

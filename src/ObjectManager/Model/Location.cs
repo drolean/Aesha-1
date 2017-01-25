@@ -1,4 +1,6 @@
-﻿namespace ObjectManager.Model
+﻿using System;
+
+namespace ObjectManager.Model
 {
     public class Location
     {
@@ -17,6 +19,14 @@
         public override string ToString()
         {
             return $"{X:##.000}/{Y:##.000}";
+        }
+
+        public float GetDistanceTo(Location l)
+        {
+            float dx = X - l.X;
+            float dy = Y - l.Y;
+            float dz = Z - l.Z;
+            return (float)Math.Sqrt(dx * dx + dy * dy + dz * dz);
         }
     }
 }

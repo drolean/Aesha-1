@@ -91,6 +91,57 @@ namespace ObjectManager
 
         }
 
+
+        public static float GetDistance(Location dest, Location currentPos, bool UseZ)
+        {
+            float num = currentPos.X - dest.X;
+            float num2 = currentPos.Y - dest.Y;
+            float num3 = (dest.Z != 0f) ? (currentPos.Z - dest.Z) : 0f;
+            if (UseZ)
+            {
+                return (float)Math.Sqrt((double)(((num * num) + (num2 * num2)) + (num3 * num3)));
+            }
+            return (float)Math.Sqrt((double)((num * num) + (num2 * num2)));
+        }
+
+
+
+        public static void SetPlayerFacing(Location destination)
+        {
+
+            var angle = GetFaceRadian(destination, ObjectManager.Me.Location);
+            
+            var thread = _process.Threads[0];
+            var threadPtr = Win32Imports.OpenThread(2032639U, false, (uint) thread.Id);
+            Win32Imports.SuspendThread(threadPtr);
+
+            _reader.WriteFloat(Me.BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_ROTATION, angle);
+
+            thread = _process.Threads[0];
+            threadPtr = Win32Imports.OpenThread(2032639U, false, (uint)thread.Id);
+            Win32Imports.ResumeThread(threadPtr);
+
+            Thread.Sleep(50);
+
+            Win32Imports.PostMessage(_process.MainWindowHandle, 0x100, (int) 0x25, 0x14B0001);
+            Win32Imports.PostMessage(_process.MainWindowHandle, 0x101, (int) 0x25, (0x14B0001 + 0xC0000000));
+
+        }
+
+        private  static float GetFaceRadian(Location dest, Location currentPos)
+        {
+            return NegativeAngle((float)Math.Atan2((double)(dest.Y - currentPos.Y), (double)(dest.X - currentPos.X)));
+        }
+
+        private static float NegativeAngle(float angle)
+        {
+            if (angle < 0f)
+            {
+                angle += 2 * (float)Math.PI; //6.283185f
+            }
+            return angle;
+        }
+
         public static IEnumerable<WowUnit> Units
         {
             get
