@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Aesha.Objects.Infrastructure;
 using Aesha.Objects.Model;
+using Common.Logging;
 
 namespace Aesha.Objects
 {
@@ -14,6 +15,7 @@ namespace Aesha.Objects
     {
         private static Process _process;
         private static ProcessMemoryReader _reader;
+        private static ILog _logger = LogManager.GetLogger(typeof(ObjectManager));
 
         private static ConcurrentDictionary<ulong, IWowObject> _objects = new ConcurrentDictionary<ulong, IWowObject>();
         private static CancellationTokenSource _cancellationSource;
@@ -21,7 +23,7 @@ namespace Aesha.Objects
 
         public static void Start(Process process)
         {
-
+            _logger.Debug("ObjectManager starting");
             AdministrativeRights.Ensure();
 
             if (process == null)
@@ -33,10 +35,19 @@ namespace Aesha.Objects
             _cancellationSource = new CancellationTokenSource();
             _pulseTask = new Task(async () =>
             {
-                while (true)
+                while (!_cancellationSource.IsCancellationRequested)
                 {
-                    Pulse();
-                    await Task.Delay(new TimeSpan(0, 0, 0, 0, 10));
+                    try
+                    {
+                        Pulse();
+                        await Task.Delay(new TimeSpan(0, 0, 0, 0, 10));
+                    }
+                    catch (Exception)
+                    {
+                        _cancellationSource.Cancel();
+                        throw;
+                    }
+
                 }
             }, _cancellationSource.Token);
 
@@ -59,23 +70,42 @@ namespace Aesha.Objects
         {
             get
             {
-                return
-                    _objects.Where(o => o.Value.Type == ObjectType.Player)
-                        .Select(p => (WowPlayer) p.Value)
-                        .ToList();
+                try
+                {
+                    return
+                        _objects.Where(o => o.Value.Type == ObjectType.Player)
+                            .Select(p => (WowPlayer) p.Value)
+                            .ToList();
+                }
+                catch (Exception ex)
+                {
+                    _logger.ErrorFormat("Error occured attempting to read Players", ex);
+                    throw;
+                }
+
             }
         }
 
-        
+
 
         public static IEnumerable<WowUnit> Units
         {
             get
             {
-                return
-                    _objects.Where(o => o.Value.Type == ObjectType.Unit && ((WowUnit) o.Value).Attributes.NPC == false)
-                        .Select(u => (WowUnit) u.Value)
-                        .ToList();
+                try
+                {
+                    return
+                        _objects.Where(
+                                o => o.Value.Type == ObjectType.Unit && ((WowUnit) o.Value).Attributes.NPC == false)
+                            .Select(u => (WowUnit) u.Value)
+                            .ToList();
+                }
+                catch (Exception ex)
+                {
+                    _logger.ErrorFormat("Error occured attempting to read Units", ex);
+                    throw;
+                }
+
             }
         }
 
@@ -83,16 +113,36 @@ namespace Aesha.Objects
         {
             get
             {
-                return 
-                    _objects.Where(o => o.Value.Type == ObjectType.Unit && ((WowUnit) o.Value).Attributes.NPC)
-                        .Select(u => (WowUnit) u.Value)
-                        .ToList();
+                try
+                {
+                    return
+                        _objects.Where(o => o.Value.Type == ObjectType.Unit && ((WowUnit) o.Value).Attributes.NPC)
+                            .Select(u => (WowUnit) u.Value)
+                            .ToList();
+                }
+                catch (Exception ex)
+                {
+                    _logger.ErrorFormat("Error occured attempting to read Npcs", ex);
+                    throw;
+                }
+
             }
         }
 
         public static IEnumerable<IWowObject> Objects
         {
-            get { return _objects.Values; }
+            get
+            {
+                try
+                {
+                    return _objects.Values;
+                }
+                catch (Exception ex)
+                {
+                    _logger.ErrorFormat("Error occured attempting to read Objects", ex);
+                    throw;
+                }
+            }
         }
 
         private static void Pulse()

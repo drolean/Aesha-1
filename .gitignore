@@ -10,3 +10,5 @@ src/Aesha.Objects/bin/
 src/Aesha.Sample/bin/
 src/Aesha.Sample/obj/
 src/Aesha.Core/obj/
+src/packages/
+src/Aesha.Core/bin/

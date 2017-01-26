@@ -61,8 +61,8 @@ namespace Aesha.Forms
 
             var obj = (RowUnit)dataGridView1.Rows[e.RowIndex].DataBoundItem;
             _commandManager.SetTarget(obj.Address);
-            var kcd = new KeyboardCommandDispatcher();
-            kcd.SendG(_process);
+          //  var kcd = new KeyboardCommandDispatcher();
+         //   kcd.SendG(_process);
 
             Win32Imports.SetForegroundWindow(_process.MainWindowHandle);
 

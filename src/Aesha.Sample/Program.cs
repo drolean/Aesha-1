@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using Aesha.Core;
 using Aesha.Forms;
 using Aesha.Objects;
 
@@ -11,8 +12,15 @@ namespace Aesha
         static void Main(string[] args)
         {
 
-           var process = Process.GetProcessesByName("WoW").FirstOrDefault();
-             ObjectManager.Start(process);
+           //var process = Process.GetProcessesByName("WoW").FirstOrDefault();
+           var process = Process.GetProcessesByName("Notepad").FirstOrDefault();
+            var kcd = new KeyboardCommandDispatcher(process);
+            //kcd.SendKey('a');
+            kcd.SendShiftKey("A");
+
+            return;
+
+             //ObjectManager.Start(process);
             //ObjectManager.SetPlayerFacing();
             //var facing = ObjectManager.Me.Rotation;
             //return;

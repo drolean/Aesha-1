@@ -40,6 +40,15 @@ namespace Aesha.Core
         }
 
 
+        public void SendG(Process process)
+        {
+         //   Win32Imports.PostMessage(process.MainWindowHandle, WM_KEYDOWN, 0x00000047, 0x00220001);
+          //  Win32Imports.PostMessage(process.MainWindowHandle, WM_CHAR, 0x00000067, 0x00220001);
+         //   Win32Imports.PostMessage(process.MainWindowHandle, WM_KEYUP, 0x00000047, 0xC0220001);
+        }
+
+
+
         public float GetDistance(Location dest, Location currentPos, bool UseZ)
         {
             float num = currentPos.X - dest.X;

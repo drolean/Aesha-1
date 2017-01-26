@@ -1,21 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.Runtime.InteropServices;
+using System.Linq;
 using System.Threading;
+using Aesha.Objects.Infrastructure;
 
 namespace Aesha.Core
 {
     public class KeyboardCommandDispatcher
     {
-        [DllImport("USER32.DLL")]
-        private static extern int PostMessage(IntPtr hwnd, uint msg, int character, uint lparam);
+        //http://www.codingvision.net/miscellaneous/c-send-text-to-notepad
+        //http://stackoverflow.com/questions/21994276/setting-wm-keydown-lparam-parameters
 
-        [DllImport("user32.dll")]
-        private static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
+        private readonly IntPtr _processWindowHandle;
+
+        private readonly Dictionary<char, KeyMap> _keyMaps = new Dictionary<char, KeyMap>()
+        {
+            {'A', new KeyMap() {ScanCode = 0x1E, VirtualKeyCode = 'A'}}
+        };
+        
+        public KeyboardCommandDispatcher(Process process)
+        {
+            _processWindowHandle = Win32Imports.FindWindowEx(process.MainWindowHandle, IntPtr.Zero, null, null);
+        }
 
         #region VirtualKeyCodes Enum
-        public enum VirtualKeyCodes
+
+        private enum VirtualKeyCodes
         {
             VK_LBUTTON = 0x01,
             VK_RBUTTON = 0x02,
@@ -49,42 +60,6 @@ namespace Aesha.Core
             VK_INSERT = 0x2D,
             VK_DELETE = 0x2E,
             VK_HELP = 0x2F,
-            VK_0 = 0x30,
-            VK_1 = 0x31,
-            VK_2 = 0x32,
-            VK_3 = 0x33,
-            VK_4 = 0x34,
-            VK_5 = 0x35,
-            VK_6 = 0x36,
-            VK_7 = 0x37,
-            VK_8 = 0x38,
-            VK_9 = 0x39,
-            VK_A = 0x41,
-            VK_B = 0x42,
-            VK_C = 0x43,
-            VK_D = 0x44,
-            VK_E = 0x45,
-            VK_F = 0x46,
-            VK_G = 0x47,
-            VK_H = 0x48,
-            VK_I = 0x49,
-            VK_J = 0x4A,
-            VK_K = 0x4B,
-            VK_L = 0x4C,
-            VK_M = 0x4D,
-            VK_N = 0x4E,
-            VK_O = 0x4F,
-            VK_P = 0x50,
-            VK_Q = 0x51,
-            VK_R = 0x52,
-            VK_S = 0x53,
-            VK_T = 0x54,
-            VK_U = 0x55,
-            VK_V = 0x56,
-            VK_W = 0x57,
-            VK_X = 0x58,
-            VK_Y = 0x59,
-            VK_Z = 0x5A,
             VK_NUMPAD0 = 0x60,
             VK_NUMPAD1 = 0x61,
             VK_NUMPAD2 = 0x62,
@@ -129,88 +104,43 @@ namespace Aesha.Core
 
         private const uint WM_KEYDOWN = 0x100;
         private const uint WM_KEYUP = 0x101;
-        private const uint WM_CHAR = 0x102;
-        private const uint WM_LBUTTONDOWN = 0x201;
-        private const uint WM_LBUTTONUP = 0x202;
-        private const uint WM_RBUTTONDOWN = 0x204;
-        private const uint WM_RBUTTONUP = 0x205;
-        private const uint WM_MOVEMOUSE = 0x0200;
 
-        [Flags]
-        private enum MouseFlags
+
+        public void SendShiftKey(string key)
         {
-            MK_CONTROL = 0x0008,
-            MK_LBUTTON = 0x0001,
-            MK_MBUTTON = 0x0010,
-            MK_RBUTTON = 0x0002,
-            MK_SHIFT = 0x0004,
-            MK_XBUTTON1 = 0x0020,
-            MK_XBUTTON2 = 0x0040
+            InternalSendKeyDown(0x2A, (int) VirtualKeyCodes.VK_SHIFT);
+            Thread.Sleep(500);
+            SendKey(key);
+            Thread.Sleep(500);
+            InternalSendKeyUp(0x2A,(int)VirtualKeyCodes.VK_SHIFT);
         }
 
-        public void SendClick(Process process, Point point)
+        public void SendKey(string key)
         {
-            var processWindowHandle = FindWindowEx(process.MainWindowHandle, IntPtr.Zero, null, null);
-            var lparam = CreateMouseParam(point);
-            PostMessage(processWindowHandle, WM_RBUTTONDOWN, 0x01, lparam);
-            PostMessage(processWindowHandle, WM_RBUTTONUP, 0x01, lparam);
+            var map = MapKey(key);
+            InternalSendKeyDown(map.ScanCode, map.VirtualKeyCode);
+            InternalSendKeyUp(map.ScanCode, map.VirtualKeyCode);
         }
 
-        public void MoveMouse(Process process, Point point)
+        private KeyMap MapKey(string key)
         {
-            var lparam = CreateMouseParam(point);
-            var flags = MouseFlags.MK_LBUTTON | MouseFlags.MK_SHIFT;
-
-            PostMessage(process.MainWindowHandle, WM_MOVEMOUSE, 0, lparam);
-         //   PostMessage(process.MainWindowHandle, 0x0020, 0x00050038, 0x02000001);
+            var keyChar = key.ToUpper().ToCharArray().First();
+            return _keyMaps[keyChar];
         }
 
-        public void SendShiftClick(Process process, Point point)
+        private void InternalSendKeyDown(int scanCode, int virtualKeyCode)
         {
-            //var processWindowHandle = FindWindowEx(process.MainWindowHandle, IntPtr.Zero, null, null);
-            //if ((uint)processWindowHandle == 0) processWindowHandle = process.MainWindowHandle;
-
-            var lparam = CreateMouseParam(point);
-            var flags = MouseFlags.MK_LBUTTON | MouseFlags.MK_SHIFT;
-
-            PostMessage(process.MainWindowHandle, WM_KEYDOWN, (int)VirtualKeyCodes.VK_SHIFT, 0x002A0001);
-            Thread.Sleep(100);
-            PostMessage(process.MainWindowHandle, WM_MOVEMOUSE, 0, lparam);
-            PostMessage(process.MainWindowHandle, 0x0020, 0x00050038, 0x02000001);
-            Thread.Sleep(100);
-            PostMessage(process.MainWindowHandle, WM_RBUTTONDOWN, (int)flags, lparam);
-            Thread.Sleep(100);
-            PostMessage(process.MainWindowHandle, WM_RBUTTONUP, (int)flags, lparam);
-            Thread.Sleep(100);
-            PostMessage(process.MainWindowHandle, WM_KEYUP, (int)VirtualKeyCodes.VK_SHIFT, 0xC02A0001);
+            var downParam = CreateParam(1, (uint)scanCode, 0, 0, 0, 0);
+            Win32Imports.PostMessage(_processWindowHandle, WM_KEYDOWN, virtualKeyCode, downParam);
         }
 
 
-        public void SendG(Process process)
+        private void InternalSendKeyUp(int scanCode, int virtualKeyCode)
         {
-            PostMessage(process.MainWindowHandle, WM_KEYDOWN, 0x00000047, 0x00220001);
-            PostMessage(process.MainWindowHandle, WM_CHAR, 0x00000067, 0x00220001);
-            PostMessage(process.MainWindowHandle, WM_KEYUP, 0x00000047, 0xC0220001);
+            var upParam = CreateParam(1, (uint)scanCode, 0, 0, 1, 1);
+            Win32Imports.PostMessage(_processWindowHandle, WM_KEYUP, virtualKeyCode, upParam);
         }
 
-
-
-        public void SendKey(Process process, VirtualKeyCodes key, uint repeatCount = 1, uint previousState = 0)
-        {
-            //http://www.codingvision.net/miscellaneous/c-send-text-to-notepad
-            //http://stackoverflow.com/questions/21994276/setting-wm-keydown-lparam-parameters
-
-            var processWindowHandle = FindWindowEx(process.MainWindowHandle, IntPtr.Zero, null, null);
-            var lparam = CreateParam(repeatCount, (uint)key, 0, 0, previousState);
-            PostMessage(processWindowHandle, WM_KEYDOWN, (int)key, lparam);
-            PostMessage(processWindowHandle, WM_KEYUP, (int) key, lparam);
-
-        }
-
-        private uint CreateMouseParam(Point point)
-        {
-            return (uint)((point.Y << 16) | (point.X & 0xFFFF));
-        }
 
         private uint CreateParam(uint repeatCount, uint scanCode, uint extended = 0, uint context = 0, uint previousState = 0, uint transition = 0)
         {
@@ -221,5 +151,11 @@ namespace Aesha.Core
                 | (previousState << 30)
                 | (transition << 31);
         }
+    }
+
+    class KeyMap
+    {
+        public int ScanCode { get; set; }
+        public int VirtualKeyCode { get; set; }
     }
 }
