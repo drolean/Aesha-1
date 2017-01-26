@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace ObjectManager.Infrastructure
+namespace Aesha.Core
 {
     public class KeyboardCommandDispatcher
     {

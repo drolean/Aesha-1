@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ObjectManager.Infrastructure;
-using ObjectManager.Model;
+using Aesha.Core;
+using Aesha.Objects;
+using Aesha.Objects.Infrastructure;
+using Aesha.Objects.Model;
 
-namespace ObjectManager.Sample.Forms
+namespace Aesha.Forms
 {
     public partial class Main : Form
     {
-        private CancellationTokenSource _cancellationSource;
-        private Task _pulseTask;
+
         private Process _process;
+        private CommandManager _commandManager;
+        private ProcessMemoryReader _reader;
 
         public Main()
         {
@@ -26,6 +27,11 @@ namespace ObjectManager.Sample.Forms
         {
             _process = Process.GetProcessesByName("WoW").FirstOrDefault();
             ObjectManager.Start(_process);
+
+            _reader = new ProcessMemoryReader(_process);
+
+            _commandManager = new CommandManager(_process,_reader);
+            
             timer1.Start();
            
    
@@ -54,13 +60,13 @@ namespace ObjectManager.Sample.Forms
             if (e.RowIndex == -1) return;
 
             var obj = (RowUnit)dataGridView1.Rows[e.RowIndex].DataBoundItem;
-            ObjectManager.SetTarget(obj.Address);
+            _commandManager.SetTarget(obj.Address);
             var kcd = new KeyboardCommandDispatcher();
             kcd.SendG(_process);
 
             Win32Imports.SetForegroundWindow(_process.MainWindowHandle);
 
-            //ObjectManager.SetPlayerFacing(obj.Location);
+            _commandManager.SetPlayerFacing(obj.Location);
 
         }
 

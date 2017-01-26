@@ -1,7 +1,7 @@
 ﻿using System.Security;
 using System.Security.Principal;
 
-namespace ObjectManager.Infrastructure
+namespace Aesha.Objects.Infrastructure
 {
     internal class AdministrativeRights
     {

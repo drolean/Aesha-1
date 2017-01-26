@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace ObjectManager.Infrastructure
+namespace Aesha.Objects.Infrastructure
 {
     public sealed class ProcessMemoryReader
     {

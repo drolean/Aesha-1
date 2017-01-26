@@ -1,4 +1,4 @@
-﻿namespace ObjectManager.Sample.Forms
+﻿namespace Aesha.Forms
 {
     partial class Main
     {

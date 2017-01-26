@@ -1,6 +1,6 @@
-﻿using ObjectManager.Infrastructure;
+﻿using Aesha.Objects.Infrastructure;
 
-namespace ObjectManager.Model
+namespace Aesha.Objects.Model
 {
     public class WowGameObject : WowObject
     {

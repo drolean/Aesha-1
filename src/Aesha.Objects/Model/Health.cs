@@ -1,4 +1,4 @@
-﻿namespace ObjectManager.Model
+﻿namespace Aesha.Objects.Model
 {
     public class Health
     {

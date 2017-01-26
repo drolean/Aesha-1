@@ -5,3 +5,8 @@ src/ObjectManager/obj/
 src/ObjectManager.Sample/bin/
 src/ObjectManager.Sample/obj/
 src/.vs/
+src/Aesha.Objects/obj/
+src/Aesha.Objects/bin/
+src/Aesha.Sample/bin/
+src/Aesha.Sample/obj/
+src/Aesha.Core/obj/

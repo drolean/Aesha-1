@@ -1,13 +1,10 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
-using ObjectManager.Infrastructure;
-using ObjectManager.Sample.Forms;
+using Aesha.Forms;
+using Aesha.Objects;
 
-namespace ObjectManager.Sample
+namespace Aesha
 {
     class Program
     {

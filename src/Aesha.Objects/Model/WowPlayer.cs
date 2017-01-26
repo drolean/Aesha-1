@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Linq;
-using ObjectManager.Infrastructure;
+using Aesha.Objects.Infrastructure;
 
-namespace ObjectManager.Model
+namespace Aesha.Objects.Model
 {
     public class WowPlayer : WowUnit
     {

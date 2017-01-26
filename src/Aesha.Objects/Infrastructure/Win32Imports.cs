@@ -1,24 +1,27 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace ObjectManager.Infrastructure
+namespace Aesha.Objects.Infrastructure
 {
     public static class Win32Imports
     {
         [DllImport("kernel32", EntryPoint = "OpenProcess")]
-        internal static extern IntPtr OpenProcess(
+        public static extern IntPtr OpenProcess(
             uint dwDesiredAccess,
             bool bInheritHandle,
             int dwProcessId);
 
         [DllImport("kernel32", EntryPoint = "OpenThread")]
-        internal static extern IntPtr OpenThread(uint dwDesiredAccess, bool bInheritHandle, uint dwThreadId);
+        public static extern IntPtr OpenThread(
+            uint dwDesiredAccess,
+            bool bInheritHandle, 
+            uint dwThreadId);
 
         [DllImport("kernel32", EntryPoint = "CloseHandle")]
-        internal static extern bool CloseHandle(IntPtr hObject);
+        public static extern bool CloseHandle(IntPtr hObject);
 
         [DllImport("kernel32", EntryPoint = "ReadProcessMemory")]
-        internal static extern bool ReadProcessMemory(
+        public static extern bool ReadProcessMemory(
             IntPtr hProcess,
             uint dwAddress,
             IntPtr lpBuffer,
@@ -40,7 +43,11 @@ namespace ObjectManager.Infrastructure
         public static extern uint ResumeThread(IntPtr hThread);
 
         [DllImport("USER32.DLL")]
-        public static extern int PostMessage(IntPtr hwnd, uint msg, int character, uint lparam);
+        public static extern int PostMessage(
+            IntPtr hwnd, 
+            uint msg, 
+            int character, 
+            uint lparam);
 
         [DllImport("user32.dll")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);

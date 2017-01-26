@@ -1,4 +1,4 @@
-﻿namespace ObjectManager.Infrastructure
+﻿namespace Aesha.Objects.Infrastructure
 {
 
     public static class Offsets
