@@ -3,20 +3,88 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
 using Aesha.Objects.Infrastructure;
+// ReSharper disable InconsistentNaming
 
 namespace Aesha.Core
 {
     public class KeyboardCommandDispatcher
     {
-        //http://www.codingvision.net/miscellaneous/c-send-text-to-notepad
-        //http://stackoverflow.com/questions/21994276/setting-wm-keydown-lparam-parameters
-
         private readonly IntPtr _processWindowHandle;
 
         private readonly Dictionary<char, KeyMap> _keyMaps = new Dictionary<char, KeyMap>()
         {
-            {'A', new KeyMap() {ScanCode = 0x1E, VirtualKeyCode = 'A'}}
+            {'!', new KeyMap() {ScanCode = 0x2, VirtualKeyCode = '1', Shifted = true}},
+            {'"', new KeyMap() {ScanCode = 0x3, VirtualKeyCode = '2', Shifted = true}},
+            {'£', new KeyMap() {ScanCode = 0x4, VirtualKeyCode = '3', Shifted = true}},
+            {'$', new KeyMap() {ScanCode = 0x5, VirtualKeyCode = '4', Shifted = true}},
+            {'%', new KeyMap() {ScanCode = 0x6, VirtualKeyCode = '5', Shifted = true}},
+            {'^', new KeyMap() {ScanCode = 0x7, VirtualKeyCode = '6', Shifted = true}},
+            {'&', new KeyMap() {ScanCode = 0x8, VirtualKeyCode = '7', Shifted = true}},
+            {'*', new KeyMap() {ScanCode = 0x9, VirtualKeyCode = '8', Shifted = true}},
+            {'(', new KeyMap() {ScanCode = 0x0A, VirtualKeyCode = '9', Shifted = true}},
+            {')', new KeyMap() {ScanCode = 0x0B, VirtualKeyCode = '0', Shifted = true}},
+            {'_', new KeyMap() {ScanCode = 0x0C, VirtualKeyCode = '-', Shifted = true}},
+            {'+', new KeyMap() {ScanCode = 0x0D, VirtualKeyCode = '=', Shifted = true}},
+            {'Q', new KeyMap() {ScanCode = 0x10, VirtualKeyCode = 'Q'}},
+            {'W', new KeyMap() {ScanCode = 0x11, VirtualKeyCode = 'W'}},
+            {'E', new KeyMap() {ScanCode = 0x12, VirtualKeyCode = 'E'}},
+            {'R', new KeyMap() {ScanCode = 0x13, VirtualKeyCode = 'R'}},
+            {'T', new KeyMap() {ScanCode = 0x14, VirtualKeyCode = 'T'}},
+            {'Y', new KeyMap() {ScanCode = 0x15, VirtualKeyCode = 'Y'}},
+            {'U', new KeyMap() {ScanCode = 0x16, VirtualKeyCode = 'U'}},
+            {'I', new KeyMap() {ScanCode = 0x17, VirtualKeyCode = 'I'}},
+            {'O', new KeyMap() {ScanCode = 0x18, VirtualKeyCode = 'O'}},
+            {'P', new KeyMap() {ScanCode = 0x19, VirtualKeyCode = 'P'}},
+            {'{', new KeyMap() {ScanCode = 0x1A, VirtualKeyCode = '{'}},
+            {'}', new KeyMap() {ScanCode = 0x1B, VirtualKeyCode = '}'}},
+            {'A', new KeyMap() {ScanCode = 0x1E, VirtualKeyCode = 'A'}},
+            {'S', new KeyMap() {ScanCode = 0x1F, VirtualKeyCode = 'S'}},
+            {'D', new KeyMap() {ScanCode = 0x20, VirtualKeyCode = 'D'}},
+            {'F', new KeyMap() {ScanCode = 0x21, VirtualKeyCode = 'F'}},
+            {'G', new KeyMap() {ScanCode = 0x22, VirtualKeyCode = 'G'}},
+            {'H', new KeyMap() {ScanCode = 0x23, VirtualKeyCode = 'H'}},
+            {'J', new KeyMap() {ScanCode = 0x24, VirtualKeyCode = 'J'}},
+            {'K', new KeyMap() {ScanCode = 0x25, VirtualKeyCode = 'K'}},
+            {'L', new KeyMap() {ScanCode = 0x26, VirtualKeyCode = 'L'}},
+            {':', new KeyMap() {ScanCode = 0x27, VirtualKeyCode = ';', Shifted = true}},
+            {'@', new KeyMap() {ScanCode = 0x28, VirtualKeyCode = '\'', Shifted = true}},
+            {'|', new KeyMap() {ScanCode = 0x2B, VirtualKeyCode = '\\', Shifted = true}},
+            {'~', new KeyMap() {ScanCode = 0x2B, VirtualKeyCode = '#', Shifted = true}},
+            {'Z', new KeyMap() {ScanCode = 0x2C, VirtualKeyCode = 'Z'}},
+            {'X', new KeyMap() {ScanCode = 0x2D, VirtualKeyCode = 'X'}},
+            {'C', new KeyMap() {ScanCode = 0x2E, VirtualKeyCode = 'C'}},
+            {'V', new KeyMap() {ScanCode = 0x2F, VirtualKeyCode = 'V'}},
+            {'B', new KeyMap() {ScanCode = 0x30, VirtualKeyCode = 'B'}},
+            {'N', new KeyMap() {ScanCode = 0x31, VirtualKeyCode = 'N'}},
+            {'M', new KeyMap() {ScanCode = 0x32, VirtualKeyCode = 'M'}},
+            {'<', new KeyMap() {ScanCode = 0x33, VirtualKeyCode = ',', Shifted = true}},
+            {'>', new KeyMap() {ScanCode = 0x34, VirtualKeyCode = '.', Shifted = true}},
+            {'?', new KeyMap() {ScanCode = 0x35, VirtualKeyCode = '/', Shifted = true}},
+            {'1', new KeyMap() {ScanCode = 0x2, VirtualKeyCode = '1'}},
+            {'2', new KeyMap() {ScanCode = 0x3, VirtualKeyCode = '2'}},
+            {'3', new KeyMap() {ScanCode = 0x4, VirtualKeyCode = '3'}},
+            {'4', new KeyMap() {ScanCode = 0x5, VirtualKeyCode = '4'}},
+            {'5', new KeyMap() {ScanCode = 0x6, VirtualKeyCode = '5'}},
+            {'6', new KeyMap() {ScanCode = 0x7, VirtualKeyCode = '6'}},
+            {'7', new KeyMap() {ScanCode = 0x8, VirtualKeyCode = '7'}},
+            {'8', new KeyMap() {ScanCode = 0x9, VirtualKeyCode = '8'}},
+            {'9', new KeyMap() {ScanCode = 0x0A, VirtualKeyCode = '9'}},
+            {'0', new KeyMap() {ScanCode = 0x0B, VirtualKeyCode = '0'}},
+            {'-', new KeyMap() {ScanCode = 0x0C, VirtualKeyCode = '-'}},
+            {'=', new KeyMap() {ScanCode = 0x0D, VirtualKeyCode = '='}},
+            {'[', new KeyMap() {ScanCode = 0x1A, VirtualKeyCode = '['}},
+            {']', new KeyMap() {ScanCode = 0x1B, VirtualKeyCode = ']'}},
+            {';', new KeyMap() {ScanCode = 0x27, VirtualKeyCode = ';'}},
+            {'\'', new KeyMap() {ScanCode = 0x28, VirtualKeyCode = '\''}},
+            {'`', new KeyMap() {ScanCode = 0x29, VirtualKeyCode = '`'}},
+            {'\\', new KeyMap() {ScanCode = 0x2B, VirtualKeyCode = '\\'}},
+            {'#', new KeyMap() {ScanCode = 0x2B, VirtualKeyCode = '#'}},
+            {',', new KeyMap() {ScanCode = 0x33, VirtualKeyCode = ','}},
+            {'.', new KeyMap() {ScanCode = 0x34, VirtualKeyCode = '.'}},
+            {'/', new KeyMap() {ScanCode = 0x35, VirtualKeyCode = '/'}},
+            {' ', new KeyMap() {ScanCode = 0x39, VirtualKeyCode = ' '}}
         };
         
         public KeyboardCommandDispatcher(Process process)
@@ -24,114 +92,89 @@ namespace Aesha.Core
             _processWindowHandle = Win32Imports.FindWindowEx(process.MainWindowHandle, IntPtr.Zero, null, null);
         }
 
-        #region VirtualKeyCodes Enum
-
-        private enum VirtualKeyCodes
-        {
-            VK_LBUTTON = 0x01,
-            VK_RBUTTON = 0x02,
-            VK_CANCEL = 0x03,
-            VK_MBUTTON = 0x04,
-            VK_XBUTTON1 = 0x05,
-            VK_XBUTTON2 = 0x06,
-            VK_BACK = 0x08,
-            VK_TAB = 0x09,
-            VK_CLEAR = 0x0C,
-            VK_RETURN = 0x0D,
-            VK_SHIFT = 0x10,
-            VK_CONTROL = 0x11,
-            VK_ALT = 0x12,
-            VK_PAUSE = 0x13,
-            VK_CAPSLOCK = 0x14,
-            VK_ESCAPE = 0x1B,
-            VK_SPACE = 0x20,
-            VK_PAGEUP = 0x21,
-            VK_PAGEDOWN = 0x22,
-            VK_END = 0x23,
-            VK_HOME = 0x24,
-            VK_LEFT = 0x25,
-            VK_UP = 0x26,
-            VK_RIGHT = 0x27,
-            VK_DOWN = 0x28,
-            VK_SELECT = 0x29,
-            VK_PRINT = 0x2A,
-            VK_EXECUTE = 0x2B,
-            VK_PRINTSCREEN = 0x2A,
-            VK_INSERT = 0x2D,
-            VK_DELETE = 0x2E,
-            VK_HELP = 0x2F,
-            VK_NUMPAD0 = 0x60,
-            VK_NUMPAD1 = 0x61,
-            VK_NUMPAD2 = 0x62,
-            VK_NUMPAD3 = 0x63,
-            VK_NUMPAD4 = 0x64,
-            VK_NUMPAD5 = 0x65,
-            VK_NUMPAD6 = 0x66,
-            VK_NUMPAD7 = 0x67,
-            VK_NUMPAD8 = 0x68,
-            VK_NUMPAD9 = 0x69,
-            VK_MULTIPLY = 0x6A,
-            VK_ADD = 0x6B,
-            VK_SEPERATOR = 0x6C,
-            VK_SUBTRACT = 0x6D,
-            VK_DECIMAL = 0x6E,
-            VK_DIVIDE = 0x6F,
-            VK_F1 = 0x70,
-            VK_F2 = 0x71,
-            VK_F3 = 0x72,
-            VK_F4 = 0x73,
-            VK_F5 = 0x74,
-            VK_F6 = 0x75,
-            VK_F7 = 0x76,
-            VK_F8 = 0x77,
-            VK_F9 = 0x78,
-            VK_F10 = 0x79,
-            VK_F11 = 0x7A,
-            VK_F12 = 0x7B,
-            VK_NUMLOCK = 0x90,
-            VK_SCROLLLOCK = 0x91,
-            VK_LSHIFT = 0xA0,
-            VK_RSHIFT = 0xA1,
-            VK_LCONTROL = 0xA2,
-            VK_RCONTROL = 0xA3,
-            VK_LMENU = 0xA4,
-            VK_RMENU = 0xA5,
-            VK_PLUS = 0xBB,
-            VK_MINUS = 0xBD,
-            VK_TILDE = 0xC0
-        }
-        #endregion
-
         private const uint WM_KEYDOWN = 0x100;
         private const uint WM_KEYUP = 0x101;
 
 
-        public void SendShiftKey(string key)
-        {
-            InternalSendKeyDown(0x2A, (int) VirtualKeyCodes.VK_SHIFT);
-            Thread.Sleep(500);
-            SendKey(key);
-            Thread.Sleep(500);
-            InternalSendKeyUp(0x2A,(int)VirtualKeyCodes.VK_SHIFT);
-        }
-
-        public void SendKey(string key)
+        public void SendShiftKey(char key)
         {
             var map = MapKey(key);
+            if (map == null) throw new Exception($"Unable to map key: {key}");
+
+            InternalSetKeyDown((int)Keys.ShiftKey);
+            InternalSendKeyDown(0x2A, (int)Keys.ShiftKey);
+            InternalSendKeyDown(map.ScanCode, map.VirtualKeyCode);
+            InternalSendKeyUp(map.ScanCode, map.VirtualKeyCode);
+            InternalSendKeyUp(0x2A,(int)Keys.ShiftKey);
+            InternalSetKeyUp((int)Keys.ShiftKey);
+        }
+
+        public void SendKeys(string keys)
+        {
+            foreach (var key in keys)
+            {
+                SendKey(key);
+            }
+        }
+
+        public void SendKey(char key)
+        {
+            var map = MapKey(key);
+            if (map != null && map.Shifted) {
+                SendShiftKey(key);
+                return;
+            }
+            if (map == null) throw new Exception($"Unable to map key: {key}");
+
             InternalSendKeyDown(map.ScanCode, map.VirtualKeyCode);
             InternalSendKeyUp(map.ScanCode, map.VirtualKeyCode);
         }
 
-        private KeyMap MapKey(string key)
+        private KeyMap MapKey(char key)
         {
-            var keyChar = key.ToUpper().ToCharArray().First();
-            return _keyMaps[keyChar];
+            var upper = char.IsUpper(key);
+            key = key.ToString().ToUpper().ToCharArray().First();
+            var map = _keyMaps.ContainsKey(key) ? _keyMaps[key] : null;
+            if (upper)
+                map.Shifted = true;
+
+            return map;
+        }
+
+        private void InternalSetKeyDown(int virtualKeyCode)
+        {
+            var foreignThreadId = Win32Imports.GetWindowThreadProcessId(_processWindowHandle, IntPtr.Zero);
+            var localThreadId = Win32Imports.GetCurrentThreadId();
+            Win32Imports.AttachThreadInput(localThreadId, foreignThreadId, true);
+
+            var keys = new byte[256];
+            Win32Imports.GetKeyboardState(keys);
+            keys[virtualKeyCode] |= 0x80;
+            Win32Imports.SetKeyboardState(keys);
+
+            Thread.Sleep(50);
+        }
+
+        private void InternalSetKeyUp(int virtualKeyCode)
+        {
+            var keys = new byte[256];
+            Win32Imports.GetKeyboardState(keys);
+            keys[virtualKeyCode] &= 0x00;
+            Win32Imports.SetKeyboardState(keys);
+
+            var foreignThreadId = Win32Imports.GetWindowThreadProcessId(_processWindowHandle, IntPtr.Zero);
+            var localThreadId = Win32Imports.GetCurrentThreadId();
+            Win32Imports.AttachThreadInput(localThreadId, foreignThreadId, false);
+
+            Thread.Sleep(50);
         }
 
         private void InternalSendKeyDown(int scanCode, int virtualKeyCode)
         {
             var downParam = CreateParam(1, (uint)scanCode, 0, 0, 0, 0);
             Win32Imports.PostMessage(_processWindowHandle, WM_KEYDOWN, virtualKeyCode, downParam);
+
+            Thread.Sleep(50);
         }
 
 
@@ -139,6 +182,8 @@ namespace Aesha.Core
         {
             var upParam = CreateParam(1, (uint)scanCode, 0, 0, 1, 1);
             Win32Imports.PostMessage(_processWindowHandle, WM_KEYUP, virtualKeyCode, upParam);
+
+            Thread.Sleep(50);
         }
 
 
@@ -157,5 +202,6 @@ namespace Aesha.Core
     {
         public int ScanCode { get; set; }
         public int VirtualKeyCode { get; set; }
+        public bool Shifted { get; set; }
     }
 }

@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aesha", "Aesha.Sample\Aesha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aesha.Core", "Aesha.Core\Aesha.Core.csproj", "{5E2EE1D9-2417-4C9A-9E3F-B590FAB69BC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aesha.UnitTests", "Aesha.UnitTests\Aesha.UnitTests.csproj", "{084CE6D0-F2D6-4CB2-AAFC-1A7658A668A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,11 +34,12 @@ Global
 		{5E2EE1D9-2417-4C9A-9E3F-B590FAB69BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E2EE1D9-2417-4C9A-9E3F-B590FAB69BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E2EE1D9-2417-4C9A-9E3F-B590FAB69BC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{084CE6D0-F2D6-4CB2-AAFC-1A7658A668A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{084CE6D0-F2D6-4CB2-AAFC-1A7658A668A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{084CE6D0-F2D6-4CB2-AAFC-1A7658A668A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{084CE6D0-F2D6-4CB2-AAFC-1A7658A668A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{AD53AC8F-0B8A-4DC2-838B-C8A04641B96C} = {E0178A9D-C44D-4EBE-8B2C-E5ABEDAF7A7B}
 	EndGlobalSection
 EndGlobal

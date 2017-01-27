@@ -12,3 +12,5 @@ src/Aesha.Sample/obj/
 src/Aesha.Core/obj/
 src/packages/
 src/Aesha.Core/bin/
+src/Aesha.UnitTests/obj/
+src/Aesha.UnitTests/bin/

@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Aesha.Objects.Infrastructure;
 using Aesha.Objects.Model;
-using Common.Logging;
 
 namespace Aesha.Objects
 {
@@ -15,7 +14,6 @@ namespace Aesha.Objects
     {
         private static Process _process;
         private static ProcessMemoryReader _reader;
-        private static ILog _logger = LogManager.GetLogger(typeof(ObjectManager));
 
         private static ConcurrentDictionary<ulong, IWowObject> _objects = new ConcurrentDictionary<ulong, IWowObject>();
         private static CancellationTokenSource _cancellationSource;
@@ -23,7 +21,6 @@ namespace Aesha.Objects
 
         public static void Start(Process process)
         {
-            _logger.Debug("ObjectManager starting");
             AdministrativeRights.Ensure();
 
             if (process == null)
@@ -70,19 +67,10 @@ namespace Aesha.Objects
         {
             get
             {
-                try
-                {
-                    return
-                        _objects.Where(o => o.Value.Type == ObjectType.Player)
-                            .Select(p => (WowPlayer) p.Value)
-                            .ToList();
-                }
-                catch (Exception ex)
-                {
-                    _logger.ErrorFormat("Error occured attempting to read Players", ex);
-                    throw;
-                }
-
+                return
+                    _objects.Where(o => o.Value.Type == ObjectType.Player)
+                        .Select(p => (WowPlayer) p.Value)
+                        .ToList();
             }
         }
 
@@ -92,20 +80,11 @@ namespace Aesha.Objects
         {
             get
             {
-                try
-                {
-                    return
-                        _objects.Where(
-                                o => o.Value.Type == ObjectType.Unit && ((WowUnit) o.Value).Attributes.NPC == false)
-                            .Select(u => (WowUnit) u.Value)
-                            .ToList();
-                }
-                catch (Exception ex)
-                {
-                    _logger.ErrorFormat("Error occured attempting to read Units", ex);
-                    throw;
-                }
-
+                return
+                    _objects.Where(
+                            o => o.Value.Type == ObjectType.Unit && ((WowUnit) o.Value).Attributes.NPC == false)
+                        .Select(u => (WowUnit) u.Value)
+                        .ToList();
             }
         }
 
@@ -113,37 +92,14 @@ namespace Aesha.Objects
         {
             get
             {
-                try
-                {
-                    return
-                        _objects.Where(o => o.Value.Type == ObjectType.Unit && ((WowUnit) o.Value).Attributes.NPC)
-                            .Select(u => (WowUnit) u.Value)
-                            .ToList();
-                }
-                catch (Exception ex)
-                {
-                    _logger.ErrorFormat("Error occured attempting to read Npcs", ex);
-                    throw;
-                }
-
+                return
+                    _objects.Where(o => o.Value.Type == ObjectType.Unit && ((WowUnit) o.Value).Attributes.NPC)
+                        .Select(u => (WowUnit) u.Value)
+                        .ToList();
             }
         }
 
-        public static IEnumerable<IWowObject> Objects
-        {
-            get
-            {
-                try
-                {
-                    return _objects.Values;
-                }
-                catch (Exception ex)
-                {
-                    _logger.ErrorFormat("Error occured attempting to read Objects", ex);
-                    throw;
-                }
-            }
-        }
+        public static IEnumerable<IWowObject> Objects => _objects.Values;
 
         private static void Pulse()
         {

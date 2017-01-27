@@ -1,21 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AD53AC8F-0B8A-4DC2-838B-C8A04641B96C}</ProjectGuid>
+    <ProjectGuid>{084CE6D0-F2D6-4CB2-AAFC-1A7658A668A0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aesha.Objects</RootNamespace>
-    <AssemblyName>Aesha.Objects</AssemblyName>
+    <RootNamespace>Aesha.UnitTests</RootNamespace>
+    <AssemblyName>Aesha.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,52 +21,53 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup />
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.6.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.6.0\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastructure\AdministrativeRights.cs" />
-    <Compile Include="Infrastructure\Enums.cs" />
-    <Compile Include="Infrastructure\Offsets.cs" />
-    <Compile Include="Infrastructure\ProcessMemoryReader.cs" />
-    <Compile Include="Infrastructure\Win32Imports.cs" />
-    <Compile Include="Model\Health.cs" />
-    <Compile Include="Model\IWowObject.cs" />
-    <Compile Include="Model\Location.cs" />
-    <Compile Include="Model\Power.cs" />
-    <Compile Include="Model\Spell.cs" />
-    <Compile Include="Model\UnitAttributes.cs" />
-    <Compile Include="Model\WowGameObject.cs" />
-    <Compile Include="Model\WowObject.cs" />
-    <Compile Include="Model\WowPlayer.cs" />
-    <Compile Include="Model\WowUnit.cs" />
-    <Compile Include="ObjectManager.cs" />
+    <Compile Include="KeyboardTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\Aesha.Core\Aesha.Core.csproj">
+      <Project>{5e2ee1d9-2417-4c9a-9e3f-b590fab69bc4}</Project>
+      <Name>Aesha.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aesha.Objects\Aesha.Objects.csproj">
+      <Project>{ad53ac8f-0b8a-4dc2-838b-c8a04641b96c}</Project>
+      <Name>Aesha.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aesha.Sample\Aesha.csproj">
+      <Project>{a9c24467-ddb6-4a22-958c-628e08725d05}</Project>
+      <Name>Aesha</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
