@@ -55,21 +55,6 @@ namespace Aesha.Core
         }
 
 
-
-        public float GetDistance(Location dest, Location currentPos, bool UseZ)
-        {
-            float num = currentPos.X - dest.X;
-            float num2 = currentPos.Y - dest.Y;
-            float num3 = (dest.Z != 0f) ? (currentPos.Z - dest.Z) : 0f;
-            if (UseZ)
-            {
-                return (float)Math.Sqrt((double)(((num * num) + (num2 * num2)) + (num3 * num3)));
-            }
-            return (float)Math.Sqrt((double)((num * num) + (num2 * num2)));
-        }
-
-
-
         public void SetPlayerFacing(Location destination)
         {
             var newFacing = GetFaceRadian(destination, ObjectManager.Me.Location);

@@ -153,6 +153,11 @@ namespace Aesha.Objects.Model
             get { return Location.GetDistanceTo(ObjectManager.Me.Location); }
         }
 
+        public bool HasAura(int spellId)
+        {
+            return Auras.Any(a => a.SpellId == spellId);
+        }
+
         public List<Spell> Auras
         {
             get

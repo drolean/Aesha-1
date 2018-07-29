@@ -4,18 +4,16 @@ namespace Aesha.Objects.Model
 {
     public class Location
     {
-        public Location(float x, float y, float z)
+        public Location(float x, float y)
         {
             X = x;
             Y = y;
-            Z = z;
         }
     
 
         public float X { get;}
         public float Y { get; }
-        public float Z { get; }
-
+        
         public override string ToString()
         {
             return $"{X:##.000}/{Y:##.000}";
@@ -33,7 +31,7 @@ namespace Aesha.Objects.Model
 
             var other = (Location) obj;
 
-            return X == other.X && Y == other.Y && Z == other.Z;
+            return X == other.X && Y == other.Y;
 
         }
     }

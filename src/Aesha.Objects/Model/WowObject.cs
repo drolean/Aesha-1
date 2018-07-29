@@ -25,9 +25,9 @@ namespace Aesha.Objects.Model
             {
                 var x = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_X);
                 var y = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_Y);
-                var z = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_Z);
+                //var z = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_Z);
 
-                return new Location(x, y, z);
+                return new Location(x, y);
             }
         }
 

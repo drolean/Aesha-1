@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using Aesha.Objects.Infrastructure;
 
 namespace Aesha.Objects.Model
@@ -77,6 +78,15 @@ namespace Aesha.Objects.Model
         public override string ToString()
         {
             return $"{Name} (Level {Level} {UnitRace} {UnitClass})";
+        }
+
+        public bool IsMoving()
+        {
+            var currentLocation = Location;
+            Thread.Sleep(500);
+            var newLocation = Location;
+
+            return newLocation.Equals(currentLocation);
         }
     }
 }

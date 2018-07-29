@@ -34,16 +34,20 @@ namespace Aesha.Forms
 
             _commandManager = new CommandManager(_process,_reader);
             
-            timer1.Start();
+
+            var bot = new Fubars();
+            bot.Start(_process);
+
+           // timer1.Start();
 
 
-            var botTask = new Task(() =>
-            {
-                var bot = new Fubars();
-                bot.Start(_process);
-            });
+            //var botTask = new Task(() =>
+            //{
+            //    var bot = new Fubars();
+            //    bot.Start(_process);
+            //});
 
-            botTask.Start();
+            //botTask.Start();
 
 
         }
