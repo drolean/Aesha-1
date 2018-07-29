@@ -13,6 +13,9 @@ namespace Aesha.Core
         private readonly Process _process;
         private readonly ProcessMemoryReader _reader;
 
+        private const uint WM_KEYDOWN = 0x100;
+        private const uint WM_KEYUP = 0x101;
+
         public CommandManager(Process process, ProcessMemoryReader reader)
         {
             _process = process;
@@ -42,9 +45,13 @@ namespace Aesha.Core
 
         public void SendG(Process process)
         {
-         //   Win32Imports.PostMessage(process.MainWindowHandle, WM_KEYDOWN, 0x00000047, 0x00220001);
-          //  Win32Imports.PostMessage(process.MainWindowHandle, WM_CHAR, 0x00000067, 0x00220001);
-         //   Win32Imports.PostMessage(process.MainWindowHandle, WM_KEYUP, 0x00000047, 0xC0220001);
+            Win32Imports.PostMessage(process.MainWindowHandle, WM_KEYDOWN, 0x00000047, 0x00220001);
+            Win32Imports.PostMessage(process.MainWindowHandle, WM_KEYUP, 0x00000047, 0xC0220001);
+        }
+
+        public void BeingMoveForward(Process process)
+        {
+
         }
 
 
@@ -65,14 +72,13 @@ namespace Aesha.Core
 
         public void SetPlayerFacing(Location destination)
         {
-
-            var angle = GetFaceRadian(destination, ObjectManager.Me.Location);
+            var newFacing = GetFaceRadian(destination, ObjectManager.Me.Location);
 
             var thread = _process.Threads[0];
             var threadPtr = Win32Imports.OpenThread(2032639U, false, (uint)thread.Id);
             Win32Imports.SuspendThread(threadPtr);
 
-            _reader.WriteFloat(ObjectManager.Me.BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_ROTATION, angle);
+            _reader.WriteFloat(ObjectManager.Me.BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_ROTATION, newFacing);
 
             thread = _process.Threads[0];
             threadPtr = Win32Imports.OpenThread(2032639U, false, (uint)thread.Id);
@@ -80,12 +86,12 @@ namespace Aesha.Core
 
             Thread.Sleep(50);
 
-            Win32Imports.PostMessage(_process.MainWindowHandle, 0x100, (int)0x25, 0x14B0001);
-            Win32Imports.PostMessage(_process.MainWindowHandle, 0x101, (int)0x25, (0x14B0001 + 0xC0000000));
+            Win32Imports.PostMessage(_process.MainWindowHandle, WM_KEYDOWN, (int)0x25, 0x14B0001);
+            Win32Imports.PostMessage(_process.MainWindowHandle, WM_KEYUP, (int)0x25, (0x14B0001 + 0xC0000000));
 
         }
 
-        private float GetFaceRadian(Location destination, Location current)
+        public float GetFaceRadian(Location destination, Location current)
         {
             var n = 270 - (Math.Atan2(current.Y - destination.Y, current.X - destination.X)) * 180 / Math.PI;
             var angle = (Math.PI / 180) * (n % 360);

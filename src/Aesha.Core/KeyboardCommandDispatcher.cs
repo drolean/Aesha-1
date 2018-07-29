@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using Aesha.Objects;
 using Aesha.Objects.Infrastructure;
-// ReSharper disable InconsistentNaming
 
 namespace Aesha.Core
 {
@@ -15,6 +15,7 @@ namespace Aesha.Core
 
         private readonly Dictionary<char, KeyMap> _keyMaps = new Dictionary<char, KeyMap>()
         {
+
             {'!', new KeyMap() {ScanCode = 0x2, VirtualKeyCode = '1', Shifted = true}},
             {'"', new KeyMap() {ScanCode = 0x3, VirtualKeyCode = '2', Shifted = true}},
             {'£', new KeyMap() {ScanCode = 0x4, VirtualKeyCode = '3', Shifted = true}},
@@ -89,7 +90,8 @@ namespace Aesha.Core
         
         public KeyboardCommandDispatcher(Process process)
         {
-            _processWindowHandle = Win32Imports.FindWindowEx(process.MainWindowHandle, IntPtr.Zero, null, null);
+           // _processWindowHandle = Win32Imports.FindWindowEx(process.MainWindowHandle, IntPtr.Zero, null, null);
+            _processWindowHandle = process.MainWindowHandle;
         }
 
         private const uint WM_KEYDOWN = 0x100;
@@ -196,6 +198,34 @@ namespace Aesha.Core
                 | (previousState << 30)
                 | (transition << 31);
         }
+
+        public void SendKeyDown(char key)
+        {
+            var map = MapKey(key);
+            InternalSendKeyDown(map.ScanCode, map.VirtualKeyCode);
+        }
+
+        public void SendKeyUp(char key)
+        {
+            var map = MapKey(key);
+            InternalSendKeyUp(map.ScanCode, map.VirtualKeyCode);
+        }
+
+        public void SetPlayerFacing(float newFacing)
+        {
+            var currentFacing = ObjectManager.Me.Rotation;
+            var diff = newFacing - currentFacing;
+            var direction = diff < 0 ? 'D' : 'A';
+            
+            while (diff < -0.1 || diff > 0.1)
+            {
+                SendKeyDown(direction);
+                diff = newFacing - ObjectManager.Me.Rotation;
+            }
+
+            SendKeyUp(direction);
+        }
+
     }
 
     class KeyMap

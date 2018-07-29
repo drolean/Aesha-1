@@ -18,9 +18,15 @@ namespace Aesha.Objects
         private static ConcurrentDictionary<ulong, IWowObject> _objects = new ConcurrentDictionary<ulong, IWowObject>();
         private static CancellationTokenSource _cancellationSource;
         private static Task _pulseTask;
+        private static bool _running;
 
         public static void Start(Process process)
         {
+            if (_running)
+                return;
+
+            _running = true;
+
             AdministrativeRights.Ensure();
 
             if (process == null)

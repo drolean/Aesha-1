@@ -28,5 +28,12 @@ namespace Aesha.Objects.Model
                 return new Location(x, y, z);
             }
         }
+
+        public float Facing {
+            get
+            {
+                return _reader.ReadFloat(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_FACING);
+            }
+        }
     }
 }

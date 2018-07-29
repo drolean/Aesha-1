@@ -134,7 +134,8 @@ namespace Aesha.Objects.Infrastructure
         {
             var buffer = ReadBytes(dwAddress, sizeof(uint));
             if (buffer == null)
-                throw new Exception("ReadUInt failed.");
+                return 0;
+                //throw new Exception("ReadUInt failed.");
 
             return BitConverter.ToUInt32(buffer, 0);
         }

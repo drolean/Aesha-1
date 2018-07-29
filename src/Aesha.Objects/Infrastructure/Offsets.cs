@@ -7,7 +7,13 @@
         {
             MouseOverGuid = 0x00B4E2C8,
             TargetLastTargetGuid = 0x00B4E2E8,
-            PlayerFacing = 0x86326C
+            PlayerFacing = 0x86326C,
+            MinimapZoneText = 0x74DA28,
+            SubZoneText = 0x74E280,
+            RealZoneText = 0x74B404,
+
+
+            Zone = 0x25D85F08
         }
 
         public enum WowObjectManager

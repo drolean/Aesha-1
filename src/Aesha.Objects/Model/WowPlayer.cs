@@ -73,7 +73,7 @@ namespace Aesha.Objects.Model
                 return (UnitRaceTypes) (ret & 0xFF);
             }
         }
-
+        
         public override string ToString()
         {
             return $"{Name} (Level {Level} {UnitRace} {UnitClass})";

@@ -23,10 +23,18 @@ namespace Aesha.Objects.Model
 
         public float GetDistanceTo(Location l)
         {
-            float dx = X - l.X;
-            float dy = Y - l.Y;
-            float dz = Z - l.Z;
-            return (float)Math.Sqrt(dx * dx + dy * dy + dz * dz);
+            var result = (Math.Pow(X - l.X, 2) + Math.Pow(Y - l.Y, 2));
+            return (float) result;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(Location)) return false;
+
+            var other = (Location) obj;
+
+            return X == other.X && Y == other.Y && Z == other.Z;
+
         }
     }
 }
