@@ -28,6 +28,7 @@ namespace Aesha.Robots
             Path = path;
             EnemyList = enemyList;
             Logger = logger;
+
         }
 
 
@@ -87,8 +88,9 @@ namespace Aesha.Robots
 
         public void Pulse()
         {
-            Tree.Tick(new TimeData());
-            
+            if (Tree == null) Behaviour();
+            Tree?.Tick(new TimeData());
+
         }
     }
 }

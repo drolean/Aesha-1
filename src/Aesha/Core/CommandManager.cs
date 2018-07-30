@@ -67,7 +67,7 @@ namespace Aesha.Core
         {
 
             var newFacing = GetFaceRadian(destination, ObjectManager.Me.Location);
-            if (Math.Abs(newFacing - ObjectManager.Me.Rotation) > 0.5)
+            if (Math.Abs(newFacing - ObjectManager.Me.Rotation) > 1.5)
             {
                 var thread = _process.Threads[0];
                 var threadPtr = Win32Imports.OpenThread(2032639U, false, (uint) thread.Id);
@@ -81,7 +81,7 @@ namespace Aesha.Core
                 Win32Imports.ResumeThread(threadPtr);
 
                 Thread.Sleep(50);
-                _keyboard.SendKey('K');
+                _keyboard.SendKey('D');
             }
             else
             {

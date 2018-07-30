@@ -12,7 +12,7 @@ namespace Aesha.Core
 
         public static Path FromFile(string filename)
         {
-            var stream = File.OpenRead(filename);
+            var stream = File.OpenRead($"paths\\{filename}");
             var reader = new StreamReader(stream);
 
             var path = new Path();
