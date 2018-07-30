@@ -133,11 +133,7 @@ namespace Aesha.Infrastructure
         public uint ReadUInt( uint dwAddress)
         {
             var buffer = ReadBytes(dwAddress, sizeof(uint));
-            if (buffer == null)
-                return 0;
-                //throw new Exception("ReadUInt failed.");
-
-            return BitConverter.ToUInt32(buffer, 0);
+            return buffer == null ? 0 : BitConverter.ToUInt32(buffer, 0);
         }
 
         public ulong ReadUInt64( uint dwAddress)

@@ -1,5 +1,10 @@
-﻿using Aesha.Commands;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using Aesha.Core;
 using Aesha.Infrastructure;
+using Aesha.Objects;
+using Aesha.Robots;
 using Serilog;
 using Topshelf;
 
@@ -7,27 +12,31 @@ namespace Aesha
 {
     public class Service
     {
-        private readonly CommandDispatcher _dispatcher;
-
+        
         public Service(ILogger logger)
         {
-            _dispatcher = new CommandDispatcher(logger);
+            var process = Process.GetProcessesByName("WoW").FirstOrDefault();
+            ObjectManager.Start(process);
+            var robot = new Hunter(new CommandManager(process,new ProcessMemoryReader(process),new KeyboardCommandDispatcher(process)), Path.FromFile("Ashenvale-Athalaxx.path"),
+                new List<string>()
+                {
+                    "Felslayer",
+                    "Lesser Felguard",
+                    "Ghostpaw Runner"
+                }, logger);
 
-
-            _dispatcher.SingleThreadedMode = true;
-            //_dispatcher.ScanInstance(new StartRobotHandler());
-            _dispatcher.Start();
+            robot.Pulse();
         }
 
         public bool Start(HostControl hostControl)
         {
-            _dispatcher.Start();
+            
             return true;
         }
 
         public void Stop()
         {
-            _dispatcher.Stop();
+            
         }
     }
 }

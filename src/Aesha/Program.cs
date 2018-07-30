@@ -18,7 +18,7 @@ namespace Aesha
                 x.UseSerilog(logger);
                 x.Service<Service>(sc =>
                 {
-                    sc.ConstructUsing(name => Program.GetService(logger));
+                    sc.ConstructUsing(name => GetService(logger));
                     sc.WhenStarted((service, control) => service.Start(control));
                     sc.WhenStopped(s => s.Stop());
                 });

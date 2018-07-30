@@ -12,7 +12,7 @@ namespace Aesha.Infrastructure
             var isAdmin =  principal.IsInRole(WindowsBuiltInRole.Administrator);
 
             if (!isAdmin)
-                throw new SecurityException("ObjectManager requires administrative rights to function");
+                throw new SecurityException("Aesha requires administrative rights to function");
         }
     }
 }

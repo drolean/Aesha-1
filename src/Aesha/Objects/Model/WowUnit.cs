@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Aesha.Core;
 using Aesha.Infrastructure;
 
 namespace Aesha.Objects.Model
@@ -153,21 +154,15 @@ namespace Aesha.Objects.Model
             get { return Location.GetDistanceTo(ObjectManager.Me.Location); }
         }
 
-        public bool HasAura(int spellId)
+        public bool HasAura(Spell spell)
         {
-            return Auras.Any(a => a.SpellId == spellId);
+            return Auras.Any(a => a.Equals(spell));
         }
 
         public List<Spell> Auras
         {
             get
             {
-
-                //var bob = _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_AURA);
-                //var dump = _reader.ReadBytes(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_AURA, 20000);
-                //uint buffId = 1244;
-                //var buffIndex = dump.FindPattern(buffId);
-
                 var auras = new List<Spell>();
                 uint auraPosition = 0;
                 for (uint i = 0; i < 47; i++)
@@ -175,7 +170,7 @@ namespace Aesha.Objects.Model
                    
                     var aura = _reader.ReadInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_AURA + auraPosition);
                     if (aura > 0)
-                        auras.Add(new Spell(aura));
+                        auras.Add(new Spell(aura,"",0));
 
                     auraPosition += 4;
                 }
