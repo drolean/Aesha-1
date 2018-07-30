@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using Aesha.Infrastructure;
 using Aesha.Objects;
-using Aesha.Objects.Infrastructure;
 
 namespace Aesha.Core
 {
@@ -90,7 +90,6 @@ namespace Aesha.Core
         
         public KeyboardCommandDispatcher(Process process)
         {
-           // _processWindowHandle = Win32Imports.FindWindowEx(process.MainWindowHandle, IntPtr.Zero, null, null);
             _processWindowHandle = process.MainWindowHandle;
         }
 

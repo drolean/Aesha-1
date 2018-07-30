@@ -7,8 +7,8 @@
     <ProjectGuid>{A9C24467-DDB6-4A22-958C-628E08725D05}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aesha</RootNamespace>
-    <AssemblyName>Aesha</AssemblyName>
+    <RootNamespace>Aesha.Sample</RootNamespace>
+    <AssemblyName>Aesha.Sample</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -72,7 +72,6 @@
     <Compile Include="Forms\WaypathRecorder.Designer.cs">
       <DependentUpon>WaypathRecorder.cs</DependentUpon>
     </Compile>
-    <Compile Include="Robots\Fubars.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -98,6 +97,9 @@
       <Project>{ad53ac8f-0b8a-4dc2-838b-c8a04641b96c}</Project>
       <Name>Aesha.Objects</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Robots\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

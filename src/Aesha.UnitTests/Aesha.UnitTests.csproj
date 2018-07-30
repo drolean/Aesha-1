@@ -58,9 +58,9 @@
       <Project>{ad53ac8f-0b8a-4dc2-838b-c8a04641b96c}</Project>
       <Name>Aesha.Objects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Aesha.Sample\Aesha.csproj">
+    <ProjectReference Include="..\Aesha.Sample\Aesha.Sample.csproj">
       <Project>{a9c24467-ddb6-4a22-958c-628e08725d05}</Project>
-      <Name>Aesha</Name>
+      <Name>Aesha.Sample</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

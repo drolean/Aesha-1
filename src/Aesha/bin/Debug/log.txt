@@ -1,0 +1,46 @@
+2018-07-30 11:14:11.195 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-30 11:14:11.221 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-30 11:14:11.310 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-30 11:14:11.316 +01:00 [DBG] Starting up as a console application
+2018-07-30 11:14:11.318 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-30 11:14:14.841 +01:00 [INF] Control+C detected, attempting to stop service.
+2018-07-30 11:14:14.843 +01:00 [INF] The Aesha service has stopped.
+2018-07-30 11:28:57.907 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-30 11:28:57.932 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-30 11:30:25.102 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-30 11:30:25.131 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-30 11:30:25.139 +01:00 [DBG] Registered command handler 'StartRobotHandler' for command type 'StartRobot'
+2018-07-30 11:30:25.215 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-30 11:30:25.221 +01:00 [DBG] Starting up as a console application
+2018-07-30 11:30:25.223 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-30 11:31:07.406 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-30 11:31:07.432 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-30 11:31:20.774 +01:00 [DBG] Registered command handler 'StartRobotHandler' for command type 'StartRobot'
+2018-07-30 11:31:28.343 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-30 11:31:28.347 +01:00 [DBG] Starting up as a console application
+2018-07-30 11:31:28.350 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-30 11:31:35.239 +01:00 [INF] Control+C detected, attempting to stop service.
+2018-07-30 11:31:35.241 +01:00 [INF] The Aesha service has stopped.
+2018-07-30 11:31:39.420 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-30 11:31:39.446 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-30 11:31:39.455 +01:00 [DBG] Registered command handler 'StartRobotHandler' for command type 'StartRobot'
+2018-07-30 11:31:39.526 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-30 11:31:39.530 +01:00 [DBG] Starting up as a console application
+2018-07-30 11:31:39.533 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-30 11:31:42.534 +01:00 [INF] Control+C detected, attempting to stop service.
+2018-07-30 11:31:42.536 +01:00 [INF] The Aesha service has stopped.
