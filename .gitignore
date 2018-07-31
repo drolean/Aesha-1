@@ -16,3 +16,6 @@ src/Aesha.UnitTests/obj/
 src/Aesha.UnitTests/bin/
 src/Aesha/bin/
 src/Aesha/obj/
+src/PathRecorder/bin/
+src/PathRecorder/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+src/PathRecorder/obj/

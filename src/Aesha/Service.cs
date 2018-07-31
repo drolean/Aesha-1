@@ -27,12 +27,12 @@ namespace Aesha
             _robot =
                 new Hunter(
                     new CommandManager(process, new ProcessMemoryReader(process), new KeyboardCommandDispatcher(process)),
-                    Path.FromFile("Ashenvale-Athalaxx.path"),
+                    Path.FromFile("Brightwood-Grove.path"),
                     new List<string>()
                     {
-                        "Felslayer",
-                        "Lesser Felguard",
-                        "Ghostpaw Runner"
+                        "Nightbane Shadow Weaver",
+                        "Nightbane Dark Runner",
+                        "Nightbane Worgen"
                     }, logger);
         }
 

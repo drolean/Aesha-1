@@ -4449,3 +4449,920 @@
 2018-07-30 22:22:25.350 +01:00 [INF] move to next waypoint
 2018-07-30 22:22:25.350 +01:00 [INF] Setting player facing 211.933/2220.514
 2018-07-30 22:22:25.711 +01:00 [INF] Sending W key
+2018-07-31 22:43:12.409 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-31 22:43:12.441 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-31 22:43:12.502 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-31 22:43:12.508 +01:00 [DBG] Starting up as a console application
+2018-07-31 22:43:12.510 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-31 22:43:12.992 +01:00 [INF] find nearest waypoint
+2018-07-31 22:43:12.993 +01:00 [INF] check for enemies
+2018-07-31 22:43:13.001 +01:00 [INF] move to next waypoint
+2018-07-31 22:43:13.003 +01:00 [INF] Setting player facing 100.134/2217.076
+2018-07-31 22:43:13.054 +01:00 [INF] Sending W key
+2018-07-31 22:44:10.910 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-31 22:44:10.940 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-31 22:44:10.991 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-31 22:44:10.996 +01:00 [DBG] Starting up as a console application
+2018-07-31 22:44:10.998 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-31 22:46:00.031 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-31 22:46:00.064 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-31 22:46:00.124 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-31 22:46:00.128 +01:00 [DBG] Starting up as a console application
+2018-07-31 22:46:00.129 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-31 22:46:54.479 +01:00 [INF] Waiting for Nightbane Worgen (26) - Humanoid to die
+2018-07-31 22:47:13.175 +01:00 [INF] Waiting for Nightbane Worgen (27) - Humanoid to die
+2018-07-31 22:47:36.746 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-07-31 22:47:36.751 +01:00 [INF] Setting player facing -844.953/-10223.180
+2018-07-31 22:47:36.859 +01:00 [INF] Sending W key
+2018-07-31 22:47:37.922 +01:00 [INF] Moved to -844.953/-10223.180. Distance to waypoint is 386.9825. Current location is -847.458/-10242.700 Waiting 100ms
+2018-07-31 22:47:39.604 +01:00 [INF] Waiting for Nightbane Worgen (26) - Humanoid to die
+2018-07-31 22:47:59.211 +01:00 [INF] Waiting for Nightbane Shadow Weaver (27) - Humanoid to die
+2018-07-31 22:57:45.989 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-31 22:57:46.015 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-31 22:57:46.061 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-31 22:57:46.064 +01:00 [DBG] Starting up as a console application
+2018-07-31 22:57:46.066 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-31 22:57:46.287 +01:00 [INF] find nearest waypoint
+2018-07-31 22:57:46.288 +01:00 [INF] check for enemies
+2018-07-31 22:57:46.309 +01:00 [INF] enemy Nightbane Shadow Weaver (27) - Humanoid found. Exiting 'passive'
+2018-07-31 22:57:47.088 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-07-31 22:57:47.089 +01:00 [INF] Setting player facing -855.694/-10345.340
+2018-07-31 22:57:47.191 +01:00 [INF] Sending W key
+2018-07-31 22:57:49.374 +01:00 [INF] Moved to -855.694/-10345.340. Distance to waypoint is 376.08. Current location is -839.585/-10334.540 Waiting 100ms
+2018-07-31 22:57:49.535 +01:00 [INF] Waiting for Nightbane Shadow Weaver (27) - Humanoid to die
+2018-07-31 22:58:54.755 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-31 22:58:54.780 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-31 22:58:54.832 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-31 22:58:54.836 +01:00 [DBG] Starting up as a console application
+2018-07-31 22:58:54.839 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-31 22:58:55.230 +01:00 [INF] find nearest waypoint
+2018-07-31 22:58:55.230 +01:00 [INF] check for enemies
+2018-07-31 22:58:55.244 +01:00 [INF] move to next waypoint
+2018-07-31 22:58:55.245 +01:00 [INF] Setting player facing -829.276/-10338.690
+2018-07-31 22:58:55.348 +01:00 [INF] Sending W key
+2018-07-31 22:58:56.210 +01:00 [INF] Moved to -829.276/-10338.690. Distance to waypoint is 26.66928. Current location is -834.082/-10336.800 Waiting 100ms
+2018-07-31 22:58:56.626 +01:00 [INF] find nearest waypoint
+2018-07-31 22:58:56.627 +01:00 [INF] check for enemies
+2018-07-31 22:58:56.636 +01:00 [INF] enemy Nightbane Worgen (26) - Humanoid found. Exiting 'passive'
+2018-07-31 22:58:57.100 +01:00 [INF] find nearest waypoint
+2018-07-31 22:58:57.100 +01:00 [INF] check for enemies
+2018-07-31 22:58:57.108 +01:00 [INF] move to next waypoint
+2018-07-31 22:58:57.110 +01:00 [INF] Setting player facing -831.840/-10345.250
+2018-07-31 22:58:57.263 +01:00 [INF] Sending W key
+2018-07-31 22:58:57.314 +01:00 [INF] Moved to -831.840/-10345.250. Distance to waypoint is 6.321961. Current location is -831.108/-10342.840 Waiting 100ms
+2018-07-31 22:58:57.525 +01:00 [INF] find nearest waypoint
+2018-07-31 22:58:57.526 +01:00 [INF] check for enemies
+2018-07-31 22:58:57.534 +01:00 [INF] move to next waypoint
+2018-07-31 22:58:57.535 +01:00 [INF] Setting player facing -833.648/-10348.250
+2018-07-31 22:58:57.586 +01:00 [INF] Sending W key
+2018-07-31 22:58:57.640 +01:00 [INF] Moved to -833.648/-10348.250. Distance to waypoint is 13.54908. Current location is -832.013/-10344.950 Waiting 100ms
+2018-07-31 22:58:57.852 +01:00 [INF] find nearest waypoint
+2018-07-31 22:58:57.853 +01:00 [INF] check for enemies
+2018-07-31 22:58:57.861 +01:00 [INF] move to next waypoint
+2018-07-31 22:58:57.863 +01:00 [INF] Setting player facing -835.942/-10350.780
+2018-07-31 22:58:57.916 +01:00 [INF] Sending W key
+2018-07-31 22:58:57.967 +01:00 [INF] Moved to -835.942/-10350.780. Distance to waypoint is 22.51918. Current location is -833.154/-10346.940 Waiting 100ms
+2018-07-31 22:58:58.229 +01:00 [INF] find nearest waypoint
+2018-07-31 22:58:58.230 +01:00 [INF] check for enemies
+2018-07-31 22:58:58.238 +01:00 [INF] move to next waypoint
+2018-07-31 22:58:58.239 +01:00 [INF] Setting player facing -839.038/-10352.620
+2018-07-31 22:58:58.292 +01:00 [INF] Sending W key
+2018-07-31 22:58:58.444 +01:00 [INF] Moved to -839.038/-10352.620. Distance to waypoint is 23.21869. Current location is -835.414/-10349.440 Waiting 100ms
+2018-07-31 22:58:58.658 +01:00 [INF] find nearest waypoint
+2018-07-31 22:58:58.658 +01:00 [INF] check for enemies
+2018-07-31 22:58:58.667 +01:00 [INF] move to next waypoint
+2018-07-31 22:58:58.668 +01:00 [INF] Setting player facing -842.077/-10354.340
+2018-07-31 22:58:58.719 +01:00 [INF] Sending W key
+2018-07-31 22:58:58.874 +01:00 [INF] Moved to -842.077/-10354.340. Distance to waypoint is 28.38519. Current location is -837.720/-10351.270 Waiting 100ms
+2018-07-31 22:58:59.033 +01:00 [INF] find nearest waypoint
+2018-07-31 22:58:59.033 +01:00 [INF] check for enemies
+2018-07-31 22:58:59.041 +01:00 [INF] move to next waypoint
+2018-07-31 22:58:59.042 +01:00 [INF] Setting player facing -844.816/-10356.520
+2018-07-31 22:58:59.094 +01:00 [INF] Sending W key
+2018-07-31 22:58:59.449 +01:00 [INF] Moved to -844.816/-10356.520. Distance to waypoint is 22.77057. Current location is -840.989/-10353.670 Waiting 100ms
+2018-07-31 22:58:59.607 +01:00 [INF] find nearest waypoint
+2018-07-31 22:58:59.608 +01:00 [INF] check for enemies
+2018-07-31 22:58:59.615 +01:00 [INF] move to next waypoint
+2018-07-31 22:58:59.616 +01:00 [INF] Setting player facing -847.495/-10358.770
+2018-07-31 22:58:59.669 +01:00 [INF] Sending W key
+2018-07-31 22:58:59.922 +01:00 [INF] Moved to -847.495/-10358.770. Distance to waypoint is 24.94241. Current location is -843.632/-10355.600 Waiting 100ms
+2018-07-31 22:59:00.082 +01:00 [INF] find nearest waypoint
+2018-07-31 22:59:00.083 +01:00 [INF] check for enemies
+2018-07-31 22:59:00.090 +01:00 [INF] move to next waypoint
+2018-07-31 22:59:00.092 +01:00 [INF] Setting player facing -850.236/-10361.120
+2018-07-31 22:59:00.143 +01:00 [INF] Sending W key
+2018-07-31 22:59:00.397 +01:00 [INF] Moved to -850.236/-10361.120. Distance to waypoint is 28.44614. Current location is -846.279/-10357.540 Waiting 100ms
+2018-07-31 22:59:00.607 +01:00 [INF] find nearest waypoint
+2018-07-31 22:59:00.608 +01:00 [INF] check for enemies
+2018-07-31 22:59:00.615 +01:00 [INF] move to next waypoint
+2018-07-31 22:59:00.617 +01:00 [INF] Setting player facing -852.813/-10363.490
+2018-07-31 22:59:00.668 +01:00 [INF] Sending W key
+2018-07-31 22:59:00.922 +01:00 [INF] Moved to -852.813/-10363.490. Distance to waypoint is 26.32815. Current location is -849.093/-10359.960 Waiting 100ms
+2018-07-31 22:59:01.081 +01:00 [INF] find nearest waypoint
+2018-07-31 22:59:01.082 +01:00 [INF] check for enemies
+2018-07-31 22:59:01.088 +01:00 [INF] move to next waypoint
+2018-07-31 22:59:01.089 +01:00 [INF] Setting player facing -855.245/-10366.000
+2018-07-31 22:59:01.142 +01:00 [INF] Sending W key
+2018-07-31 22:59:01.397 +01:00 [INF] Moved to -855.245/-10366.000. Distance to waypoint is 28.55436. Current location is -851.511/-10362.180 Waiting 100ms
+2018-07-31 22:59:02.457 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-07-31 22:59:02.458 +01:00 [INF] Setting player facing -877.605/-10385.770
+2018-07-31 22:59:02.510 +01:00 [INF] Sending W key
+2018-07-31 22:59:03.573 +01:00 [INF] Moved to -877.605/-10385.770. Distance to waypoint is 394.4648. Current location is -862.790/-10372.540 Waiting 100ms
+2018-07-31 22:59:05.271 +01:00 [INF] Waiting for Nightbane Shadow Weaver (28) - Humanoid to die
+2018-07-31 22:59:17.763 +01:00 [INF] find nearest waypoint
+2018-07-31 22:59:17.764 +01:00 [INF] check for enemies
+2018-07-31 22:59:17.772 +01:00 [INF] move to next waypoint
+2018-07-31 22:59:17.772 +01:00 [INF] Setting player facing -857.385/-10368.770
+2018-07-31 22:59:17.876 +01:00 [INF] Sending W key
+2018-07-31 22:59:18.129 +01:00 [INF] Moved to -857.385/-10368.770. Distance to waypoint is 25.55647. Current location is -861.523/-10371.670 Waiting 100ms
+2018-07-31 22:59:18.697 +01:00 [INF] find nearest waypoint
+2018-07-31 22:59:18.698 +01:00 [INF] check for enemies
+2018-07-31 22:59:18.704 +01:00 [INF] move to next waypoint
+2018-07-31 22:59:18.705 +01:00 [INF] Setting player facing -859.044/-10371.830
+2018-07-31 22:59:19.064 +01:00 [INF] Sending W key
+2018-07-31 22:59:19.116 +01:00 [INF] Moved to -859.044/-10371.830. Distance to waypoint is 1.577233. Current location is -857.921/-10372.390 Waiting 100ms
+2018-07-31 22:59:19.480 +01:00 [INF] find nearest waypoint
+2018-07-31 22:59:19.480 +01:00 [INF] check for enemies
+2018-07-31 22:59:19.487 +01:00 [INF] move to next waypoint
+2018-07-31 22:59:19.488 +01:00 [INF] Setting player facing -859.591/-10375.390
+2018-07-31 22:59:19.745 +01:00 [INF] Sending W key
+2018-07-31 22:59:19.797 +01:00 [INF] Moved to -859.591/-10375.390. Distance to waypoint is 1.322935. Current location is -859.796/-10376.520 Waiting 100ms
+2018-07-31 22:59:20.109 +01:00 [INF] find nearest waypoint
+2018-07-31 22:59:20.110 +01:00 [INF] check for enemies
+2018-07-31 22:59:20.116 +01:00 [INF] move to next waypoint
+2018-07-31 22:59:20.117 +01:00 [INF] Setting player facing -858.908/-10378.910
+2018-07-31 22:59:20.372 +01:00 [INF] Sending W key
+2018-07-31 22:59:20.424 +01:00 [INF] Moved to -858.908/-10378.910. Distance to waypoint is 3.154722. Current location is -857.713/-10380.220 Waiting 100ms
+2018-07-31 22:59:42.289 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-31 22:59:42.318 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-31 22:59:42.381 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-31 22:59:42.384 +01:00 [DBG] Starting up as a console application
+2018-07-31 22:59:42.386 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-31 22:59:42.922 +01:00 [INF] find nearest waypoint
+2018-07-31 22:59:42.923 +01:00 [INF] check for enemies
+2018-07-31 22:59:42.937 +01:00 [INF] move to next waypoint
+2018-07-31 22:59:42.939 +01:00 [INF] Setting player facing -855.198/-10392.560
+2018-07-31 22:59:42.990 +01:00 [INF] Sending W key
+2018-07-31 22:59:43.042 +01:00 [INF] Moved to -855.198/-10392.560. Distance to waypoint is 6.320076. Current location is -857.401/-10391.350 Waiting 100ms
+2018-07-31 22:59:43.513 +01:00 [INF] find nearest waypoint
+2018-07-31 22:59:43.513 +01:00 [INF] check for enemies
+2018-07-31 22:59:43.522 +01:00 [INF] move to next waypoint
+2018-07-31 22:59:43.522 +01:00 [INF] Setting player facing -855.132/-10396.060
+2018-07-31 23:00:44.722 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-31 23:00:44.749 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-31 23:00:44.810 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-31 23:00:44.815 +01:00 [DBG] Starting up as a console application
+2018-07-31 23:00:44.817 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-31 23:00:45.193 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:45.194 +01:00 [INF] check for enemies
+2018-07-31 23:00:45.206 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:45.207 +01:00 [INF] Setting player facing -862.580/-10437.740
+2018-07-31 23:00:45.310 +01:00 [INF] Sending W key
+2018-07-31 23:00:45.362 +01:00 [INF] Moved to -862.580/-10437.740. Distance to waypoint is 11.42376. Current location is -859.293/-10438.530 Waiting 100ms
+2018-07-31 23:00:45.929 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:45.930 +01:00 [INF] check for enemies
+2018-07-31 23:00:45.935 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:45.936 +01:00 [INF] Setting player facing -862.902/-10441.340
+2018-07-31 23:00:46.396 +01:00 [INF] Sending W key
+2018-07-31 23:00:46.447 +01:00 [INF] Moved to -862.902/-10441.340. Distance to waypoint is 2.428743. Current location is -863.921/-10442.520 Waiting 100ms
+2018-07-31 23:00:46.658 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:46.658 +01:00 [INF] check for enemies
+2018-07-31 23:00:46.664 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:46.664 +01:00 [INF] Setting player facing -863.391/-10444.800
+2018-07-31 23:00:46.716 +01:00 [INF] Sending W key
+2018-07-31 23:00:46.768 +01:00 [INF] Moved to -863.391/-10444.800. Distance to waypoint is 0.02628142. Current location is -863.434/-10444.640 Waiting 100ms
+2018-07-31 23:00:47.183 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:47.770 +01:00 [INF] check for enemies
+2018-07-31 23:00:47.779 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:47.780 +01:00 [INF] Setting player facing -863.879/-10448.270
+2018-07-31 23:00:48.138 +01:00 [INF] Sending W key
+2018-07-31 23:00:48.190 +01:00 [INF] Moved to -863.879/-10448.270. Distance to waypoint is 8.161239. Current location is -864.673/-10451.010 Waiting 100ms
+2018-07-31 23:00:48.653 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:48.654 +01:00 [INF] check for enemies
+2018-07-31 23:00:48.662 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:48.663 +01:00 [INF] Setting player facing -864.367/-10451.730
+2018-07-31 23:00:48.920 +01:00 [INF] Sending W key
+2018-07-31 23:00:48.972 +01:00 [INF] Moved to -864.367/-10451.730. Distance to waypoint is 0.5944148. Current location is -864.159/-10452.470 Waiting 100ms
+2018-07-31 23:00:49.182 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:49.183 +01:00 [INF] check for enemies
+2018-07-31 23:00:49.189 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:49.190 +01:00 [INF] Setting player facing -864.856/-10455.200
+2018-07-31 23:00:49.243 +01:00 [INF] Sending W key
+2018-07-31 23:00:49.296 +01:00 [INF] Moved to -864.856/-10455.200. Distance to waypoint is 0.2764976. Current location is -864.693/-10454.700 Waiting 100ms
+2018-07-31 23:00:49.556 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:49.556 +01:00 [INF] check for enemies
+2018-07-31 23:00:49.563 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:49.564 +01:00 [INF] Setting player facing -865.360/-10458.780
+2018-07-31 23:00:49.616 +01:00 [INF] Sending W key
+2018-07-31 23:00:49.668 +01:00 [INF] Moved to -865.360/-10458.780. Distance to waypoint is 2.324641. Current location is -865.177/-10457.270 Waiting 100ms
+2018-07-31 23:00:49.826 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:49.826 +01:00 [INF] check for enemies
+2018-07-31 23:00:49.833 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:49.835 +01:00 [INF] Setting player facing -865.848/-10462.240
+2018-07-31 23:00:49.887 +01:00 [INF] Sending W key
+2018-07-31 23:00:49.939 +01:00 [INF] Moved to -865.848/-10462.240. Distance to waypoint is 9.986618. Current location is -865.335/-10459.120 Waiting 100ms
+2018-07-31 23:00:50.098 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:50.098 +01:00 [INF] check for enemies
+2018-07-31 23:00:50.104 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:50.106 +01:00 [INF] Setting player facing -865.909/-10462.670
+2018-07-31 23:00:50.210 +01:00 [INF] Sending W key
+2018-07-31 23:00:50.263 +01:00 [INF] Moved to -865.909/-10462.670. Distance to waypoint is 1.707693. Current location is -865.607/-10461.400 Waiting 100ms
+2018-07-31 23:00:50.422 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:50.422 +01:00 [INF] check for enemies
+2018-07-31 23:00:50.430 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:50.432 +01:00 [INF] Setting player facing -866.852/-10467.930
+2018-07-31 23:00:50.484 +01:00 [INF] Sending W key
+2018-07-31 23:00:50.537 +01:00 [INF] Moved to -866.852/-10467.930. Distance to waypoint is 22.90868. Current location is -865.969/-10463.230 Waiting 100ms
+2018-07-31 23:00:50.746 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:50.747 +01:00 [INF] check for enemies
+2018-07-31 23:00:50.753 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:50.754 +01:00 [INF] Setting player facing -866.639/-10471.530
+2018-07-31 23:00:50.807 +01:00 [INF] Sending W key
+2018-07-31 23:00:50.960 +01:00 [INF] Moved to -866.639/-10471.530. Distance to waypoint is 27.90079. Current location is -866.353/-10466.260 Waiting 100ms
+2018-07-31 23:00:51.120 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:51.121 +01:00 [INF] check for enemies
+2018-07-31 23:00:51.128 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:51.129 +01:00 [INF] Setting player facing -866.341/-10475.020
+2018-07-31 23:00:51.182 +01:00 [INF] Sending W key
+2018-07-31 23:00:51.536 +01:00 [INF] Moved to -866.341/-10475.020. Distance to waypoint is 23.51584. Current location is -866.687/-10470.180 Waiting 100ms
+2018-07-31 23:00:51.796 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:51.797 +01:00 [INF] check for enemies
+2018-07-31 23:00:51.804 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:51.805 +01:00 [INF] Setting player facing -866.058/-10478.510
+2018-07-31 23:00:51.857 +01:00 [INF] Sending W key
+2018-07-31 23:00:52.010 +01:00 [INF] Moved to -866.058/-10478.510. Distance to waypoint is 24.81911. Current location is -866.515/-10473.550 Waiting 100ms
+2018-07-31 23:00:52.169 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:52.170 +01:00 [INF] check for enemies
+2018-07-31 23:00:52.177 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:52.178 +01:00 [INF] Setting player facing -865.988/-10479.380
+2018-07-31 23:00:52.230 +01:00 [INF] Sending W key
+2018-07-31 23:00:52.282 +01:00 [INF] Moved to -865.988/-10479.380. Distance to waypoint is 15.96545. Current location is -866.261/-10475.390 Waiting 100ms
+2018-07-31 23:00:52.441 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:52.441 +01:00 [INF] check for enemies
+2018-07-31 23:00:52.448 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:52.449 +01:00 [INF] Setting player facing -865.891/-10480.030
+2018-07-31 23:00:52.503 +01:00 [INF] Sending W key
+2018-07-31 23:00:52.554 +01:00 [INF] Moved to -865.891/-10480.030. Distance to waypoint is 7.847057. Current location is -866.008/-10477.230 Waiting 100ms
+2018-07-31 23:00:52.712 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:52.713 +01:00 [INF] check for enemies
+2018-07-31 23:00:52.719 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:52.720 +01:00 [INF] Setting player facing -865.394/-10483.500
+2018-07-31 23:00:52.772 +01:00 [INF] Sending W key
+2018-07-31 23:00:52.824 +01:00 [INF] Moved to -865.394/-10483.500. Distance to waypoint is 18.71649. Current location is -865.739/-10479.190 Waiting 100ms
+2018-07-31 23:00:52.982 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:52.983 +01:00 [INF] check for enemies
+2018-07-31 23:00:52.989 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:52.991 +01:00 [INF] Setting player facing -864.918/-10486.960
+2018-07-31 23:00:53.044 +01:00 [INF] Sending W key
+2018-07-31 23:00:53.197 +01:00 [INF] Moved to -864.918/-10486.960. Distance to waypoint is 26.973. Current location is -865.382/-10481.790 Waiting 100ms
+2018-07-31 23:00:53.354 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:53.356 +01:00 [INF] check for enemies
+2018-07-31 23:00:53.362 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:53.363 +01:00 [INF] Setting player facing -864.389/-10490.420
+2018-07-31 23:00:53.417 +01:00 [INF] Sending W key
+2018-07-31 23:00:53.670 +01:00 [INF] Moved to -864.389/-10490.420. Distance to waypoint is 29.31448. Current location is -864.935/-10485.030 Waiting 100ms
+2018-07-31 23:00:53.828 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:53.829 +01:00 [INF] check for enemies
+2018-07-31 23:00:53.835 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:53.836 +01:00 [INF] Setting player facing -863.793/-10493.980
+2018-07-31 23:00:53.891 +01:00 [INF] Sending W key
+2018-07-31 23:00:54.246 +01:00 [INF] Moved to -863.793/-10493.980. Distance to waypoint is 24.74719. Current location is -864.384/-10489.040 Waiting 100ms
+2018-07-31 23:00:54.404 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:54.405 +01:00 [INF] check for enemies
+2018-07-31 23:00:54.412 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:54.414 +01:00 [INF] Setting player facing -863.310/-10497.450
+2018-07-31 23:00:54.466 +01:00 [INF] Sending W key
+2018-07-31 23:00:54.719 +01:00 [INF] Moved to -863.310/-10497.450. Distance to waypoint is 26.97952. Current location is -863.937/-10492.290 Waiting 100ms
+2018-07-31 23:00:54.878 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:54.878 +01:00 [INF] check for enemies
+2018-07-31 23:00:54.885 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:54.886 +01:00 [INF] Setting player facing -862.926/-10500.930
+2018-07-31 23:00:54.939 +01:00 [INF] Sending W key
+2018-07-31 23:00:55.193 +01:00 [INF] Moved to -862.926/-10500.930. Distance to waypoint is 28.09932. Current location is -863.474/-10495.660 Waiting 100ms
+2018-07-31 23:00:55.353 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:55.354 +01:00 [INF] check for enemies
+2018-07-31 23:00:55.360 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:55.361 +01:00 [INF] Setting player facing -862.559/-10504.410
+2018-07-31 23:00:55.414 +01:00 [INF] Sending W key
+2018-07-31 23:00:55.769 +01:00 [INF] Moved to -862.559/-10504.410. Distance to waypoint is 23.71929. Current location is -862.938/-10499.550 Waiting 100ms
+2018-07-31 23:00:55.927 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:55.928 +01:00 [INF] check for enemies
+2018-07-31 23:00:55.933 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:56.470 +01:00 [INF] Setting player facing -862.216/-10507.660
+2018-07-31 23:00:56.572 +01:00 [INF] Sending W key
+2018-07-31 23:00:56.624 +01:00 [INF] Moved to -862.216/-10507.660. Distance to waypoint is 5.044958. Current location is -862.211/-10505.410 Waiting 100ms
+2018-07-31 23:00:56.831 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:56.832 +01:00 [INF] check for enemies
+2018-07-31 23:00:56.838 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:56.839 +01:00 [INF] Setting player facing -861.371/-10511.840
+2018-07-31 23:00:56.891 +01:00 [INF] Sending W key
+2018-07-31 23:00:56.942 +01:00 [INF] Moved to -861.371/-10511.840. Distance to waypoint is 16.64282. Current location is -862.009/-10507.810 Waiting 100ms
+2018-07-31 23:00:57.100 +01:00 [INF] find nearest waypoint
+2018-07-31 23:00:57.101 +01:00 [INF] check for enemies
+2018-07-31 23:00:57.106 +01:00 [INF] move to next waypoint
+2018-07-31 23:00:57.107 +01:00 [INF] Setting player facing -860.667/-10515.270
+2018-07-31 23:00:57.159 +01:00 [INF] Sending W key
+2018-07-31 23:01:37.952 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-31 23:01:37.982 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-31 23:01:38.032 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-31 23:01:38.037 +01:00 [DBG] Starting up as a console application
+2018-07-31 23:01:38.039 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-31 23:01:38.416 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:38.417 +01:00 [INF] check for enemies
+2018-07-31 23:01:38.432 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:38.433 +01:00 [INF] Setting player facing -866.852/-10467.930
+2018-07-31 23:01:38.537 +01:00 [INF] Sending W key
+2018-07-31 23:01:40.112 +01:00 [INF] Moved to -866.852/-10467.930. Distance to waypoint is 29.41678. Current location is -872.247/-10468.480 Waiting 100ms
+2018-07-31 23:01:40.577 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:40.578 +01:00 [INF] check for enemies
+2018-07-31 23:01:40.585 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:40.587 +01:00 [INF] Setting player facing -866.639/-10471.530
+2018-07-31 23:01:40.690 +01:00 [INF] Sending W key
+2018-07-31 23:01:40.743 +01:00 [INF] Moved to -866.639/-10471.530. Distance to waypoint is 5.67856. Current location is -868.345/-10469.870 Waiting 100ms
+2018-07-31 23:01:41.104 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:41.105 +01:00 [INF] check for enemies
+2018-07-31 23:01:41.112 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:41.113 +01:00 [INF] Setting player facing -866.341/-10475.020
+2018-07-31 23:01:41.266 +01:00 [INF] Sending W key
+2018-07-31 23:01:41.317 +01:00 [INF] Moved to -866.341/-10475.020. Distance to waypoint is 3.151935. Current location is -866.583/-10473.260 Waiting 100ms
+2018-07-31 23:01:41.477 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:41.478 +01:00 [INF] check for enemies
+2018-07-31 23:01:41.485 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:41.487 +01:00 [INF] Setting player facing -866.058/-10478.510
+2018-07-31 23:01:41.539 +01:00 [INF] Sending W key
+2018-07-31 23:01:41.590 +01:00 [INF] Moved to -866.058/-10478.510. Distance to waypoint is 11.65799. Current location is -866.333/-10475.110 Waiting 100ms
+2018-07-31 23:01:41.752 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:41.753 +01:00 [INF] check for enemies
+2018-07-31 23:01:41.760 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:41.761 +01:00 [INF] Setting player facing -865.988/-10479.380
+2018-07-31 23:01:41.813 +01:00 [INF] Sending W key
+2018-07-31 23:01:41.865 +01:00 [INF] Moved to -865.988/-10479.380. Distance to waypoint is 4.936055. Current location is -866.055/-10477.160 Waiting 100ms
+2018-07-31 23:01:42.075 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:42.076 +01:00 [INF] check for enemies
+2018-07-31 23:01:42.083 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:42.085 +01:00 [INF] Setting player facing -865.891/-10480.030
+2018-07-31 23:01:42.138 +01:00 [INF] Sending W key
+2018-07-31 23:01:42.189 +01:00 [INF] Moved to -865.891/-10480.030. Distance to waypoint is 0.4740699. Current location is -865.900/-10479.340 Waiting 100ms
+2018-07-31 23:01:42.399 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:42.400 +01:00 [INF] check for enemies
+2018-07-31 23:01:42.406 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:42.407 +01:00 [INF] Setting player facing -865.394/-10483.500
+2018-07-31 23:01:42.461 +01:00 [INF] Sending W key
+2018-07-31 23:01:42.513 +01:00 [INF] Moved to -865.394/-10483.500. Distance to waypoint is 3.605694. Current location is -865.707/-10481.630 Waiting 100ms
+2018-07-31 23:01:42.673 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:42.673 +01:00 [INF] check for enemies
+2018-07-31 23:01:42.680 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:42.681 +01:00 [INF] Setting player facing -864.918/-10486.960
+2018-07-31 23:01:42.735 +01:00 [INF] Sending W key
+2018-07-31 23:01:42.787 +01:00 [INF] Moved to -864.918/-10486.960. Distance to waypoint is 12.45136. Current location is -865.457/-10483.470 Waiting 100ms
+2018-07-31 23:01:42.946 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:42.947 +01:00 [INF] check for enemies
+2018-07-31 23:01:42.953 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:42.954 +01:00 [INF] Setting player facing -864.389/-10490.420
+2018-07-31 23:01:43.007 +01:00 [INF] Sending W key
+2018-07-31 23:01:43.059 +01:00 [INF] Moved to -864.389/-10490.420. Distance to waypoint is 25.62623. Current location is -865.193/-10485.420 Waiting 100ms
+2018-07-31 23:01:43.219 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:43.220 +01:00 [INF] check for enemies
+2018-07-31 23:01:43.226 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:43.227 +01:00 [INF] Setting player facing -863.793/-10493.980
+2018-07-31 23:01:43.279 +01:00 [INF] Sending W key
+2018-07-31 23:01:43.532 +01:00 [INF] Moved to -863.793/-10493.980. Distance to waypoint is 29.07101. Current location is -864.753/-10488.670 Waiting 100ms
+2018-07-31 23:01:43.691 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:43.692 +01:00 [INF] check for enemies
+2018-07-31 23:01:43.699 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:43.701 +01:00 [INF] Setting player facing -863.310/-10497.450
+2018-07-31 23:01:43.753 +01:00 [INF] Sending W key
+2018-07-31 23:01:44.108 +01:00 [INF] Moved to -863.310/-10497.450. Distance to waypoint is 24.62219. Current location is -864.225/-10492.570 Waiting 100ms
+2018-07-31 23:01:44.267 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:44.267 +01:00 [INF] check for enemies
+2018-07-31 23:01:44.274 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:44.275 +01:00 [INF] Setting player facing -862.926/-10500.930
+2018-07-31 23:01:44.327 +01:00 [INF] Sending W key
+2018-07-31 23:01:44.581 +01:00 [INF] Moved to -862.926/-10500.930. Distance to waypoint is 25.63426. Current location is -863.770/-10495.940 Waiting 100ms
+2018-07-31 23:01:44.739 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:44.740 +01:00 [INF] check for enemies
+2018-07-31 23:01:44.747 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:44.749 +01:00 [INF] Setting player facing -862.559/-10504.410
+2018-07-31 23:01:44.802 +01:00 [INF] Sending W key
+2018-07-31 23:01:45.055 +01:00 [INF] Moved to -862.559/-10504.410. Distance to waypoint is 27.91243. Current location is -863.330/-10499.180 Waiting 100ms
+2018-07-31 23:01:45.213 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:45.214 +01:00 [INF] check for enemies
+2018-07-31 23:01:45.220 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:45.222 +01:00 [INF] Setting player facing -862.216/-10507.660
+2018-07-31 23:01:45.275 +01:00 [INF] Sending W key
+2018-07-31 23:01:45.528 +01:00 [INF] Moved to -862.216/-10507.660. Distance to waypoint is 26.57042. Current location is -862.875/-10502.550 Waiting 100ms
+2018-07-31 23:01:45.687 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:45.688 +01:00 [INF] check for enemies
+2018-07-31 23:01:45.694 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:45.695 +01:00 [INF] Setting player facing -861.371/-10511.840
+2018-07-31 23:01:45.747 +01:00 [INF] Sending W key
+2018-07-31 23:01:46.204 +01:00 [INF] Moved to -861.371/-10511.840. Distance to waypoint is 22.19856. Current location is -862.244/-10507.210 Waiting 100ms
+2018-07-31 23:01:46.364 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:46.365 +01:00 [INF] check for enemies
+2018-07-31 23:01:46.373 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:46.429 +01:00 [INF] Setting player facing -860.667/-10515.270
+2018-07-31 23:01:46.482 +01:00 [INF] Sending W key
+2018-07-31 23:01:46.635 +01:00 [INF] Moved to -860.667/-10515.270. Distance to waypoint is 26.64531. Current location is -861.834/-10510.240 Waiting 100ms
+2018-07-31 23:01:46.795 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:46.795 +01:00 [INF] check for enemies
+2018-07-31 23:01:46.802 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:46.803 +01:00 [INF] Setting player facing -859.934/-10518.800
+2018-07-31 23:01:46.855 +01:00 [INF] Sending W key
+2018-07-31 23:01:47.211 +01:00 [INF] Moved to -859.934/-10518.800. Distance to waypoint is 22.53393. Current location is -861.291/-10514.250 Waiting 100ms
+2018-07-31 23:01:47.420 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:47.421 +01:00 [INF] check for enemies
+2018-07-31 23:01:47.428 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:47.429 +01:00 [INF] Setting player facing -859.119/-10522.210
+2018-07-31 23:01:47.481 +01:00 [INF] Sending W key
+2018-07-31 23:01:47.633 +01:00 [INF] Moved to -859.119/-10522.210. Distance to waypoint is 28.15092. Current location is -860.614/-10517.120 Waiting 100ms
+2018-07-31 23:01:47.792 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:47.793 +01:00 [INF] check for enemies
+2018-07-31 23:01:47.800 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:47.802 +01:00 [INF] Setting player facing -858.264/-10525.600
+2018-07-31 23:01:47.854 +01:00 [INF] Sending W key
+2018-07-31 23:01:48.207 +01:00 [INF] Moved to -858.264/-10525.600. Distance to waypoint is 23.61186. Current location is -859.523/-10520.910 Waiting 100ms
+2018-07-31 23:01:48.366 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:48.366 +01:00 [INF] check for enemies
+2018-07-31 23:01:48.373 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:48.374 +01:00 [INF] Setting player facing -857.374/-10529.100
+2018-07-31 23:01:48.426 +01:00 [INF] Sending W key
+2018-07-31 23:01:48.679 +01:00 [INF] Moved to -857.374/-10529.100. Distance to waypoint is 25.85463. Current location is -858.584/-10524.160 Waiting 100ms
+2018-07-31 23:01:49.141 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:49.586 +01:00 [INF] check for enemies
+2018-07-31 23:01:49.593 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:49.594 +01:00 [INF] Setting player facing -856.806/-10531.320
+2018-07-31 23:01:49.646 +01:00 [INF] Sending W key
+2018-07-31 23:01:50.207 +01:00 [INF] Moved to -856.806/-10531.320. Distance to waypoint is 24.55345. Current location is -857.900/-10526.490 Waiting 100ms
+2018-07-31 23:01:50.367 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:50.368 +01:00 [INF] check for enemies
+2018-07-31 23:01:50.374 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:50.375 +01:00 [INF] Setting player facing -856.189/-10532.140
+2018-07-31 23:01:50.428 +01:00 [INF] Sending W key
+2018-07-31 23:01:50.480 +01:00 [INF] Moved to -856.189/-10532.140. Distance to waypoint is 15.57597. Current location is -857.187/-10528.320 Waiting 100ms
+2018-07-31 23:01:50.638 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:50.639 +01:00 [INF] check for enemies
+2018-07-31 23:01:50.645 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:50.646 +01:00 [INF] Setting player facing -854.747/-10535.560
+2018-07-31 23:01:50.700 +01:00 [INF] Sending W key
+2018-07-31 23:01:50.851 +01:00 [INF] Moved to -854.747/-10535.560. Distance to waypoint is 26.3158. Current location is -856.277/-10530.660 Waiting 100ms
+2018-07-31 23:01:51.011 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:51.012 +01:00 [INF] check for enemies
+2018-07-31 23:01:51.018 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:51.019 +01:00 [INF] Setting player facing -853.391/-10538.670
+2018-07-31 23:01:51.071 +01:00 [INF] Sending W key
+2018-07-31 23:01:51.324 +01:00 [INF] Moved to -853.391/-10538.670. Distance to waypoint is 27.34359. Current location is -855.087/-10533.720 Waiting 100ms
+2018-07-31 23:01:51.485 +01:00 [INF] find nearest waypoint
+2018-07-31 23:01:51.486 +01:00 [INF] check for enemies
+2018-07-31 23:01:51.493 +01:00 [INF] move to next waypoint
+2018-07-31 23:01:51.495 +01:00 [INF] Setting player facing -851.900/-10541.950
+2018-07-31 23:01:51.546 +01:00 [INF] Sending W key
+2018-07-31 23:02:09.504 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-31 23:02:09.532 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-31 23:02:09.579 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-31 23:02:09.585 +01:00 [DBG] Starting up as a console application
+2018-07-31 23:02:09.587 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-31 23:02:10.070 +01:00 [INF] find nearest waypoint
+2018-07-31 23:02:10.071 +01:00 [INF] check for enemies
+2018-07-31 23:02:10.092 +01:00 [INF] enemy Nightbane Shadow Weaver (27) - Humanoid found. Exiting 'passive'
+2018-07-31 23:02:10.873 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-07-31 23:02:10.874 +01:00 [INF] Setting player facing -875.510/-10516.050
+2018-07-31 23:02:10.977 +01:00 [INF] Sending W key
+2018-07-31 23:02:12.039 +01:00 [INF] Moved to -875.510/-10516.050. Distance to waypoint is 378.7243. Current location is -864.293/-10531.950 Waiting 100ms
+2018-07-31 23:02:12.710 +01:00 [INF] Waiting for Nightbane Shadow Weaver (27) - Humanoid to die
+2018-07-31 23:02:23.923 +01:00 [INF] find nearest waypoint
+2018-07-31 23:02:23.923 +01:00 [INF] check for enemies
+2018-07-31 23:02:23.936 +01:00 [INF] move to next waypoint
+2018-07-31 23:02:23.938 +01:00 [INF] Setting player facing -853.391/-10538.670
+2018-07-31 23:02:24.041 +01:00 [INF] Sending W key
+2018-07-31 23:02:24.698 +01:00 [INF] Moved to -853.391/-10538.670. Distance to waypoint is 26.06633. Current location is -858.059/-10536.600 Waiting 100ms
+2018-07-31 23:02:25.022 +01:00 [INF] find nearest waypoint
+2018-07-31 23:02:25.023 +01:00 [INF] check for enemies
+2018-07-31 23:02:25.036 +01:00 [INF] move to next waypoint
+2018-07-31 23:02:25.037 +01:00 [INF] Setting player facing -851.900/-10541.950
+2018-07-31 23:02:25.090 +01:00 [INF] Sending W key
+2018-07-31 23:02:25.142 +01:00 [INF] Moved to -851.900/-10541.950. Distance to waypoint is 26.6741. Current location is -855.580/-10538.330 Waiting 100ms
+2018-07-31 23:03:38.244 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-07-31 23:03:38.269 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-07-31 23:03:38.319 +01:00 [DBG] Running as a console application, creating the console host.
+2018-07-31 23:03:38.323 +01:00 [DBG] Starting up as a console application
+2018-07-31 23:03:38.325 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-07-31 23:03:38.700 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:38.701 +01:00 [INF] check for enemies
+2018-07-31 23:03:38.719 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:38.721 +01:00 [INF] Setting player facing -855.674/-10600.100
+2018-07-31 23:03:38.874 +01:00 [INF] Sending W key
+2018-07-31 23:03:38.927 +01:00 [INF] Moved to -855.674/-10600.100. Distance to waypoint is 24.30961. Current location is -851.106/-10598.250 Waiting 100ms
+2018-07-31 23:03:39.144 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:39.145 +01:00 [INF] check for enemies
+2018-07-31 23:03:39.155 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:39.156 +01:00 [INF] Setting player facing -858.998/-10598.930
+2018-07-31 23:03:39.207 +01:00 [INF] Sending W key
+2018-07-31 23:03:39.259 +01:00 [INF] Moved to -858.998/-10598.930. Distance to waypoint is 23.88641. Current location is -854.116/-10598.720 Waiting 100ms
+2018-07-31 23:03:39.524 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:39.524 +01:00 [INF] check for enemies
+2018-07-31 23:03:39.534 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:39.535 +01:00 [INF] Setting player facing -862.391/-10597.690
+2018-07-31 23:03:39.587 +01:00 [INF] Sending W key
+2018-07-31 23:03:39.638 +01:00 [INF] Moved to -862.391/-10597.690. Distance to waypoint is 22.50245. Current location is -857.736/-10598.600 Waiting 100ms
+2018-07-31 23:03:39.856 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:39.857 +01:00 [INF] check for enemies
+2018-07-31 23:03:39.870 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:39.872 +01:00 [INF] Setting player facing -865.633/-10596.370
+2018-07-31 23:03:39.925 +01:00 [INF] Sending W key
+2018-07-31 23:03:39.978 +01:00 [INF] Moved to -865.633/-10596.370. Distance to waypoint is 26.72245. Current location is -860.712/-10597.950 Waiting 100ms
+2018-07-31 23:03:40.143 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:40.143 +01:00 [INF] check for enemies
+2018-07-31 23:03:40.154 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:40.155 +01:00 [INF] Setting player facing -868.906/-10594.880
+2018-07-31 23:03:40.207 +01:00 [INF] Sending W key
+2018-07-31 23:03:40.359 +01:00 [INF] Moved to -868.906/-10594.880. Distance to waypoint is 26.3016. Current location is -864.205/-10596.930 Waiting 100ms
+2018-07-31 23:03:40.574 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:40.575 +01:00 [INF] check for enemies
+2018-07-31 23:03:40.584 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:40.586 +01:00 [INF] Setting player facing -872.038/-10593.320
+2018-07-31 23:03:40.638 +01:00 [INF] Sending W key
+2018-07-31 23:03:40.792 +01:00 [INF] Moved to -872.038/-10593.320. Distance to waypoint is 22.31436. Current location is -867.876/-10595.560 Waiting 100ms
+2018-07-31 23:03:41.026 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:41.026 +01:00 [INF] check for enemies
+2018-07-31 23:03:41.042 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:41.043 +01:00 [INF] Setting player facing -875.192/-10591.570
+2018-07-31 23:03:41.096 +01:00 [INF] Sending W key
+2018-07-31 23:03:41.148 +01:00 [INF] Moved to -875.192/-10591.570. Distance to waypoint is 23.52853. Current location is -871.009/-10594.030 Waiting 100ms
+2018-07-31 23:03:41.316 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:41.316 +01:00 [INF] check for enemies
+2018-07-31 23:03:41.329 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:41.330 +01:00 [INF] Setting player facing -878.084/-10589.600
+2018-07-31 23:03:41.382 +01:00 [INF] Sending W key
+2018-07-31 23:03:41.536 +01:00 [INF] Moved to -878.084/-10589.600. Distance to waypoint is 23.64204. Current location is -874.061/-10592.330 Waiting 100ms
+2018-07-31 23:03:41.749 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:41.750 +01:00 [INF] check for enemies
+2018-07-31 23:03:41.760 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:41.761 +01:00 [INF] Setting player facing -880.862/-10587.470
+2018-07-31 23:03:41.815 +01:00 [INF] Sending W key
+2018-07-31 23:03:41.866 +01:00 [INF] Moved to -880.862/-10587.470. Distance to waypoint is 26.80919. Current location is -876.754/-10590.620 Waiting 100ms
+2018-07-31 23:03:42.031 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:42.031 +01:00 [INF] check for enemies
+2018-07-31 23:03:42.044 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:42.045 +01:00 [INF] Setting player facing -883.619/-10585.310
+2018-07-31 23:03:42.098 +01:00 [INF] Sending W key
+2018-07-31 23:03:42.251 +01:00 [INF] Moved to -883.619/-10585.310. Distance to waypoint is 26.97657. Current location is -879.600/-10588.600 Waiting 100ms
+2018-07-31 23:03:42.413 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:42.414 +01:00 [INF] check for enemies
+2018-07-31 23:03:42.423 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:42.424 +01:00 [INF] Setting player facing -886.436/-10583.050
+2018-07-31 23:03:42.475 +01:00 [INF] Sending W key
+2018-07-31 23:03:42.628 +01:00 [INF] Moved to -886.436/-10583.050. Distance to waypoint is 28.36412. Current location is -882.445/-10586.580 Waiting 100ms
+2018-07-31 23:03:42.841 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:42.842 +01:00 [INF] check for enemies
+2018-07-31 23:03:42.851 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:42.852 +01:00 [INF] Setting player facing -889.122/-10580.800
+2018-07-31 23:03:42.904 +01:00 [INF] Sending W key
+2018-07-31 23:03:43.056 +01:00 [INF] Moved to -889.122/-10580.800. Distance to waypoint is 24.08616. Current location is -885.472/-10584.080 Waiting 100ms
+2018-07-31 23:03:43.219 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:43.220 +01:00 [INF] check for enemies
+2018-07-31 23:03:43.230 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:43.231 +01:00 [INF] Setting player facing -891.804/-10578.560
+2018-07-31 23:03:43.283 +01:00 [INF] Sending W key
+2018-07-31 23:03:43.435 +01:00 [INF] Moved to -891.804/-10578.560. Distance to waypoint is 22.67245. Current location is -888.188/-10581.660 Waiting 100ms
+2018-07-31 23:03:43.598 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:43.598 +01:00 [INF] check for enemies
+2018-07-31 23:03:43.608 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:43.609 +01:00 [INF] Setting player facing -894.487/-10576.310
+2018-07-31 23:03:43.660 +01:00 [INF] Sending W key
+2018-07-31 23:03:43.813 +01:00 [INF] Moved to -894.487/-10576.310. Distance to waypoint is 24.22622. Current location is -890.681/-10579.430 Waiting 100ms
+2018-07-31 23:03:43.980 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:43.986 +01:00 [INF] check for enemies
+2018-07-31 23:03:44.003 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:44.004 +01:00 [INF] Setting player facing -897.249/-10573.990
+2018-07-31 23:03:44.057 +01:00 [INF] Sending W key
+2018-07-31 23:03:44.210 +01:00 [INF] Moved to -897.249/-10573.990. Distance to waypoint is 22.50937. Current location is -893.508/-10576.910 Waiting 100ms
+2018-07-31 23:03:44.371 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:44.372 +01:00 [INF] check for enemies
+2018-07-31 23:03:44.384 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:44.385 +01:00 [INF] Setting player facing -899.932/-10571.740
+2018-07-31 23:03:44.438 +01:00 [INF] Sending W key
+2018-07-31 23:03:44.591 +01:00 [INF] Moved to -899.932/-10571.740. Distance to waypoint is 21.3603. Current location is -896.217/-10574.490 Waiting 100ms
+2018-07-31 23:03:44.754 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:44.754 +01:00 [INF] check for enemies
+2018-07-31 23:03:44.766 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:44.767 +01:00 [INF] Setting player facing -902.614/-10569.500
+2018-07-31 23:03:44.819 +01:00 [INF] Sending W key
+2018-07-31 23:03:44.973 +01:00 [INF] Moved to -902.614/-10569.500. Distance to waypoint is 21.4887. Current location is -898.822/-10572.170 Waiting 100ms
+2018-07-31 23:03:45.145 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:45.147 +01:00 [INF] check for enemies
+2018-07-31 23:03:45.164 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:45.168 +01:00 [INF] Setting player facing -905.296/-10567.250
+2018-07-31 23:03:45.276 +01:00 [INF] Sending W key
+2018-07-31 23:03:45.328 +01:00 [INF] Moved to -905.296/-10567.250. Distance to waypoint is 22.91498. Current location is -901.398/-10570.030 Waiting 100ms
+2018-07-31 23:03:45.495 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:45.495 +01:00 [INF] check for enemies
+2018-07-31 23:03:45.507 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:45.507 +01:00 [INF] Setting player facing -908.065/-10564.930
+2018-07-31 23:03:45.559 +01:00 [INF] Sending W key
+2018-07-31 23:03:45.711 +01:00 [INF] Moved to -908.065/-10564.930. Distance to waypoint is 24.06182. Current location is -904.244/-10568.010 Waiting 100ms
+2018-07-31 23:03:45.877 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:45.878 +01:00 [INF] check for enemies
+2018-07-31 23:03:45.888 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:45.889 +01:00 [INF] Setting player facing -910.747/-10562.680
+2018-07-31 23:03:45.941 +01:00 [INF] Sending W key
+2018-07-31 23:03:46.097 +01:00 [INF] Moved to -910.747/-10562.680. Distance to waypoint is 21.54587. Current location is -907.325/-10565.820 Waiting 100ms
+2018-07-31 23:03:46.318 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:46.319 +01:00 [INF] check for enemies
+2018-07-31 23:03:46.335 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:47.095 +01:00 [INF] Setting player facing -913.429/-10560.430
+2018-07-31 23:03:47.451 +01:00 [INF] Sending W key
+2018-07-31 23:03:47.504 +01:00 [INF] Moved to -913.429/-10560.430. Distance to waypoint is 0.3760865. Current location is -913.549/-10559.830 Waiting 100ms
+2018-07-31 23:03:47.969 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:47.970 +01:00 [INF] check for enemies
+2018-07-31 23:03:47.979 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:47.980 +01:00 [INF] Setting player facing -916.112/-10558.180
+2018-07-31 23:03:48.132 +01:00 [INF] Sending W key
+2018-07-31 23:03:48.185 +01:00 [INF] Moved to -916.112/-10558.180. Distance to waypoint is 3.670319. Current location is -914.532/-10559.260 Waiting 100ms
+2018-07-31 23:03:48.354 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:48.354 +01:00 [INF] check for enemies
+2018-07-31 23:03:48.363 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:48.364 +01:00 [INF] Setting player facing -916.863/-10557.550
+2018-07-31 23:03:48.416 +01:00 [INF] Sending W key
+2018-07-31 23:03:48.467 +01:00 [INF] Moved to -916.863/-10557.550. Distance to waypoint is 0.08263499. Current location is -916.596/-10557.660 Waiting 100ms
+2018-07-31 23:03:48.884 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:48.885 +01:00 [INF] check for enemies
+2018-07-31 23:03:48.893 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:48.894 +01:00 [INF] Setting player facing -917.887/-10555.740
+2018-07-31 23:03:49.259 +01:00 [INF] Sending W key
+2018-07-31 23:03:49.312 +01:00 [INF] Moved to -917.887/-10555.740. Distance to waypoint is 1.907803. Current location is -917.778/-10554.360 Waiting 100ms
+2018-07-31 23:03:49.782 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:49.782 +01:00 [INF] check for enemies
+2018-07-31 23:03:49.793 +01:00 [INF] move to next waypoint
+2018-07-31 23:03:49.794 +01:00 [INF] Setting player facing -919.917/-10552.630
+2018-07-31 23:03:49.948 +01:00 [INF] Sending W key
+2018-07-31 23:03:50.000 +01:00 [INF] Moved to -919.917/-10552.630. Distance to waypoint is 2.677494. Current location is -918.834/-10553.860 Waiting 100ms
+2018-07-31 23:03:50.268 +01:00 [INF] find nearest waypoint
+2018-07-31 23:03:50.269 +01:00 [INF] check for enemies
+2018-07-31 23:03:50.283 +01:00 [INF] enemy Nightbane Dark Runner (28) - Humanoid found. Exiting 'passive'
+2018-07-31 23:03:51.062 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-07-31 23:03:51.063 +01:00 [INF] Setting player facing -947.963/-10570.390
+2018-07-31 23:03:51.116 +01:00 [INF] Sending W key
+2018-07-31 23:03:51.973 +01:00 [INF] Moved to -947.963/-10570.390. Distance to waypoint is 366.5248. Current location is -932.274/-10559.420 Waiting 100ms
+2018-07-31 23:03:53.645 +01:00 [INF] Waiting for Nightbane Dark Runner (28) - Humanoid to die
+2018-07-31 23:04:11.471 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:11.472 +01:00 [INF] check for enemies
+2018-07-31 23:04:11.479 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:11.481 +01:00 [INF] Setting player facing -923.915/-10546.890
+2018-07-31 23:04:11.582 +01:00 [INF] Sending W key
+2018-07-31 23:04:11.634 +01:00 [INF] Moved to -923.915/-10546.890. Distance to waypoint is 17.94838. Current location is -922.514/-10550.890 Waiting 100ms
+2018-07-31 23:04:11.844 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:11.845 +01:00 [INF] check for enemies
+2018-07-31 23:04:11.853 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:11.854 +01:00 [INF] Setting player facing -925.945/-10544.040
+2018-07-31 23:04:11.906 +01:00 [INF] Sending W key
+2018-07-31 23:04:11.958 +01:00 [INF] Moved to -925.945/-10544.040. Distance to waypoint is 22.63122. Current location is -923.687/-10548.230 Waiting 100ms
+2018-07-31 23:04:12.118 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:12.119 +01:00 [INF] check for enemies
+2018-07-31 23:04:12.127 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:12.128 +01:00 [INF] Setting player facing -928.061/-10541.110
+2018-07-31 23:04:12.180 +01:00 [INF] Sending W key
+2018-07-31 23:04:12.332 +01:00 [INF] Moved to -928.061/-10541.110. Distance to waypoint is 22.44489. Current location is -925.371/-10545.010 Waiting 100ms
+2018-07-31 23:04:12.543 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:12.544 +01:00 [INF] check for enemies
+2018-07-31 23:04:12.552 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:12.553 +01:00 [INF] Setting player facing -929.340/-10539.340
+2018-07-31 23:04:12.606 +01:00 [INF] Sending W key
+2018-07-31 23:04:12.658 +01:00 [INF] Moved to -929.340/-10539.340. Distance to waypoint is 16.17845. Current location is -926.879/-10542.520 Waiting 100ms
+2018-07-31 23:04:12.870 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:12.871 +01:00 [INF] check for enemies
+2018-07-31 23:04:12.879 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:12.880 +01:00 [INF] Setting player facing -930.148/-10538.450
+2018-07-31 23:04:12.932 +01:00 [INF] Sending W key
+2018-07-31 23:04:12.984 +01:00 [INF] Moved to -930.148/-10538.450. Distance to waypoint is 4.729158. Current location is -928.764/-10540.130 Waiting 100ms
+2018-07-31 23:04:13.145 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:13.146 +01:00 [INF] check for enemies
+2018-07-31 23:04:13.154 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:13.155 +01:00 [INF] Setting player facing -932.497/-10535.850
+2018-07-31 23:04:13.208 +01:00 [INF] Sending W key
+2018-07-31 23:04:13.259 +01:00 [INF] Moved to -932.497/-10535.850. Distance to waypoint is 10.31392. Current location is -930.422/-10538.300 Waiting 100ms
+2018-07-31 23:04:13.419 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:13.419 +01:00 [INF] check for enemies
+2018-07-31 23:04:13.428 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:13.430 +01:00 [INF] Setting player facing -934.848/-10533.260
+2018-07-31 23:04:13.482 +01:00 [INF] Sending W key
+2018-07-31 23:04:13.533 +01:00 [INF] Moved to -934.848/-10533.260. Distance to waypoint is 16.67495. Current location is -932.186/-10536.360 Waiting 100ms
+2018-07-31 23:04:13.693 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:13.694 +01:00 [INF] check for enemies
+2018-07-31 23:04:13.702 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:13.704 +01:00 [INF] Setting player facing -937.129/-10530.600
+2018-07-31 23:04:13.756 +01:00 [INF] Sending W key
+2018-07-31 23:04:13.809 +01:00 [INF] Moved to -937.129/-10530.600. Distance to waypoint is 24.73698. Current location is -933.943/-10534.420 Waiting 100ms
+2018-07-31 23:04:13.970 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:13.971 +01:00 [INF] check for enemies
+2018-07-31 23:04:13.979 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:13.980 +01:00 [INF] Setting player facing -939.304/-10527.860
+2018-07-31 23:04:14.032 +01:00 [INF] Sending W key
+2018-07-31 23:04:14.184 +01:00 [INF] Moved to -939.304/-10527.860. Distance to waypoint is 24.87268. Current location is -936.289/-10531.830 Waiting 100ms
+2018-07-31 23:04:14.345 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:14.346 +01:00 [INF] check for enemies
+2018-07-31 23:04:14.354 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:14.355 +01:00 [INF] Setting player facing -941.497/-10524.990
+2018-07-31 23:04:14.458 +01:00 [INF] Sending W key
+2018-07-31 23:04:14.611 +01:00 [INF] Moved to -941.497/-10524.990. Distance to waypoint is 21.8936. Current location is -938.760/-10528.790 Waiting 100ms
+2018-07-31 23:04:14.773 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:14.774 +01:00 [INF] check for enemies
+2018-07-31 23:04:14.782 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:14.783 +01:00 [INF] Setting player facing -943.428/-10522.070
+2018-07-31 23:04:14.834 +01:00 [INF] Sending W key
+2018-07-31 23:04:14.987 +01:00 [INF] Moved to -943.428/-10522.070. Distance to waypoint is 21.9705. Current location is -940.805/-10525.960 Waiting 100ms
+2018-07-31 23:04:15.148 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:15.149 +01:00 [INF] check for enemies
+2018-07-31 23:04:15.156 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:15.157 +01:00 [INF] Setting player facing -945.295/-10519.110
+2018-07-31 23:04:15.209 +01:00 [INF] Sending W key
+2018-07-31 23:04:15.361 +01:00 [INF] Moved to -945.295/-10519.110. Distance to waypoint is 22.09883. Current location is -942.851/-10523.130 Waiting 100ms
+2018-07-31 23:04:15.571 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:15.572 +01:00 [INF] check for enemies
+2018-07-31 23:04:15.579 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:15.580 +01:00 [INF] Setting player facing -946.978/-10516.040
+2018-07-31 23:04:15.632 +01:00 [INF] Sending W key
+2018-07-31 23:04:15.684 +01:00 [INF] Moved to -946.978/-10516.040. Distance to waypoint is 26.57097. Current location is -944.441/-10520.530 Waiting 100ms
+2018-07-31 23:04:15.845 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:15.846 +01:00 [INF] check for enemies
+2018-07-31 23:04:15.854 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:15.855 +01:00 [INF] Setting player facing -948.541/-10512.920
+2018-07-31 23:04:15.906 +01:00 [INF] Sending W key
+2018-07-31 23:04:16.058 +01:00 [INF] Moved to -948.541/-10512.920. Distance to waypoint is 26.52892. Current location is -946.053/-10517.430 Waiting 100ms
+2018-07-31 23:04:16.217 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:16.218 +01:00 [INF] check for enemies
+2018-07-31 23:04:16.225 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:16.227 +01:00 [INF] Setting player facing -950.086/-10509.660
+2018-07-31 23:04:16.279 +01:00 [INF] Sending W key
+2018-07-31 23:04:16.432 +01:00 [INF] Moved to -950.086/-10509.660. Distance to waypoint is 27.69777. Current location is -947.665/-10514.330 Waiting 100ms
+2018-07-31 23:04:16.592 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:16.625 +01:00 [INF] check for enemies
+2018-07-31 23:04:16.632 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:16.633 +01:00 [INF] Setting player facing -951.569/-10506.490
+2018-07-31 23:04:16.686 +01:00 [INF] Sending W key
+2018-07-31 23:04:16.839 +01:00 [INF] Moved to -951.569/-10506.490. Distance to waypoint is 24.82084. Current location is -949.410/-10510.980 Waiting 100ms
+2018-07-31 23:04:17.513 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-07-31 23:04:17.514 +01:00 [INF] Setting player facing -976.185/-10491.050
+2018-07-31 23:04:17.566 +01:00 [INF] Sending W key
+2018-07-31 23:04:18.324 +01:00 [INF] Moved to -976.185/-10491.050. Distance to waypoint is 386.1129. Current location is -960.320/-10502.640 Waiting 100ms
+2018-07-31 23:04:19.489 +01:00 [INF] Waiting for Nightbane Worgen (26) - Humanoid to die
+2018-07-31 23:04:36.792 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:36.793 +01:00 [INF] check for enemies
+2018-07-31 23:04:36.799 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:36.801 +01:00 [INF] Setting player facing -953.068/-10503.200
+2018-07-31 23:04:36.854 +01:00 [INF] Sending W key
+2018-07-31 23:04:36.906 +01:00 [INF] Moved to -953.068/-10503.200. Distance to waypoint is 20.05485. Current location is -952.721/-10507.670 Waiting 100ms
+2018-07-31 23:04:37.167 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:37.168 +01:00 [INF] check for enemies
+2018-07-31 23:04:37.174 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:37.175 +01:00 [INF] Setting player facing -954.550/-10499.910
+2018-07-31 23:04:37.227 +01:00 [INF] Sending W key
+2018-07-31 23:04:37.279 +01:00 [INF] Moved to -954.550/-10499.910. Distance to waypoint is 20.42197. Current location is -953.212/-10504.230 Waiting 100ms
+2018-07-31 23:04:37.438 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:37.438 +01:00 [INF] check for enemies
+2018-07-31 23:04:37.445 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:37.446 +01:00 [INF] Setting player facing -955.843/-10496.660
+2018-07-31 23:04:37.550 +01:00 [INF] Sending W key
+2018-07-31 23:04:37.603 +01:00 [INF] Moved to -955.843/-10496.660. Distance to waypoint is 24.65629. Current location is -954.089/-10501.310 Waiting 100ms
+2018-07-31 23:04:37.762 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:37.763 +01:00 [INF] check for enemies
+2018-07-31 23:04:37.769 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:37.771 +01:00 [INF] Setting player facing -957.536/-10493.600
+2018-07-31 23:04:37.823 +01:00 [INF] Sending W key
+2018-07-31 23:04:37.975 +01:00 [INF] Moved to -957.536/-10493.600. Distance to waypoint is 26.10541. Current location is -955.275/-10498.180 Waiting 100ms
+2018-07-31 23:04:38.234 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:38.235 +01:00 [INF] check for enemies
+2018-07-31 23:04:38.242 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:38.243 +01:00 [INF] Setting player facing -958.918/-10492.370
+2018-07-31 23:04:38.295 +01:00 [INF] Sending W key
+2018-07-31 23:04:38.348 +01:00 [INF] Moved to -958.918/-10492.370. Distance to waypoint is 10.6464. Current location is -956.941/-10494.970 Waiting 100ms
+2018-07-31 23:04:38.609 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:38.610 +01:00 [INF] check for enemies
+2018-07-31 23:04:38.615 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:38.616 +01:00 [INF] Setting player facing -960.184/-10486.180
+2018-07-31 23:04:38.667 +01:00 [INF] Sending W key
+2018-07-31 23:04:38.819 +01:00 [INF] Moved to -960.184/-10486.180. Distance to waypoint is 25.43216. Current location is -958.693/-10491.000 Waiting 100ms
+2018-07-31 23:04:39.029 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:39.030 +01:00 [INF] check for enemies
+2018-07-31 23:04:39.036 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:39.038 +01:00 [INF] Setting player facing -960.594/-10482.600
+2018-07-31 23:04:39.090 +01:00 [INF] Sending W key
+2018-07-31 23:04:39.242 +01:00 [INF] Moved to -960.594/-10482.600. Distance to waypoint is 23.39243. Current location is -959.629/-10487.340 Waiting 100ms
+2018-07-31 23:04:39.400 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:39.401 +01:00 [INF] check for enemies
+2018-07-31 23:04:39.407 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:39.408 +01:00 [INF] Setting player facing -960.708/-10479.100
+2018-07-31 23:04:39.512 +01:00 [INF] Sending W key
+2018-07-31 23:04:39.563 +01:00 [INF] Moved to -960.708/-10479.100. Distance to waypoint is 27.72028. Current location is -960.159/-10484.340 Waiting 100ms
+2018-07-31 23:04:39.721 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:39.722 +01:00 [INF] check for enemies
+2018-07-31 23:04:39.727 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:39.727 +01:00 [INF] Setting player facing -960.542/-10475.610
+2018-07-31 23:04:39.779 +01:00 [INF] Sending W key
+2018-07-31 23:04:39.930 +01:00 [INF] Moved to -960.542/-10475.610. Distance to waypoint is 27.66564. Current location is -960.520/-10480.870 Waiting 100ms
+2018-07-31 23:04:40.392 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:40.393 +01:00 [INF] check for enemies
+2018-07-31 23:04:40.398 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:40.399 +01:00 [INF] Setting player facing -960.367/-10472.000
+2018-07-31 23:04:40.757 +01:00 [INF] Sending W key
+2018-07-31 23:04:40.808 +01:00 [INF] Moved to -960.367/-10472.000. Distance to waypoint is 0.9290057. Current location is -960.976/-10472.750 Waiting 100ms
+2018-07-31 23:04:41.068 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:41.068 +01:00 [INF] check for enemies
+2018-07-31 23:04:41.073 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:41.074 +01:00 [INF] Setting player facing -960.207/-10468.500
+2018-07-31 23:04:41.126 +01:00 [INF] Sending W key
+2018-07-31 23:04:41.178 +01:00 [INF] Moved to -960.207/-10468.500. Distance to waypoint is 1.016602. Current location is -960.524/-10469.460 Waiting 100ms
+2018-07-31 23:04:41.438 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:41.438 +01:00 [INF] check for enemies
+2018-07-31 23:04:41.443 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:41.444 +01:00 [INF] Setting player facing -960.042/-10464.890
+2018-07-31 23:04:41.802 +01:00 [INF] Sending W key
+2018-07-31 23:04:41.854 +01:00 [INF] Moved to -960.042/-10464.890. Distance to waypoint is 3.137673. Current location is -960.184/-10463.120 Waiting 100ms
+2018-07-31 23:04:42.316 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:42.317 +01:00 [INF] check for enemies
+2018-07-31 23:04:42.322 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:42.323 +01:00 [INF] Setting player facing -959.882/-10461.400
+2018-07-31 23:04:42.681 +01:00 [INF] Sending W key
+2018-07-31 23:04:43.246 +01:00 [INF] Moved to -959.882/-10461.400. Distance to waypoint is 10.66655. Current location is -958.758/-10464.470 Waiting 100ms
+2018-07-31 23:04:43.707 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:43.708 +01:00 [INF] check for enemies
+2018-07-31 23:04:43.713 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:43.714 +01:00 [INF] Setting player facing -959.722/-10457.900
+2018-07-31 23:04:43.868 +01:00 [INF] Sending W key
+2018-07-31 23:04:44.021 +01:00 [INF] Moved to -959.722/-10457.900. Distance to waypoint is 21.42292. Current location is -959.261/-10462.510 Waiting 100ms
+2018-07-31 23:04:44.178 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:44.179 +01:00 [INF] check for enemies
+2018-07-31 23:04:44.184 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:44.185 +01:00 [INF] Setting player facing -959.599/-10454.400
+2018-07-31 23:04:44.237 +01:00 [INF] Sending W key
+2018-07-31 23:04:44.390 +01:00 [INF] Moved to -959.599/-10454.400. Distance to waypoint is 21.35615. Current location is -959.363/-10459.020 Waiting 100ms
+2018-07-31 23:04:44.546 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:44.547 +01:00 [INF] check for enemies
+2018-07-31 23:04:44.552 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:44.553 +01:00 [INF] Setting player facing -959.792/-10450.810
+2018-07-31 23:04:44.606 +01:00 [INF] Sending W key
+2018-07-31 23:04:44.758 +01:00 [INF] Moved to -959.792/-10450.810. Distance to waypoint is 23.78091. Current location is -959.460/-10455.670 Waiting 100ms
+2018-07-31 23:04:44.916 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:44.916 +01:00 [INF] check for enemies
+2018-07-31 23:04:44.921 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:44.922 +01:00 [INF] Setting player facing -960.323/-10447.350
+2018-07-31 23:04:44.973 +01:00 [INF] Sending W key
+2018-07-31 23:04:45.126 +01:00 [INF] Moved to -960.323/-10447.350. Distance to waypoint is 23.96614. Current location is -959.561/-10452.190 Waiting 100ms
+2018-07-31 23:04:45.335 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:45.336 +01:00 [INF] check for enemies
+2018-07-31 23:04:45.342 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:45.343 +01:00 [INF] Setting player facing -960.729/-10443.760
+2018-07-31 23:04:45.395 +01:00 [INF] Sending W key
+2018-07-31 23:04:45.448 +01:00 [INF] Moved to -960.729/-10443.760. Distance to waypoint is 29.73619. Current location is -959.887/-10449.150 Waiting 100ms
+2018-07-31 23:04:45.605 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:45.606 +01:00 [INF] check for enemies
+2018-07-31 23:04:45.612 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:45.612 +01:00 [INF] Setting player facing -960.817/-10440.260
+2018-07-31 23:04:45.665 +01:00 [INF] Sending W key
+2018-07-31 23:04:45.817 +01:00 [INF] Moved to -960.817/-10440.260. Distance to waypoint is 29.81324. Current location is -960.504/-10445.710 Waiting 100ms
+2018-07-31 23:04:46.025 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:46.026 +01:00 [INF] check for enemies
+2018-07-31 23:04:46.032 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:46.033 +01:00 [INF] Setting player facing -960.904/-10436.760
+2018-07-31 23:04:46.085 +01:00 [INF] Sending W key
+2018-07-31 23:04:46.238 +01:00 [INF] Moved to -960.904/-10436.760. Distance to waypoint is 26.99143. Current location is -960.892/-10441.960 Waiting 100ms
+2018-07-31 23:04:46.396 +01:00 [INF] find nearest waypoint
+2018-07-31 23:04:46.397 +01:00 [INF] check for enemies
+2018-07-31 23:04:46.403 +01:00 [INF] move to next waypoint
+2018-07-31 23:04:46.406 +01:00 [INF] Setting player facing -960.992/-10433.260
+2018-07-31 23:04:46.761 +01:00 [INF] Sending W key
+2018-07-31 23:04:46.812 +01:00 [INF] Moved to -960.992/-10433.260. Distance to waypoint is 11.20743. Current location is -961.316/-10436.590 Waiting 100ms
+2018-07-31 23:04:47.535 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-07-31 23:04:47.536 +01:00 [INF] Setting player facing -982.330/-10412.320
+2018-07-31 23:04:47.587 +01:00 [INF] Sending W key
+2018-07-31 23:04:48.144 +01:00 [INF] Moved to -982.330/-10412.320. Distance to waypoint is 398.359. Current location is -968.769/-10426.960 Waiting 100ms
+2018-07-31 23:04:50.324 +01:00 [INF] Waiting for Nightbane Worgen (27) - Humanoid to die

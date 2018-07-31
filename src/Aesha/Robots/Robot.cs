@@ -39,7 +39,7 @@ namespace Aesha.Robots
             var enemies = ObjectManager.Units.Where(u =>
                     EnemyList.Any(e => e.Contains(u.Name))
                     && u.Health.Percentage == 100
-                    && u.Distance < 800)
+                    && u.Distance < 1200)
                 .OrderBy(u => u.Distance).ToList();
 
             var nearest = enemies.FirstOrDefault();

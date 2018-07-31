@@ -19,7 +19,7 @@ namespace Aesha.Robots
         
         private WowUnit _currentTarget;
         private Location _nearestWaypoint;
-        private readonly Spell _serpentSting = new Spell(13550,"Serpent Sting",3);
+        private readonly Spell _serpentSting = new Spell(13551,"Serpent Sting",4);
 
         protected override void Behaviour()
         {
@@ -29,8 +29,8 @@ namespace Aesha.Robots
                     .Selector("passive")
                         .Do("find nearest waypoint", t =>
                         {
-                            _nearestWaypoint = _nearestWaypoint != null 
-                                ? Path.GetNextWaypoint(_nearestWaypoint) 
+                            _nearestWaypoint = _nearestWaypoint != null
+                                ? Path.GetNextWaypoint(_nearestWaypoint)
                                 : Path.FindNearestWaypoint(ObjectManager.Me.Location);
 
                             CommandManager.SetPlayerFacing(_nearestWaypoint);
@@ -108,9 +108,12 @@ namespace Aesha.Robots
                                 }
                                 CommandManager.SendKeyUp('S');
 
-
-
-                                if (!_currentTarget.HasAura(_serpentSting)) CommandManager.SendKey('4');
+                               
+                                if (!_currentTarget.HasAura(_serpentSting))
+                                {
+                                    CommandManager.SendKey('4');
+                                    Thread.Sleep(1500);
+                                }
                             }
 
                             return BehaviourTreeStatus.Success;
