@@ -7,12 +7,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Aesha.Domain;
 using Aesha.Infrastructure;
+using Aesha.Interfaces;
 
 namespace Aesha.Core
 {
     public static class ObjectManager
     {
-        private static Process _process;
+        private static IWowProcess _process;
         private static ProcessMemoryReader _reader;
 
         private static ConcurrentDictionary<ulong, IWowObject> _objects = new ConcurrentDictionary<ulong, IWowObject>();
@@ -20,7 +21,7 @@ namespace Aesha.Core
         private static Task _pulseTask;
         private static bool _running;
 
-        public static void Start(Process process)
+        public static void Start(IWowProcess process)
         {
             if (_running)
                 return;

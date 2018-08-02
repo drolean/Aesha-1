@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Aesha.Interfaces;
 
 namespace Aesha.Infrastructure
 {
@@ -12,7 +13,7 @@ namespace Aesha.Infrastructure
         private const uint Synchronize = 0x00100000;
         private const uint ProcessAllAccess = StandardRightsRequired | Synchronize | 0xFFF;
 
-        public ProcessMemoryReader(Process process)
+        public ProcessMemoryReader(IWowProcess process)
         {
             _processPtr = Win32Imports.OpenProcess(ProcessAllAccess, false, process.Id);
 

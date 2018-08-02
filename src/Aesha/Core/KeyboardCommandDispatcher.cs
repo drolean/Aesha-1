@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Aesha.Infrastructure;
+using Aesha.Interfaces;
 
 namespace Aesha.Core
 {
@@ -87,7 +88,7 @@ namespace Aesha.Core
             {' ', new KeyMap() {ScanCode = 0x39, VirtualKeyCode = ' '}}
         };
         
-        public KeyboardCommandDispatcher(Process process)
+        public KeyboardCommandDispatcher(IWowProcess process)
         {
             _processWindowHandle = process.MainWindowHandle;
         }

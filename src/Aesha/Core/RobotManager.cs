@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,18 +10,15 @@ namespace Aesha.Core
 {
     public class RobotManager
     {
-        private readonly Process _process;
         private readonly CommandManager _commandManager;
         private readonly ILogger _logger;
 
-        public RobotManager(Process process, CommandManager commandManager, ILogger logger)
+        public RobotManager(CommandManager commandManager, ILogger logger)
         {
-            _process = process;
             _commandManager = commandManager;
             _logger = logger;
         }
-
-
+        
         private Task _task;
         private CancellationToken _cancellationToken;
         private CancellationTokenSource _cancellationSource;

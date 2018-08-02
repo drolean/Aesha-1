@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using Aesha.Domain;
 using Aesha.Infrastructure;
+using Aesha.Interfaces;
 
 namespace Aesha.Core
 {
@@ -29,15 +29,16 @@ namespace Aesha.Core
 
     public class CommandManager
     {
-        private readonly Process _process;
+        private readonly IWowProcess _process;
         private readonly ProcessMemoryReader _reader;
         private readonly KeyboardCommandDispatcher _keyboard;
 
-        public CommandManager(Process process, ProcessMemoryReader reader, KeyboardCommandDispatcher keyboard)
+        public CommandManager(IWowProcess process, ProcessMemoryReader reader, KeyboardCommandDispatcher keyboard)
         {
             _process = process;
             _reader = reader;
             _keyboard = keyboard;
+
         }
 
         public void SetTarget(IWowObject unit)

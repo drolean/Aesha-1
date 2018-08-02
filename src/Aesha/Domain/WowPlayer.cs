@@ -1,23 +1,20 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using System.Threading;
+﻿using System.Linq;
 using Aesha.Core;
 using Aesha.Infrastructure;
+using Aesha.Interfaces;
 
 namespace Aesha.Domain
 {
     public class WowPlayer : WowUnit
     {
-        private readonly Process _wowProcess;
+        private readonly IWowProcess _wowProcess;
         private readonly ProcessMemoryReader _reader;
-        private readonly uint _objectBaseAddress;
 
-        public WowPlayer(Process wowProcess, ProcessMemoryReader reader, uint objectBaseAddress)
+        public WowPlayer(IWowProcess wowProcess, ProcessMemoryReader reader, uint objectBaseAddress)
             : base(reader, objectBaseAddress)
         {
             _wowProcess = wowProcess;
             _reader = reader;
-            _objectBaseAddress = objectBaseAddress;
         }
 
 
@@ -39,7 +36,7 @@ namespace Aesha.Domain
         public override string Name {
             get
             {
-                var nameStoreAddress = (uint)_wowProcess.MainModule.BaseAddress + (uint)Offsets.WowPlayerNameCache.NAME_CACHE_BASE;
+                var nameStoreAddress = (uint)_wowProcess.MainModuleBaseAddress + (uint)Offsets.WowPlayerNameCache.NAME_CACHE_BASE;
                 var baseAddress = _reader.ReadUInt(nameStoreAddress);
                 var currentGuid = _reader.ReadUInt64(baseAddress + (uint)Offsets.WowObjectManager.LOCAL_GUID);
 
@@ -79,15 +76,6 @@ namespace Aesha.Domain
         public override string ToString()
         {
             return $"{Name} (Level {Level} {UnitRace} {UnitClass})";
-        }
-
-        public bool IsMoving()
-        {
-            var currentLocation = Location;
-            Thread.Sleep(500);
-            var newLocation = Location;
-
-            return newLocation.Equals(currentLocation);
         }
     }
 }

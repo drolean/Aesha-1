@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Aesha.Core;
 using Aesha.Domain;
+using Aesha.Interfaces;
 
 
 namespace PathRecorder
 {
     public partial class Main : Form
     {
-        private readonly Process _process;
+        private readonly IWowProcess _process;
         private readonly List<Location> _path;
         private bool _recording;
 
-        public Main(Process process)
+        public Main(IWowProcess process)
         {
             _process = process;
             _path = new List<Location>();

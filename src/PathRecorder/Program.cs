@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Aesha.Core;
 
 namespace PathRecorder
 {
@@ -17,10 +18,10 @@ namespace PathRecorder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-
+            
             var proc = Process.GetProcessesByName("wow").FirstOrDefault();
-            Application.Run(new Main(proc));
+            var wowProc = new WowProcess(proc);
+            Application.Run(new Main(wowProc));
         }
     }
 }
