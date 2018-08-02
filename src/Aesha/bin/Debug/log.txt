@@ -5366,3 +5366,228 @@
 2018-07-31 23:04:47.587 +01:00 [INF] Sending W key
 2018-07-31 23:04:48.144 +01:00 [INF] Moved to -982.330/-10412.320. Distance to waypoint is 398.359. Current location is -968.769/-10426.960 Waiting 100ms
 2018-07-31 23:04:50.324 +01:00 [INF] Waiting for Nightbane Worgen (27) - Humanoid to die
+2018-08-02 22:31:52.132 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 22:31:52.168 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 22:31:52.225 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 22:31:52.550 +01:00 [DBG] Starting up as a console application
+2018-08-02 22:31:52.560 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 22:36:40.366 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 22:36:40.390 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 22:36:40.434 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 22:36:40.438 +01:00 [DBG] Starting up as a console application
+2018-08-02 22:37:37.901 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 22:38:33.317 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 22:38:33.344 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 22:38:33.401 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 22:38:33.405 +01:00 [DBG] Starting up as a console application
+2018-08-02 22:38:40.058 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 22:38:40.572 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:41:10.834 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 22:41:10.861 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 22:41:10.922 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 22:41:10.926 +01:00 [DBG] Starting up as a console application
+2018-08-02 22:41:10.934 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 22:41:35.193 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:42:48.489 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:43:10.416 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:43:32.569 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:43:54.032 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:54.033 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:54.381 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:54.382 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:54.579 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:54.581 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:55.034 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:55.035 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:55.430 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:55.432 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:55.943 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:55.944 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:56.440 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:56.442 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:56.946 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:56.947 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:57.444 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:57.446 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:58.204 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:58.206 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:58.490 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:58.491 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:58.978 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:58.979 +01:00 [INF] move to next waypoint
+2018-08-02 22:43:59.573 +01:00 [INF] find nearest waypoint
+2018-08-02 22:43:59.575 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:00.212 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:00.214 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:00.752 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:00.753 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:01.540 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:44:09.786 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:09.787 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:10.118 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:10.119 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:10.595 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:10.596 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:10.767 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:10.769 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:11.499 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:44:23.956 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:24.267 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:24.604 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:24.605 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:24.791 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:24.793 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:25.147 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:25.148 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:25.529 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:25.530 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:26.021 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:26.022 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:26.523 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:26.524 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:27.018 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:27.019 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:27.653 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:27.654 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:28.056 +01:00 [INF] find nearest waypoint
+2018-08-02 22:44:28.057 +01:00 [INF] move to next waypoint
+2018-08-02 22:44:29.001 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:44:44.419 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:45:02.467 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:45:46.333 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:46:52.185 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:47:00.640 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:47:18.018 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:48:49.910 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:49:19.917 +01:00 [INF] find nearest waypoint
+2018-08-02 22:49:19.918 +01:00 [INF] move to next waypoint
+2018-08-02 22:49:59.263 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:50:20.176 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:50:40.358 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:51:38.397 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:53:33.870 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 22:53:33.897 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 22:53:33.945 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 22:53:33.948 +01:00 [DBG] Starting up as a console application
+2018-08-02 22:53:33.955 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 22:54:16.181 +01:00 [INF] Distance is over 400. Moving closer to target
+2018-08-02 22:57:13.041 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 22:57:13.082 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 22:57:13.141 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 22:57:13.147 +01:00 [DBG] Starting up as a console application
+2018-08-02 22:57:13.158 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 23:00:14.504 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 23:00:14.545 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 23:00:14.615 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 23:00:14.620 +01:00 [DBG] Starting up as a console application
+2018-08-02 23:00:14.632 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 23:00:57.478 +01:00 [INF] Moving closer to target
+2018-08-02 23:01:10.500 +01:00 [INF] find nearest waypoint
+2018-08-02 23:01:10.501 +01:00 [INF] move to next waypoint
+2018-08-02 23:01:11.050 +01:00 [INF] find nearest waypoint
+2018-08-02 23:01:11.051 +01:00 [INF] move to next waypoint
+2018-08-02 23:01:11.239 +01:00 [INF] find nearest waypoint
+2018-08-02 23:01:11.240 +01:00 [INF] move to next waypoint
+2018-08-02 23:01:11.676 +01:00 [INF] find nearest waypoint
+2018-08-02 23:01:11.677 +01:00 [INF] move to next waypoint
+2018-08-02 23:01:12.062 +01:00 [INF] find nearest waypoint
+2018-08-02 23:01:12.063 +01:00 [INF] move to next waypoint
+2018-08-02 23:01:12.852 +01:00 [INF] Moving closer to target
+2018-08-02 23:01:51.991 +01:00 [INF] Moving closer to target
+2018-08-02 23:03:09.271 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 23:03:09.298 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 23:03:09.371 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 23:03:09.376 +01:00 [DBG] Starting up as a console application
+2018-08-02 23:03:09.386 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 23:03:30.237 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 23:03:30.260 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 23:03:30.324 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 23:03:30.328 +01:00 [DBG] Starting up as a console application
+2018-08-02 23:03:30.336 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 23:03:44.936 +01:00 [INF] Moving closer to target
+2018-08-02 23:04:23.947 +01:00 [INF] Moving closer to target
+2018-08-02 23:04:48.251 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 23:04:48.295 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 23:04:48.345 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 23:04:48.349 +01:00 [DBG] Starting up as a console application
+2018-08-02 23:04:48.356 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 23:05:56.859 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 23:05:56.886 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 23:05:56.933 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 23:05:56.937 +01:00 [DBG] Starting up as a console application
+2018-08-02 23:05:56.944 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 23:06:25.295 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 23:06:25.319 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 23:06:25.374 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 23:06:25.378 +01:00 [DBG] Starting up as a console application
+2018-08-02 23:06:25.386 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 23:07:50.201 +01:00 [INF] Moving closer to target
+2018-08-02 23:08:08.727 +01:00 [INF] Moving closer to target
+2018-08-02 23:09:14.630 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 23:09:14.660 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 23:09:14.715 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 23:09:14.720 +01:00 [DBG] Starting up as a console application
+2018-08-02 23:09:14.729 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 23:11:28.191 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 23:11:28.218 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 23:11:28.263 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 23:11:28.267 +01:00 [DBG] Starting up as a console application
+2018-08-02 23:11:28.275 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 23:18:46.566 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 23:18:46.592 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 23:18:46.637 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 23:18:46.641 +01:00 [DBG] Starting up as a console application
+2018-08-02 23:18:46.648 +01:00 [INF] The Aesha service is now running, press Control+C to exit.
+2018-08-02 23:31:12.825 +01:00 [INF] Configuration Result:
+[Success] Name Aesha
+[Success] Description Aesha Automation
+[Success] ServiceName Aesha
+2018-08-02 23:31:12.867 +01:00 [INF] Topshelf v4.0.0.0, .NET Framework v4.0.30319.42000
+2018-08-02 23:31:12.932 +01:00 [DBG] Running as a console application, creating the console host.
+2018-08-02 23:31:12.937 +01:00 [DBG] Starting up as a console application
+2018-08-02 23:31:12.947 +01:00 [INF] The Aesha service is now running, press Control+C to exit.

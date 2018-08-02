@@ -24,19 +24,18 @@ namespace Aesha.Core
         private CancellationToken _cancellationToken;
         private CancellationTokenSource _cancellationSource;
         private List<string> _enemyList;
-        private Hunter _robot;
+        private IRobot _robot;
 
         public void Start()
         {
             _enemyList = new List<string>()
             {
-                "Nightbane Shadow Weaver",
-                "Nightbane Dark Runner",
-                "Nightbane Worgen"
+                "Kobold Worker",
+                "Kobold Vermin"
             };
             
-            var waypointManager = new WaypointManager(_commandManager,Path.FromFile("Ashenvale-Athalaxx.path"));
-            _robot = new Hunter(_commandManager, waypointManager,_enemyList, _logger);
+            var waypointManager = new WaypointManager(_commandManager,Path.FromFile("Northshire-valley.path"));
+            _robot = new Warlock(_commandManager, waypointManager,_enemyList, _logger);
 
             _cancellationSource = new CancellationTokenSource();
             _cancellationToken = _cancellationSource.Token;

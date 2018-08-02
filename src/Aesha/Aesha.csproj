@@ -90,6 +90,7 @@
     <Compile Include="Robots\Hunter.cs" />
     <Compile Include="Robots\GenericBehaviour.cs" />
     <Compile Include="Interfaces\IRobot.cs" />
+    <Compile Include="Robots\Warlock.cs" />
     <Compile Include="Service.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +100,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Paths\Brightwood-Grove.path">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Paths\Northshire-valley.path">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

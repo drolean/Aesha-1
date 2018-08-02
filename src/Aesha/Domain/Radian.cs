@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
-using Aesha.Core;
 
 namespace Aesha.Domain
 {
@@ -29,17 +27,17 @@ namespace Aesha.Domain
 
         public override bool Equals(object obj)
         {
-            switch (obj)
-            {
-                case null:
-                    return false;
-                case Radian radian:
-                    return Math.Abs(radian.Angle - Angle) < 0.1;
-                case float f:
-                    return Math.Abs(f - Angle) < 0.1;
-                case double d:
-                    return Math.Abs(d - Angle) < 0.1;
-            }
+            //switch (typeof())
+            //{
+            //    case null:
+            //        return false;
+            //    case Radian radian:
+            //        return Math.Abs(radian.Angle - Angle) < 0.1;
+            //    case float f:
+            //        return Math.Abs(f - Angle) < 0.1;
+            //    case double d:
+            //        return Math.Abs(d - Angle) < 0.1;
+            //}
 
             return false;
         }

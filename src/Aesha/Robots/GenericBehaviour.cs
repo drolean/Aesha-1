@@ -46,12 +46,11 @@ namespace Aesha.Robots
         }
 
 
-        public BehaviourTreeStatus MoveCloserToTarget(WowUnit unit)
+        public BehaviourTreeStatus WaitForMana(WowUnit unit)
         {
-            if (unit.Distance > 400)
+            while (ObjectManager.Me.Mana.Current <= 25)
             {
-                _logger.Information($"Distance is over 400. Moving closer to target");
-                _waypointManager.MoveToWaypoint(unit.Location, 400, false);
+                Thread.Sleep(50);
             }
 
             return BehaviourTreeStatus.Success;

@@ -84,7 +84,7 @@ namespace Aesha.Core
 
         public void SetPlayerFacing(Location destination, bool instant = true)
         {
-            const float radianTolerance = 0.4f;
+            const float radianTolerance = 0.2f;
 
             var radian = Radian.GetFaceRadian(destination, ObjectManager.Me.Location);
             if (radian.AbsoluteDifference(ObjectManager.Me.Rotation) < radianTolerance)

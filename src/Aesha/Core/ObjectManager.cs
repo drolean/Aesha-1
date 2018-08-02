@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,10 @@ namespace Aesha.Core
             AdministrativeRights.Ensure();
 
             _reader = processMemoryReader;
-            _process = process ?? throw new ArgumentNullException(nameof(process));
+            _process = process;
+
+            if (_process == null)
+                throw new ArgumentNullException(nameof(process));
 
             _cancellationSource = new CancellationTokenSource();
             _pulseTask = new Task(async () =>
