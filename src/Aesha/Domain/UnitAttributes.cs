@@ -1,4 +1,4 @@
-﻿namespace Aesha.Objects.Model
+﻿namespace Aesha.Domain
 {
     public class UnitAttributes
     {

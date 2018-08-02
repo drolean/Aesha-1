@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using Aesha.Core;
 using Aesha.Infrastructure;
 
-namespace Aesha.Objects.Model
+namespace Aesha.Domain
 {
     public class WowPlayer : WowUnit
     {

@@ -5,10 +5,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Aesha.Domain;
 using Aesha.Infrastructure;
-using Aesha.Objects.Model;
 
-namespace Aesha.Objects
+namespace Aesha.Core
 {
     public static class ObjectManager
     {

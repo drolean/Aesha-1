@@ -1,13 +1,32 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading;
+using Aesha.Domain;
 using Aesha.Infrastructure;
-using Aesha.Objects;
-using Aesha.Objects.Model;
 
 namespace Aesha.Core
 {
+
+    public static class MappedKey
+    {
+        public const char Left = 'A';
+        public const char Right = 'D';
+        public const char Forward = 'W';
+        public const char Backward = 'S';
+        public const char TargetLastTarget = 'G';
+        public const char ActionBar1 = '1';
+        public const char ActionBar2 = '2';
+        public const char ActionBar3 = '3';
+        public const char ActionBar4 = '4';
+        public const char ActionBar5 = '5';
+        public const char ActionBar6 = '6';
+        public const char ActionBar7 = '7';
+        public const char ActionBar8 = '8';
+        public const char ActionBar9 = '9';
+        public const char ActionBar10 = '0';
+
+    }
+
     public class CommandManager
     {
         private readonly Process _process;
@@ -21,11 +40,12 @@ namespace Aesha.Core
             _keyboard = keyboard;
         }
 
-        public void SetTarget(ulong guid)
+        public void SetTarget(IWowObject unit)
         {
-            _reader.WriteUInt64((uint)Offsets.WowGame.TargetLastTargetGuid, guid);
+            SetPlayerFacing(unit.Location);
+            _reader.WriteUInt64((uint)Offsets.WowGame.TargetLastTargetGuid, unit.Guid);
+            _keyboard.SendKey(MappedKey.TargetLastTarget);
         }
-
 
         public void SendKeyDown(char key)
         {
@@ -43,61 +63,72 @@ namespace Aesha.Core
             _keyboard.SendKey(key);
         }
 
-        public WowUnit GetMouseOverTarget()
+        private void InternalSetPlayerFacing(Radian radian, char nudgeKey)
         {
-            try
+            var thread = _process.Threads[0];
+            var threadPtr = Win32Imports.OpenThread(2032639U, false, (uint)thread.Id);
+            Win32Imports.SuspendThread(threadPtr);
+
+            _reader.WriteFloat(ObjectManager.Me.BaseAddress + (uint) Offsets.WowObject.OBJECT_FIELD_ROTATION, radian.Angle);
+
+            thread = _process.Threads[0];
+            threadPtr = Win32Imports.OpenThread(2032639U, false, (uint)thread.Id);
+            Win32Imports.ResumeThread(threadPtr);
+
+            Thread.Sleep(50);
+            _keyboard.SendKeyDown(nudgeKey);
+            _keyboard.SendKeyUp(nudgeKey);
+        }
+
+
+        public void SetPlayerFacing(Location destination, bool instant = true)
+        {
+            const float radianTolerance = 0.4f;
+
+            var radian = Radian.GetFaceRadian(destination, ObjectManager.Me.Location);
+            if (radian.AbsoluteDifference(ObjectManager.Me.Rotation) < radianTolerance)
+                return;
+
+            var nudgeKey = MappedKey.Left;
+            if (instant)
             {
-                var guid = _reader.ReadUInt64((uint)Offsets.WowGame.MouseOverGuid);
-                var unit = ObjectManager.Objects.SingleOrDefault(o => o.Guid == guid);
-                return (WowUnit)unit;
+                InternalSetPlayerFacing(radian, nudgeKey);
+                return;
             }
-            catch (Exception)
+
+            while (radian.AbsoluteDifference(ObjectManager.Me.Rotation) < radianTolerance)
             {
-                return null;
+                var currentRadian = new Radian(ObjectManager.Me.Rotation);
+                var direction = currentRadian.GetDirectionOfTravel(radian);
+                
+                var radiansPerCycle = (float)Math.PI / 10f;
+                if (direction == Radian.TravelDirection.Left) radiansPerCycle *= -1;
+                
+                var nextRadian = currentRadian.Angle - radiansPerCycle;
+                InternalSetPlayerFacing(nextRadian, nudgeKey);
+                
+                radian = Radian.GetFaceRadian(destination, ObjectManager.Me.Location);
+                nudgeKey = nudgeKey == MappedKey.Left ? MappedKey.Right : MappedKey.Left;
             }
 
         }
 
-        public void GetNearestUntaggedMob()
+        public void MoveToWaypoint(Location location, int stopAt = 30, bool continuousMode = true)
         {
-
-        }
-
-        public void SetPlayerFacing(Location destination)
-        {
-
-            var newFacing = GetFaceRadian(destination, ObjectManager.Me.Location);
-            if (Math.Abs(newFacing - ObjectManager.Me.Rotation) > 1.5)
+            SetPlayerFacing(location);
+            SendKeyDown(MappedKey.Forward);
+            
+            var distanceToWaypoint = location.GetDistanceTo(ObjectManager.Me.Location);
+            while (distanceToWaypoint >= stopAt)
             {
-                var thread = _process.Threads[0];
-                var threadPtr = Win32Imports.OpenThread(2032639U, false, (uint) thread.Id);
-                Win32Imports.SuspendThread(threadPtr);
-
-                _reader.WriteFloat(ObjectManager.Me.BaseAddress + (uint) Offsets.WowObject.OBJECT_FIELD_ROTATION,
-                    newFacing);
-
-                thread = _process.Threads[0];
-                threadPtr = Win32Imports.OpenThread(2032639U, false, (uint) thread.Id);
-                Win32Imports.ResumeThread(threadPtr);
-
-                Thread.Sleep(50);
-                _keyboard.SendKey('D');
+                Thread.Sleep(100);
+                distanceToWaypoint = location.GetDistanceTo(ObjectManager.Me.Location);
             }
-            else
-            {
-                _keyboard.SetPlayerFacing(newFacing);
-            }
+            
+            if (!continuousMode)
+                SendKeyUp(MappedKey.Forward);
         }
 
-        public float GetFaceRadian(Location destination, Location current)
-        {
-            var n = 270 - (Math.Atan2(current.Y - destination.Y, current.X - destination.X)) * 180 / Math.PI;
-            var angle = (Math.PI / 180) * (n % 360);
 
-            if (angle < 0f)
-                angle = 2 * (float)Math.PI;
-
-            return (float)angle;
-        }
     }
 }

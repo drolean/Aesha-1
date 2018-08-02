@@ -4,7 +4,7 @@ using System.Linq;
 using Aesha.Core;
 using Aesha.Infrastructure;
 
-namespace Aesha.Objects.Model
+namespace Aesha.Domain
 {
     public class WowUnit : WowObject
     {

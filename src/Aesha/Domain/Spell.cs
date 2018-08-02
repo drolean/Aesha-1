@@ -1,4 +1,4 @@
-﻿namespace Aesha.Core
+﻿namespace Aesha.Domain
 {
     public class Spell
     {

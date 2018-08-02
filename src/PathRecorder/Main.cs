@@ -4,15 +4,16 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Aesha.Objects;
-using Aesha.Objects.Model;
+using Aesha.Core;
+using Aesha.Domain;
+
 
 namespace PathRecorder
 {
     public partial class Main : Form
     {
         private readonly Process _process;
-        private List<Location> _path;
+        private readonly List<Location> _path;
         private bool _recording;
 
         public Main(Process process)

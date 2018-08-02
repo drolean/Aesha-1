@@ -1,12 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Aesha.Core;
 using Aesha.Infrastructure;
-using Aesha.Objects;
-using Aesha.Robots;
 using Serilog;
 using Topshelf;
 
@@ -14,52 +9,32 @@ namespace Aesha
 {
     public class Service
     {
-
-        private readonly Hunter _robot;
-        private Task _task;
-        private CancellationToken _cancellationToken;
-        private CancellationTokenSource _cancellationSource;
+        private readonly ILogger _logger;
+        private readonly Process _process;
+        private RobotManager _robotManager;
 
         public Service(ILogger logger)
         {
-            var process = Process.GetProcessesByName("WoW").FirstOrDefault();
-            ObjectManager.Start(process);
-            _robot =
-                new Hunter(
-                    new CommandManager(process, new ProcessMemoryReader(process), new KeyboardCommandDispatcher(process)),
-                    Path.FromFile("Brightwood-Grove.path"),
-                    new List<string>()
-                    {
-                        "Nightbane Shadow Weaver",
-                        "Nightbane Dark Runner",
-                        "Nightbane Worgen"
-                    }, logger);
+            _logger = logger;
+            _process = Process.GetProcessesByName("WoW").FirstOrDefault();
+            ObjectManager.Start(_process);
         }
 
         public bool Start(HostControl hostControl)
         {
-            _cancellationSource = new CancellationTokenSource();
-            _cancellationToken = _cancellationSource.Token;
-            _task = new Task(() =>
-            {
-                while (!_cancellationToken.IsCancellationRequested)
-                {
-                    _robot.Pulse();
-                    Thread.Sleep(100);
-                }
-                
-            }, _cancellationToken);
+            var processMemoryReader = new ProcessMemoryReader(_process);
+            var keyboard = new KeyboardCommandDispatcher(_process);
+            var commandManager = new CommandManager(_process, processMemoryReader, keyboard);
+            _robotManager = new RobotManager(_process, commandManager, _logger);
 
-            _task.Start();
+            _robotManager.Start();
+            
             return true;
         }
 
         public void Stop()
         {
-            if (_cancellationToken.CanBeCanceled)
-            {
-                _cancellationSource.Cancel();
-            }
+            _robotManager.Stop();
         }
     }
 }

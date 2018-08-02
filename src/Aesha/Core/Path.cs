@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Aesha.Objects.Model;
+using Aesha.Domain;
 
 namespace Aesha.Core
 {

@@ -1,6 +1,6 @@
 ﻿using Aesha.Infrastructure;
 
-namespace Aesha.Objects.Model
+namespace Aesha.Domain
 {
     public class WowGameObject : WowObject
     {

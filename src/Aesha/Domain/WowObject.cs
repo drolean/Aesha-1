@@ -1,13 +1,13 @@
 ﻿using Aesha.Infrastructure;
 
-namespace Aesha.Objects.Model
+namespace Aesha.Domain
 {
     public class WowObject : IWowObject
     {
         private readonly ProcessMemoryReader _reader;
         protected readonly uint UnitFieldsAddress;
 
-        public WowObject(ProcessMemoryReader reader, uint objectBaseAddress)
+        protected WowObject(ProcessMemoryReader reader, uint objectBaseAddress)
         {
             _reader = reader;
             BaseAddress = objectBaseAddress;
@@ -25,7 +25,6 @@ namespace Aesha.Objects.Model
             {
                 var x = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_X);
                 var y = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_Y);
-                //var z = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_Z);
 
                 return new Location(x, y);
             }
@@ -33,5 +32,16 @@ namespace Aesha.Objects.Model
 
         public float Rotation => _reader.ReadFloat(BaseAddress + (uint)Offsets.WowObject.OBJECT_FIELD_ROTATION);
         
+    }
+
+    public interface IWowObject
+    {
+        ulong Guid { get; }
+        uint BaseAddress { get; }
+        ObjectType Type { get; }
+        string Name { get; }
+        Location Location { get; }
+        float Rotation { get; }
+
     }
 }

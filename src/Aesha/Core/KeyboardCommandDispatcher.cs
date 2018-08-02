@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Aesha.Infrastructure;
-using Aesha.Objects;
 
 namespace Aesha.Core
 {
