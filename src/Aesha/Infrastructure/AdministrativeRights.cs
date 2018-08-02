@@ -3,7 +3,7 @@ using System.Security.Principal;
 
 namespace Aesha.Infrastructure
 {
-    internal class AdministrativeRights
+    internal static class AdministrativeRights
     {
         public static void Ensure()
         {

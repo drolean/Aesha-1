@@ -31,12 +31,11 @@ namespace Aesha.Core
 
         public void Start()
         {
-
             _enemyList = new List<string>()
             {
-                "Felslayer",
-                "Lesser Felguard",
-                "Ghostpaw Runner"
+                "Nightbane Shadow Weaver",
+                "Nightbane Dark Runner",
+                "Nightbane Worgen"
             };
             
             _robot = new Hunter(_commandManager, Path.FromFile("Ashenvale-Athalaxx.path"),_enemyList, _logger);
