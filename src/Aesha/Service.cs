@@ -19,7 +19,7 @@ namespace Aesha
             _logger = logger;
             var proc = Process.GetProcessesByName("WoW").FirstOrDefault();
             _process = new WowProcess(proc);
-            ObjectManager.Start(_process);
+            ObjectManager.Start(_process, new ProcessMemoryReader(_process));
         }
 
         public bool Start(HostControl hostControl)

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Aesha.Core;
 using Aesha.Domain;
+using Aesha.Infrastructure;
 using Aesha.Interfaces;
 
 
@@ -27,7 +28,7 @@ namespace PathRecorder
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ObjectManager.Start(_process);
+            ObjectManager.Start(_process, new ProcessMemoryReader(_process));
 
             var pathTask = new Task(async () =>
             {

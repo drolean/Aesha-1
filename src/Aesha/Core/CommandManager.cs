@@ -30,10 +30,10 @@ namespace Aesha.Core
     public class CommandManager
     {
         private readonly IWowProcess _process;
-        private readonly ProcessMemoryReader _reader;
+        private readonly IProcessMemoryReader _reader;
         private readonly KeyboardCommandDispatcher _keyboard;
 
-        public CommandManager(IWowProcess process, ProcessMemoryReader reader, KeyboardCommandDispatcher keyboard)
+        public CommandManager(IWowProcess process, IProcessMemoryReader reader, KeyboardCommandDispatcher keyboard)
         {
             _process = process;
             _reader = reader;

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Aesha.Domain;
+using Aesha.Interfaces;
 using Aesha.Robots;
 using Serilog;
 

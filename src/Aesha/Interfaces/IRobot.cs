@@ -1,7 +1,7 @@
 ﻿using Aesha.Domain;
 using FluentBehaviourTree;
 
-namespace Aesha.Robots
+namespace Aesha.Interfaces
 {
     public interface IRobot
     {

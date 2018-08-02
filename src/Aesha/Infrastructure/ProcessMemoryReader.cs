@@ -1,11 +1,10 @@
 using System;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Aesha.Interfaces;
 
 namespace Aesha.Infrastructure
 {
-    public sealed class ProcessMemoryReader
+    public sealed class ProcessMemoryReader : IProcessMemoryReader
     {
         private readonly IntPtr _processPtr;
 

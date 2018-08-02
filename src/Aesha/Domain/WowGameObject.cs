@@ -1,13 +1,14 @@
 ﻿using Aesha.Infrastructure;
+using Aesha.Interfaces;
 
 namespace Aesha.Domain
 {
     public class WowGameObject : WowObject
     {
-        private readonly ProcessMemoryReader _reader;
+        private readonly IProcessMemoryReader _reader;
         private readonly uint _objectBaseAddress;
 
-        public WowGameObject(ProcessMemoryReader reader, uint objectBaseAddress) 
+        public WowGameObject(IProcessMemoryReader reader, uint objectBaseAddress) 
             : base(reader, objectBaseAddress)
         {
             _reader = reader;
@@ -23,7 +24,6 @@ namespace Aesha.Domain
             {
                 var x = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_POS_X);
                 var y = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_POS_Y);
-                //var z = _reader.ReadFloat(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_POS_Z);
 
                 return new Location(x, y);
             }

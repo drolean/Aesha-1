@@ -8,9 +8,9 @@ namespace Aesha.Domain
     public class WowPlayer : WowUnit
     {
         private readonly IWowProcess _wowProcess;
-        private readonly ProcessMemoryReader _reader;
+        private readonly IProcessMemoryReader _reader;
 
-        public WowPlayer(IWowProcess wowProcess, ProcessMemoryReader reader, uint objectBaseAddress)
+        public WowPlayer(IWowProcess wowProcess, IProcessMemoryReader reader, uint objectBaseAddress)
             : base(reader, objectBaseAddress)
         {
             _wowProcess = wowProcess;

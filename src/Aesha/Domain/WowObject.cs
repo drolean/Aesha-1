@@ -1,13 +1,14 @@
 ﻿using Aesha.Infrastructure;
+using Aesha.Interfaces;
 
 namespace Aesha.Domain
 {
     public class WowObject : IWowObject
     {
-        private readonly ProcessMemoryReader _reader;
+        private readonly IProcessMemoryReader _reader;
         protected readonly uint UnitFieldsAddress;
 
-        protected WowObject(ProcessMemoryReader reader, uint objectBaseAddress)
+        protected WowObject(IProcessMemoryReader reader, uint objectBaseAddress)
         {
             _reader = reader;
             BaseAddress = objectBaseAddress;

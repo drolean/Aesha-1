@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,14 +13,14 @@ namespace Aesha.Core
     public static class ObjectManager
     {
         private static IWowProcess _process;
-        private static ProcessMemoryReader _reader;
+        private static IProcessMemoryReader _reader;
 
         private static ConcurrentDictionary<ulong, IWowObject> _objects = new ConcurrentDictionary<ulong, IWowObject>();
         private static CancellationTokenSource _cancellationSource;
         private static Task _pulseTask;
         private static bool _running;
 
-        public static void Start(IWowProcess process)
+        public static void Start(IWowProcess process, IProcessMemoryReader processMemoryReader)
         {
             if (_running)
                 return;
@@ -30,11 +29,8 @@ namespace Aesha.Core
 
             AdministrativeRights.Ensure();
 
-            if (process == null)
-                throw new ArgumentNullException(nameof(process));
-
-            _reader = new ProcessMemoryReader(process);
-            _process = process;
+            _reader = processMemoryReader;
+            _process = process ?? throw new ArgumentNullException(nameof(process));
 
             _cancellationSource = new CancellationTokenSource();
             _pulseTask = new Task(async () =>

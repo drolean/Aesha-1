@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Aesha.Core;
 using Aesha.Infrastructure;
+using Aesha.Interfaces;
 
 namespace Aesha.Domain
 {
     public class WowUnit : WowObject
     {
-        private readonly ProcessMemoryReader _reader;
+        private readonly IProcessMemoryReader _reader;
         private readonly uint _objectBaseAddress;
 
-        public WowUnit(ProcessMemoryReader reader, uint objectBaseAddress)
+        public WowUnit(IProcessMemoryReader reader, uint objectBaseAddress)
             : base(reader,objectBaseAddress)
         {
             _reader = reader;
