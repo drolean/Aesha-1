@@ -15,12 +15,12 @@ namespace Aesha.Robots
         private WowUnit _currentTarget;
 
 
-        public Hunter(CommandManager commandManager, Path path, List<string> enemyList, ILogger logger)
+        public Hunter(CommandManager commandManager, WaypointManager waypointManager, List<string> enemyList, ILogger logger)
 
         {
             _commandManager = commandManager;
             _logger = logger;
-            _generic = new GenericBehaviour(commandManager, path, enemyList, logger);
+            _generic = new GenericBehaviour(commandManager, waypointManager, logger);
         }
         
         private BehaviourTreeStatus SetPetAttack()
@@ -75,7 +75,7 @@ namespace Aesha.Robots
             get
             {
                 return new BehaviourTreeBuilder()
-                .Sequence("combat")
+                    .Sequence("combat")
                         .Do("set target", t => _generic.SetTarget(_currentTarget))
                         .Do("send pet attack", t => SetPetAttack())
                         .Do("move closer to target", t => _generic.MoveCloserToTarget(_currentTarget))

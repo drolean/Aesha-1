@@ -65,6 +65,7 @@
     <Compile Include="Core\CommandManager.cs" />
     <Compile Include="Core\KeyboardCommandDispatcher.cs" />
     <Compile Include="Core\RobotManager.cs" />
+    <Compile Include="Core\WaypointManager.cs" />
     <Compile Include="Domain\Radian.cs" />
     <Compile Include="Domain\Spell.cs" />
     <Compile Include="Infrastructure\AdministrativeRights.cs" />

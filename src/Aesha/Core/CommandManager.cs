@@ -113,21 +113,7 @@ namespace Aesha.Core
 
         }
 
-        public void MoveToWaypoint(Location location, int stopAt = 30, bool continuousMode = true)
-        {
-            SetPlayerFacing(location);
-            SendKeyDown(MappedKey.Forward);
-            
-            var distanceToWaypoint = location.GetDistanceTo(ObjectManager.Me.Location);
-            while (distanceToWaypoint >= stopAt)
-            {
-                Thread.Sleep(100);
-                distanceToWaypoint = location.GetDistanceTo(ObjectManager.Me.Location);
-            }
-            
-            if (!continuousMode)
-                SendKeyUp(MappedKey.Forward);
-        }
+       
 
 
     }

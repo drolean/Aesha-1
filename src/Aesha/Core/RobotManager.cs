@@ -38,7 +38,8 @@ namespace Aesha.Core
                 "Nightbane Worgen"
             };
             
-            _robot = new Hunter(_commandManager, Path.FromFile("Ashenvale-Athalaxx.path"),_enemyList, _logger);
+            var waypointManager = new WaypointManager(_commandManager,Path.FromFile("Ashenvale-Athalaxx.path"));
+            _robot = new Hunter(_commandManager, waypointManager,_enemyList, _logger);
 
             _cancellationSource = new CancellationTokenSource();
             _cancellationToken = _cancellationSource.Token;
