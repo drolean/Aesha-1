@@ -1,4 +1,5 @@
-﻿namespace Aesha.Infrastructure
+﻿// ReSharper disable InconsistentNaming
+namespace Aesha.Core
 {
 
     public static class Offsets
@@ -11,8 +12,6 @@
             MinimapZoneText = 0x74DA28,
             SubZoneText = 0x74E280,
             RealZoneText = 0x74B404,
-
-
             Zone = 0x25D85F08
         }
 
@@ -404,6 +403,43 @@
             CREATURE_CACHE_BASE = 0xB30,
             CREATURE_CACHE_TYPE = 0x18,
             CREATURE_CACHE_CLASS = 0x20
+        }
+
+        internal enum ClickToMoveAction : uint
+        {
+            FaceTarget = 0x1,
+            Stop = 0x3,
+            WalkTo = 0x4,
+            InteractNpc = 0x5,
+            Loot = 0x6,
+            InteractObject = 0x7
+        }
+
+        internal enum Misc : uint
+        {
+            GameVersion = 0x00837C04,
+            MapId = 0x84C498,
+            LoginState = 0xB41478
+        }
+
+        internal enum LuaFunctions : uint
+        {
+            LastHardwareAction = 0x00CF0BC8,
+            AutoLoot = 0x4C1FA0,
+            ClickToMove = 0x00611130,
+            GetText = 0x703BF0,
+            DoString = 0x00704CD0,
+            GetEndscene = 0x5A17B6,
+            IsLooting = 0x006126B0,
+            GetLootSlots = 0x004C2260,
+            OnRightClickObject = 0x005F8660,
+            OnRightClickUnit = 0x60BEA0,
+            SetFacing = 0x007C6F30,
+            SendMovementPacket = 0x00600A30,
+            PerformDefaultAction = 0x00481F60,
+            CGInputControl__GetActive = 0x005143E0,
+            CGInputControl__SetControlBit = 0x00515090,
+
         }
     }
 }

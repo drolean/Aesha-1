@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="fasmdll_managed, Version=1.0.3262.20709, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\fasmdll_managed.dll</HintPath>
+    </Reference>
     <Reference Include="FluentBehaviourTree, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentBehaviourTree.0.0.4.0\lib\net35\FluentBehaviourTree.dll</HintPath>
     </Reference>
@@ -61,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\InjectionManager.cs" />
     <Compile Include="Core\WowProcess.cs" />
     <Compile Include="Interfaces\IProcessMemoryReader.cs" />
     <Compile Include="Interfaces\IWowProcess.cs" />
@@ -96,6 +101,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <Content Include="Libs\fasmdll_managed.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Paths\Ashenvale-Athalaxx.path">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

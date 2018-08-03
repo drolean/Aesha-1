@@ -147,8 +147,14 @@ namespace Aesha.Infrastructure
 
         public void WriteUInt64(uint dwAddress, ulong value)
         {
-            byte[] bytes = BitConverter.GetBytes(value);
+            var bytes = BitConverter.GetBytes(value);
             WriteBytes(dwAddress, bytes, 8);
+        }
+
+        public void WriteInt(uint dwAddress, int value)
+        {
+            var bytes = BitConverter.GetBytes(value);
+            WriteBytes(dwAddress, bytes, 4);
         }
 
         public string ReadString( uint dwAddress, int length)

@@ -42,7 +42,26 @@ namespace Aesha.Infrastructure
         [DllImport("kernel32")]
         public static extern uint ResumeThread(IntPtr hThread);
 
-        [DllImport("USER32.DLL")]
+
+        [DllImport("kernel32")]
+        public static extern uint GetCurrentThreadId();
+
+        [DllImport("kernel32", EntryPoint = "VirtualAllocEx")]
+        public static extern uint VirtualAllocEx(
+            IntPtr hProcess,
+            uint dwAddress,
+            int nSize,
+            uint dwAllocationType,
+            uint dwProtect);
+
+        [DllImport("kernel32", EntryPoint = "VirtualFreeEx")]
+        public static extern bool VirtualFreeEx(
+            IntPtr hProcess, 
+            uint dwAddress, 
+            int nSize, 
+            uint dwFreeType);
+
+        [DllImport("user32.dll")]
         public static extern int PostMessage(
             IntPtr hwnd, 
             uint msg,  
@@ -67,9 +86,6 @@ namespace Aesha.Infrastructure
 
         [DllImport("user32.dll")]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr processId);
-
-        [DllImport("kernel32.dll")]
-        public static extern uint GetCurrentThreadId();
 
     }
 }

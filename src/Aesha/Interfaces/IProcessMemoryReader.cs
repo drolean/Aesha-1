@@ -15,5 +15,6 @@ namespace Aesha.Interfaces
         bool WriteBytes(uint dwAddress, byte[] lpBytes, int nSize);
         bool WriteFloat(uint dwAddress, float value);
         void WriteUInt64(uint dwAddress, ulong value);
+        void WriteInt(uint dwAddress, int value);
     }
 }
