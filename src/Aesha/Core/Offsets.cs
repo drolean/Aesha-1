@@ -337,6 +337,7 @@ namespace Aesha.Core
             PLAYER_FIELD_BANK_SLOT_1 = 0x8D0,
             PLAYER_FIELD_BANKBAG_SLOT_1 = 0x990,
             PLAYER_FIELD_VENDORBUYBACK_SLOT_1 = 0x9C0,
+            PLAYER_MOVEMENT_FLAGS = 0x9E8,
             PLAYER_FIELD_KEYRING_SLOT_1 = 0xA20,
             PLAYER_FARSIGHT = 0xB20,
             PLAYER_FIELD_COMBO_TARGET = 0xB28,
@@ -420,6 +421,17 @@ namespace Aesha.Core
             GameVersion = 0x00837C04,
             MapId = 0x84C498,
             LoginState = 0xB41478
+        }
+
+        internal enum MovementFlags : uint
+        {
+            None = 0x00000000,
+            Forward = 0x00000001,
+            Back = 0x00000002,
+            TurnLeft = 0x00000010,
+            TurnRight = 0x00000020,
+            Stunned = 0x00001000,
+            Swimming = 0x00200000,
         }
 
         internal enum LuaFunctions : uint

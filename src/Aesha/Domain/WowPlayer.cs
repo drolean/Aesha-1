@@ -50,6 +50,11 @@ namespace Aesha.Domain
             }
         }
 
+        public uint MovementState
+        {
+            get { return _reader.ReadUInt(BaseAddress + (uint) Offsets.WowPlayer.PLAYER_MOVEMENT_FLAGS); }
+        }
+
         public override ObjectType Type => ObjectType.Player;
 
         public uint Xp => _reader.ReadUInt(UnitFieldsAddress + (uint) Offsets.WowPlayer.PLAYER_XP);

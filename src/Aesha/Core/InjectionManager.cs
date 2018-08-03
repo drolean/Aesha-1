@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using Aesha.Core;
 using Aesha.Infrastructure;
 using Aesha.Interfaces;
 using Fasm;
@@ -148,19 +149,13 @@ namespace Aesha.Core
         {
             var parameter = Encoding.UTF8.GetBytes(command);
             var allocationPtr = AllocateMemory(parameter.Length + 1);
-            const uint frameScriptExecute = 0x819210;
-
             _processMemoryReader.WriteBytes(allocationPtr, parameter, parameter.Length);
 
             var asm = new[]
             {
-                "mov eax, " + allocationPtr,
-                "push 0",
-                "push eax",
-                "push eax",
-                "mov eax, " + frameScriptExecute, // Lua_DoString
-                "call eax",
-                "add esp, 0xC",
+                "mov EDX, 0",
+                "mov ECX, " + allocationPtr,
+                "call " + (uint)Offsets.LuaFunctions.DoString,
                 "retn",
             };
 
@@ -170,7 +165,6 @@ namespace Aesha.Core
 
         public void AutoLoot()
         {
-                
                 var asm = new[]
                 {
                     "call " + (uint)Offsets.LuaFunctions.AutoLoot,
@@ -178,6 +172,32 @@ namespace Aesha.Core
                 };
 
                 InjectAndExecute(asm);
+        }
+
+        public void RightClickObject(uint objectBaseAddress, int autoLoot)
+        {
+            var asm = new[]
+            {
+                "push " + autoLoot,
+                "mov ECX, " + objectBaseAddress,
+                "call " + (uint) Offsets.LuaFunctions.OnRightClickObject,
+                "retn",
+            };
+
+            InjectAndExecute(asm);
+        }
+
+        public void RightClickUnit(uint objectBaseAddress, int autoLoot)
+        {
+            var asm = new[]
+            {
+                "push " + autoLoot,
+                "mov ECX, " + objectBaseAddress,
+                "call " + (uint) Offsets.LuaFunctions.OnRightClickUnit,
+                "retn",
+            };
+
+            InjectAndExecute(asm);
         }
         
 

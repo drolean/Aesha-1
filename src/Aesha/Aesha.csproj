@@ -65,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IInjectionManager.cs" />
     <Compile Include="Core\InjectionManager.cs" />
     <Compile Include="Core\WowProcess.cs" />
     <Compile Include="Interfaces\IProcessMemoryReader.cs" />
@@ -87,7 +88,7 @@
     <Compile Include="Domain\WowPlayer.cs" />
     <Compile Include="Domain\WowUnit.cs" />
     <Compile Include="Core\ObjectManager.cs" />
-    <Compile Include="Infrastructure\Offsets.cs" />
+    <Compile Include="Core\Offsets.cs" />
     <Compile Include="Infrastructure\ProcessMemoryReader.cs" />
     <Compile Include="Infrastructure\Win32Imports.cs" />
     <Compile Include="Program.cs" />

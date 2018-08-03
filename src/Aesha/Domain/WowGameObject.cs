@@ -1,4 +1,5 @@
-﻿using Aesha.Infrastructure;
+﻿using Aesha.Core;
+using Aesha.Infrastructure;
 using Aesha.Interfaces;
 
 namespace Aesha.Domain
