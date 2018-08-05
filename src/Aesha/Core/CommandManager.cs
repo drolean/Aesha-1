@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows.Forms;
 using Aesha.Domain;
 using Aesha.Infrastructure;
 using Aesha.Interfaces;
+using Serilog;
 
 namespace Aesha.Core
 {
@@ -32,35 +38,46 @@ namespace Aesha.Core
         private readonly IWowProcess _process;
         private readonly IProcessMemoryReader _reader;
         private readonly KeyboardCommandDispatcher _keyboard;
+        private readonly ILogger _logger;
 
-        public CommandManager(IWowProcess process, IProcessMemoryReader reader, KeyboardCommandDispatcher keyboard)
+        public CommandManager(IWowProcess process, IProcessMemoryReader reader, KeyboardCommandDispatcher keyboard, ILogger logger)
         {
             _process = process;
             _reader = reader;
             _keyboard = keyboard;
-
+            _logger = logger;
         }
 
         public void SetTarget(IWowObject unit)
         {
-            SetPlayerFacing(unit.Location);
+            var radian = Radian.GetFaceRadian(unit.Location, ObjectManager.Me.Location);
+            var rotationDiff = Math.Abs(ObjectManager.Me.Rotation - radian.Angle);
+            if (rotationDiff > 0.5f)
+            {
+                _logger.Information($"Rotation difference greater than tolerance: {rotationDiff}");
+                SetPlayerFacing(unit.Location);
+            }
+
             _reader.WriteUInt64((uint)Offsets.WowGame.TargetLastTargetGuid, unit.Guid);
             _keyboard.SendKey(MappedKey.TargetLastTarget);
         }
 
         public void SendKeyDown(char key)
         {
+            _logger.Information($"Sending key down: '{key}'");
             _keyboard.SendKeyDown(key);
         }
 
         public void SendKeyUp(char key)
         {
+            _logger.Information($"Sending key up: '{key}'");
             _keyboard.SendKeyUp(key);
         }
 
 
         public void SendKey(char key)
         {
+            _logger.Information($"Sending key: '{key}'");
             _keyboard.SendKey(key);
         }
 
@@ -77,45 +94,63 @@ namespace Aesha.Core
             Win32Imports.ResumeThread(threadPtr);
 
             Thread.Sleep(50);
-            _keyboard.SendKeyDown(nudgeKey);
-            _keyboard.SendKeyUp(nudgeKey);
+            _keyboard.SendKey(nudgeKey);
+            Thread.Sleep(50);
         }
 
 
-        public void SetPlayerFacing(Location destination, bool instant = true)
+        public void SetPlayerFacing(Location destination)
         {
-            const float radianTolerance = 0.2f;
-
             var radian = Radian.GetFaceRadian(destination, ObjectManager.Me.Location);
-            if (radian.AbsoluteDifference(ObjectManager.Me.Rotation) < radianTolerance)
-                return;
-
             var nudgeKey = MappedKey.Left;
-            if (instant)
-            {
-                InternalSetPlayerFacing(radian, nudgeKey);
-                return;
-            }
 
-            while (radian.AbsoluteDifference(ObjectManager.Me.Rotation) < radianTolerance)
-            {
-                var currentRadian = new Radian(ObjectManager.Me.Rotation);
-                var direction = currentRadian.GetDirectionOfTravel(radian);
-                
-                var radiansPerCycle = (float)Math.PI / 10f;
-                if (direction == Radian.TravelDirection.Left) radiansPerCycle *= -1;
-                
-                var nextRadian = currentRadian.Angle - radiansPerCycle;
-                InternalSetPlayerFacing(nextRadian, nudgeKey);
-                
-                radian = Radian.GetFaceRadian(destination, ObjectManager.Me.Location);
-                nudgeKey = nudgeKey == MappedKey.Left ? MappedKey.Right : MappedKey.Left;
-            }
-
+            _logger.Information("Set player facing");
+            InternalSetPlayerFacing(radian, nudgeKey);
         }
 
-       
 
+        public void Loot(IEnumerable<IWowObject> unitsToLoot)
+        {
+            var unitsLooted = new List<IWowObject>(); 
 
+            for (var x = 700; x <= 1150; x += 30)
+            {
+                for (var y = 450; y <= 850; y += 20)
+                {
+                    Cursor.Position = new Point(x, y);
+                    Thread.Sleep(10);
+                    if (MouseOverUnit > 0)
+                    {
+                        var unit = unitsToLoot.SingleOrDefault(u => u.Guid == MouseOverUnit);
+                        if (unit == null)
+                            continue;
+
+                        if (unit == ObjectManager.Me.Pet)
+                            continue;
+
+                        if (unitsLooted.Contains(unit))
+                            continue;
+                            
+                        _keyboard.SendShiftClick(new Point(x, y));
+                        Console.WriteLine($"Attempting to loot unit: {unit}");
+                        Thread.Sleep(500);
+                        unitsLooted.Add(unit);
+
+                        var outstandingWork = false;
+                        foreach (var u in unitsToLoot)
+                        {
+                            if (!unitsLooted.Contains(u))
+                                outstandingWork = true;
+                        }
+
+                        if (!outstandingWork) return;
+                    }
+                }
+            }
+
+            _keyboard.SendShiftClick(new Point(1000, 900));
+        }
+        
+        public ulong MouseOverUnit => _reader.ReadUInt64((uint)Offsets.WowGame.MouseOverGuid);
     }
 }

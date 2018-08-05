@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using Aesha.Domain;
 using Aesha.Infrastructure;
 using Aesha.Interfaces;
 
@@ -95,6 +97,61 @@ namespace Aesha.Core
 
         private const uint WM_KEYDOWN = 0x100;
         private const uint WM_KEYUP = 0x101;
+        private const uint WM_LBUTTONDOWN = 0x201;
+        private const uint WM_LBUTTONUP = 0x202;
+        private const uint WM_RBUTTONDOWN = 0x204;
+        private const uint WM_RBUTTONUP = 0x205;
+        private const uint WM_MOVEMOUSE = 0x0200;
+
+        [Flags]
+        private enum MouseFlags
+        {
+            MK_CONTROL = 0x0008,
+            MK_LBUTTON = 0x0001,
+            MK_MBUTTON = 0x0010,
+            MK_RBUTTON = 0x0002,
+            MK_SHIFT = 0x0004,
+            MK_XBUTTON1 = 0x0020,
+            MK_XBUTTON2 = 0x0040
+        }
+
+
+
+        public void SendClick(Point point)
+        {
+            Cursor.Position = point;
+            var lparam = CreateMouseParam(point);
+            Win32Imports.PostMessage(_processWindowHandle, WM_RBUTTONDOWN, 0x01, lparam);
+            Win32Imports.PostMessage(_processWindowHandle, WM_RBUTTONUP, 0x01, lparam);
+        }
+
+        public void MoveMouse(Process process, Point point)
+        {
+            var lparam = CreateMouseParam(point);
+            var flags = MouseFlags.MK_LBUTTON | MouseFlags.MK_SHIFT;
+
+            Win32Imports.PostMessage(process.MainWindowHandle, WM_MOVEMOUSE, 0, lparam);
+            //   PostMessage(process.MainWindowHandle, 0x0020, 0x00050038, 0x02000001);
+        }
+
+        public void SendShiftClick(Point point)
+        {
+            Cursor.Position = point;
+            var lparam = CreateMouseParam(point);
+            var flags = MouseFlags.MK_LBUTTON | MouseFlags.MK_SHIFT;
+
+            Win32Imports.PostMessage(_processWindowHandle, WM_KEYDOWN, 0x10, 0x002A0001);
+            Thread.Sleep(100);
+            Win32Imports.PostMessage(_processWindowHandle, WM_MOVEMOUSE, 0, lparam);
+            Win32Imports.PostMessage(_processWindowHandle, 0x0020, 0x00050038, 0x02000001);
+            Thread.Sleep(100);
+            Win32Imports.PostMessage(_processWindowHandle, WM_RBUTTONDOWN, (int)flags, lparam);
+            Thread.Sleep(100);
+            Win32Imports.PostMessage(_processWindowHandle, WM_RBUTTONUP, (int)flags, lparam);
+            Thread.Sleep(100);
+            Win32Imports.PostMessage(_processWindowHandle, WM_KEYUP, 0x10, 0xC02A0001);
+        }
+
 
 
         public void SendShiftKey(char key)
@@ -117,6 +174,7 @@ namespace Aesha.Core
                 SendKey(key);
             }
         }
+
 
         public void SendKey(char key)
         {
@@ -196,6 +254,11 @@ namespace Aesha.Core
                 | (context << 29)
                 | (previousState << 30)
                 | (transition << 31);
+        }
+
+        private uint CreateMouseParam(Point point)
+        {
+            return (uint)((point.Y << 16) | (point.X & 0xFFFF));
         }
 
         public void SendKeyDown(char key)

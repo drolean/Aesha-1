@@ -32,9 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="fasmdll_managed, Version=1.0.3262.20709, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libs\fasmdll_managed.dll</HintPath>
+    <Reference Include="Fasm.NET, Version=1.0.4939.27955, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\Fasm.NET.1.70.03.2\lib\Fasm.NET.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FluentBehaviourTree, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentBehaviourTree.0.0.4.0\lib\net35\FluentBehaviourTree.dll</HintPath>
@@ -50,6 +50,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -102,9 +103,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <Content Include="Libs\fasmdll_managed.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Paths\Ashenvale-Athalaxx.path">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -114,6 +112,9 @@
     <Content Include="Paths\Northshire-valley.path">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Paths\Goldshire.path">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

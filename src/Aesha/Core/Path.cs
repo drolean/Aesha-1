@@ -31,7 +31,8 @@ namespace Aesha.Core
         public Location GetNextWaypoint(Location currentWaypoint)
         {
             var index = _entries.FirstOrDefault(w => Equals(w.Value, currentWaypoint));
-            return _entries.ContainsKey(index.Key + 1) ? _entries[index.Key + 1] : _entries[1];
+            var nextWaypoint =  _entries.ContainsKey(index.Key + 1) ? _entries[index.Key + 1] : _entries[1];
+            return nextWaypoint;
         }
 
         public Location FindNearestWaypoint(Location startPosition)

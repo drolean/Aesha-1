@@ -115,10 +115,10 @@ namespace Aesha.Infrastructure
 
         private int WriteRawMemory( uint dwAddress, IntPtr lpBuffer, int nSize)
         {
-            IntPtr iBytesWritten = IntPtr.Zero;
-            if (!Win32Imports.WriteProcessMemory(_processPtr, dwAddress, lpBuffer, nSize, out iBytesWritten))
+            IntPtr bytesWritten;
+            if (!Win32Imports.WriteProcessMemory(_processPtr, dwAddress, lpBuffer, nSize, out bytesWritten))
                 return 0;
-            return (int)iBytesWritten;
+            return (int)bytesWritten;
         }
 
         public int ReadInt( uint dwAddress)

@@ -39,80 +39,69 @@ namespace Aesha.Robots
             return BehaviourTreeStatus.Success;
         }
 
-        private BehaviourTreeStatus AutoAttack()
+        private void AutoAttack()
         {
             _commandManager.SendKeyUp(MappedKey.Forward);
             _commandManager.SendKey(MappedKey.ActionBar1);
-            return BehaviourTreeStatus.Success;
         }
 
-        private BehaviourTreeStatus KillTarget()
+        private void KillTarget()
         {
             while (ObjectManager.Me.Target != null && ObjectManager.Me.Target.Health.Current != 0)
             {
-                _commandManager.SetPlayerFacing(_currentTarget.Location);
-
                 if (ObjectManager.Me.Mana.Current >= 25)
                 {
                     _commandManager.SendKey(MappedKey.ActionBar2);
                     Thread.Sleep(1700);
                 }
             }
-
-            return BehaviourTreeStatus.Success;
         }
 
 
-        private BehaviourTreeStatus Buff()
+        private void Buff()
         {
             if(!ObjectManager.Me.Auras.Contains(_demonSkinRank1))
                 _commandManager.SendKey(MappedKey.ActionBar3);
-
-            return BehaviourTreeStatus.Success;
         }
 
 
 
-        public IBehaviourTreeNode PassiveBehaviour
+        public void PassiveBehaviour()
         {
-            get
+            SummonPet();
+            _generic.LootTargets(); 
+            _generic.GetNextWaypoint();
+            _generic.MoveToNextWaypoint();
+        }
+
+        private void SummonPet()
+        {
+            if (ObjectManager.Me.Pet == null)
             {
-                return new BehaviourTreeBuilder()
-                    .Sequence("passive")
-                        .Do("find nearest waypoint", t => _generic.GetNextWaypoint())
-                        .Do("move to next waypoint", t => _generic.MoveToNextWaypoint())
-                    .End()
-                    .Build();
+                _commandManager.SendKeyUp(MappedKey.Forward);
+                _commandManager.SendKey(MappedKey.ActionBar9);
+                Thread.Sleep(11000);
             }
         }
 
-        public IBehaviourTreeNode AttackBehaviour
+        public void AttackBehaviour()
         {
-            get
-            {
-                return new BehaviourTreeBuilder()
-                    .Sequence("combat")
-                        .Do("buff", t => Buff())
-                        .Do("set target", t => _generic.SetTarget(_currentTarget))
-                       // .Do("send pet attack", t => SetPetAttack())
-                        .Do("Wait for mana", t => _generic.WaitForMana(_currentTarget))
-                       // .Do("wait for target to target pet", t => WaitForTargetToTargetPet())
-                        .Do("auto attack", t => AutoAttack())
-                        .Do("kill target", t => KillTarget())
-                    .End()
-                    .Build();
-            }
+            Buff();
+            _generic.Drink();
+            _generic.SetTarget(_currentTarget);
+            AutoAttack();
+            KillTarget();
         }
-
+        
         public void Tick(RobotState state)
         {
             switch (state)
             {
                 case RobotState.Combat:
-                    AttackBehaviour.Tick(new TimeData());
+                    AttackBehaviour();
                     break;
                 case RobotState.Passive:
-                    PassiveBehaviour.Tick(new TimeData());
+                    PassiveBehaviour();
                     break;
             }
         }

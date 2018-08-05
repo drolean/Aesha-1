@@ -1,14 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using Aesha.Core;
 using Aesha.Infrastructure;
 using Aesha.Interfaces;
-using Fasm;
+using Binarysharp.Assemblers.Fasm;
 
 namespace Aesha.Core
 {
+    public static class FasmExtensions
+    {
+        public static void Inject(this FasmNet fasm, IntPtr processPtr, uint address)
+        {
+            var assembled = fasm.Assemble();
+            var size = assembled.Length;
+
+            var dataPtr = Marshal.AllocHGlobal(Marshal.SizeOf((object) assembled[0])*size);
+            Marshal.Copy(assembled, 0, dataPtr, size);
+
+            var bytesWritten = IntPtr.Zero;
+            Win32Imports.WriteProcessMemory(processPtr, address, dataPtr, size, out bytesWritten);
+        }
+    }
+
+
     public class InjectionManager : IInjectionManager, IDisposable
     {
         private uint _injectedCode;
@@ -17,7 +33,7 @@ namespace Aesha.Core
         
         private readonly IProcessMemoryReader _processMemoryReader;
         private readonly IntPtr _processPtr;
-        private readonly ManagedFasm _fasm;
+        private readonly FasmNet _fasm;
 
         private const uint StandardRightsRequired = 0x000F0000;
         private const uint Synchronize = 0x00100000;
@@ -27,9 +43,7 @@ namespace Aesha.Core
         {
             _processPtr = Win32Imports.OpenProcess(ProcessAllAccess, false, process.Id);
             _processMemoryReader = processMemoryReader;
-
-            _fasm = new ManagedFasm();
-            _fasm.SetProcessHandle(_processPtr);
+            _fasm = new FasmNet();
         }
 
         private uint GetEndScenePointer()
@@ -74,6 +88,7 @@ namespace Aesha.Core
             _processMemoryReader.WriteInt(_returnInjectionCode, 0);
 
             _fasm.Clear();
+            _fasm.AddLine("use32");
             _fasm.AddLine("pushad");
             _fasm.AddLine("pushfd");
             _fasm.AddLine("mov eax, [" + _injectionAddress + "]");
@@ -90,21 +105,21 @@ namespace Aesha.Core
             _fasm.AddLine("popad");
 
             var sizeAsm = (uint) _fasm.Assemble().Length;
-            _fasm.Inject(_injectedCode);
+            _fasm.Inject(_processPtr, _injectedCode);
             
             _fasm.Clear();
             _fasm.AddLine("mov edi, edi");
             _fasm.AddLine("push ebp");
             _fasm.AddLine("mov ebp, esp");
-            _fasm.Inject(_injectedCode + sizeAsm);
+            _fasm.Inject(_processPtr, _injectedCode + sizeAsm);
 
             _fasm.Clear();
             _fasm.AddLine("jmp " + (endScenePtr + 5));
-            _fasm.Inject(_injectedCode + sizeAsm + (uint) 5);
+            _fasm.Inject(_processPtr, _injectedCode + sizeAsm + (uint) 5);
 
             _fasm.Clear();
             _fasm.AddLine("jmp " + (_injectedCode));
-            _fasm.Inject(endScenePtr);
+            _fasm.Inject(_processPtr, endScenePtr);
         }
 
         private void DisposeHooking()
@@ -117,7 +132,7 @@ namespace Aesha.Core
                     _fasm.AddLine("mov edi, edi");
                     _fasm.AddLine("push ebp");
                     _fasm.AddLine("mov ebp, esp");
-                    _fasm.Inject(endScenePtr);
+                    _fasm.Inject(_processPtr, endScenePtr);
                 }
 
                 FreeMemory(_injectedCode);
@@ -134,9 +149,10 @@ namespace Aesha.Core
             _fasm.Clear();
             foreach (string line in asm)
                 _fasm.AddLine(line);
-         
-            var codeCavePtr = AllocateMemory(_fasm.Assemble().Length);
-            _fasm.Inject(codeCavePtr);
+
+            var assembled = _fasm.Assemble();
+            var codeCavePtr = AllocateMemory(assembled.Length);
+            _fasm.Inject(_processPtr, codeCavePtr);
             _processMemoryReader.WriteInt(_injectionAddress, (int) codeCavePtr);
 
             while (_processMemoryReader.ReadInt(_injectionAddress) > 0)

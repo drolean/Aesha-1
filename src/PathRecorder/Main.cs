@@ -43,22 +43,20 @@ namespace PathRecorder
             while (_recording)
             {
                 var currentLocation = ObjectManager.Me.Location;
-                if (Equals(currentLocation, startPosition))
+
+                if (currentLocation.GetDistanceTo(startPosition) > 100)
                 {
-                    await Task.Delay(1000);
+                    _path.Add(currentLocation);
+
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
+                        listBox1.Items.Add($"{currentLocation.X},{currentLocation.Y}. Distance {startPosition.GetDistanceTo(currentLocation)}");
+                    }));
+
                     startPosition = currentLocation;
-                    continue;
                 }
 
-                _path.Add(currentLocation);
-
-                this.Invoke(new MethodInvoker(delegate ()
-                {
-                    listBox1.Items.Add($"{currentLocation.X},{currentLocation.Y}");
-                }));
-
-                startPosition = currentLocation;
-                await Task.Delay(500);
+                await Task.Delay(2000);
             }
         }
 

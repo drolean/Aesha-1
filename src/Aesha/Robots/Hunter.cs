@@ -79,13 +79,23 @@ namespace Aesha.Robots
                     .Sequence("combat")
                         .Do("set target", t => _generic.SetTarget(_currentTarget))
                         .Do("send pet attack", t => SetPetAttack())
-                        .Do("move closer to target", t => _generic.WaitForMana(_currentTarget))
+                        .Do("move closer to target", t => _generic.Drink())
                         .Do("wait for target to target pet", t => WaitForTargetToTargetPet())
                         .Do("auto attack", t => AutoAttack())
                         .Do("kill target", t => KillTarget())
                     .End()
                     .Build();
             }
+        }
+
+        void IRobot.PassiveBehaviour()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IRobot.AttackBehaviour()
+        {
+            throw new System.NotImplementedException();
         }
 
         public void Tick(RobotState state)
