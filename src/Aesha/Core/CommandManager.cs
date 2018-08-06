@@ -2,37 +2,34 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Aesha.Domain;
 using Aesha.Infrastructure;
 using Aesha.Interfaces;
+using Aesha.Robots.Actions;
 using Serilog;
 
 namespace Aesha.Core
 {
 
-    public static class MappedKey
+    public class MappedKeyAction
     {
-        public const char Left = 'A';
-        public const char Right = 'D';
-        public const char Forward = 'W';
-        public const char Backward = 'S';
-        public const char TargetLastTarget = 'G';
-        public const char ActionBar1 = '1';
-        public const char ActionBar2 = '2';
-        public const char ActionBar3 = '3';
-        public const char ActionBar4 = '4';
-        public const char ActionBar5 = '5';
-        public const char ActionBar6 = '6';
-        public const char ActionBar7 = '7';
-        public const char ActionBar8 = '8';
-        public const char ActionBar9 = '9';
-        public const char ActionBar10 = '0';
+        public MappedKeyAction(char key, bool shift = false, bool ctrl = false, bool alt = false)
+        {
+            Key = key;
+            Shift = shift;
+            Ctrl = ctrl;
+            Alt = alt;
+        }
 
+        public char Key { get; }
+        public bool Shift { get; }
+        public bool Ctrl { get; }
+        public bool Alt { get; }
     }
-
+    
     public class CommandManager
     {
         private readonly IWowProcess _process;
@@ -40,12 +37,27 @@ namespace Aesha.Core
         private readonly KeyboardCommandDispatcher _keyboard;
         private readonly ILogger _logger;
 
-        public CommandManager(IWowProcess process, IProcessMemoryReader reader, KeyboardCommandDispatcher keyboard, ILogger logger)
+        private CommandManager(IWowProcess process, IProcessMemoryReader reader, KeyboardCommandDispatcher keyboard, ILogger logger)
         {
             _process = process;
             _reader = reader;
             _keyboard = keyboard;
             _logger = logger;
+        }
+
+        private static CommandManager _commandManager;
+        public static CommandManager GetDefault(IWowProcess process = null, IProcessMemoryReader reader = null, KeyboardCommandDispatcher keyboard = null, ILogger logger = null)
+        {
+            if (_commandManager != null)
+                return _commandManager;
+
+            if (process == null)throw new ArgumentNullException(nameof(process));
+            if (reader == null)throw new ArgumentNullException(nameof(reader));
+            if (keyboard == null)throw new ArgumentNullException(nameof(keyboard));
+            if (logger == null)throw new ArgumentNullException(nameof(logger));
+
+            _commandManager = new CommandManager(process, reader, keyboard, logger);
+            return _commandManager;
         }
 
         public void SetTarget(IWowObject unit)
@@ -59,29 +71,45 @@ namespace Aesha.Core
             }
 
             _reader.WriteUInt64((uint)Offsets.WowGame.TargetLastTargetGuid, unit.Guid);
-            _keyboard.SendKey(MappedKey.TargetLastTarget);
+            SendKey(MappedKeys.TargetLastTarget);
         }
 
-        public void SendKeyDown(char key)
+        public void SendKeyDown(MappedKeyAction action)
         {
-            _logger.Information($"Sending key down: '{key}'");
-            _keyboard.SendKeyDown(key);
+            _logger.Information($"Sending key down: '{action}'");
+            _keyboard.SendKeyDown(action.Key);
         }
 
-        public void SendKeyUp(char key)
+        public void SendKeyUp(MappedKeyAction action)
         {
-            _logger.Information($"Sending key up: '{key}'");
-            _keyboard.SendKeyUp(key);
+            _logger.Information($"Sending key up: '{action}'");
+            _keyboard.SendKeyUp(action.Key);
         }
 
-
-        public void SendKey(char key)
+        public void StopMovingForward()
         {
-            _logger.Information($"Sending key: '{key}'");
-            _keyboard.SendKey(key);
+            SendKey(MappedKeys.Forward);
         }
 
-        private void InternalSetPlayerFacing(Radian radian, char nudgeKey)
+        public void EvaluateAndPerform(IConditionalAction action)
+        {
+            var task = new Task(() =>
+            {
+               if (action.Evaluate()) action.Do();
+            });
+
+            task.Wait();
+        }
+
+
+        public void SendKey(MappedKeyAction action)
+        {
+            _logger.Information($"Sending key: '{action.Key}' Shift:{action.Shift} Ctrl:{action.Ctrl} Alt:{action.Alt}");
+            if (action.Shift) _keyboard.SendShiftKey(action.Key);
+            else _keyboard.SendKey(action.Key);
+        }
+
+        private void InternalSetPlayerFacing(Radian radian, MappedKeyAction nudgeKey)
         {
             var thread = _process.Threads[0];
             var threadPtr = Win32Imports.OpenThread(2032639U, false, (uint)thread.Id);
@@ -93,16 +121,16 @@ namespace Aesha.Core
             threadPtr = Win32Imports.OpenThread(2032639U, false, (uint)thread.Id);
             Win32Imports.ResumeThread(threadPtr);
 
-            Thread.Sleep(50);
-            _keyboard.SendKey(nudgeKey);
-            Thread.Sleep(50);
+            Task.Delay(50).Wait();
+            SendKey(nudgeKey);
+            Task.Delay(50).Wait();
         }
 
 
         public void SetPlayerFacing(Location destination)
         {
             var radian = Radian.GetFaceRadian(destination, ObjectManager.Me.Location);
-            var nudgeKey = MappedKey.Left;
+            var nudgeKey = MappedKeys.Left;
 
             _logger.Information("Set player facing");
             InternalSetPlayerFacing(radian, nudgeKey);
@@ -111,44 +139,7 @@ namespace Aesha.Core
 
         public void Loot(IEnumerable<IWowObject> unitsToLoot)
         {
-            var unitsLooted = new List<IWowObject>(); 
-
-            for (var x = 700; x <= 1150; x += 30)
-            {
-                for (var y = 450; y <= 850; y += 20)
-                {
-                    Cursor.Position = new Point(x, y);
-                    Thread.Sleep(10);
-                    if (MouseOverUnit > 0)
-                    {
-                        var unit = unitsToLoot.SingleOrDefault(u => u.Guid == MouseOverUnit);
-                        if (unit == null)
-                            continue;
-
-                        if (unit == ObjectManager.Me.Pet)
-                            continue;
-
-                        if (unitsLooted.Contains(unit))
-                            continue;
-                            
-                        _keyboard.SendShiftClick(new Point(x, y));
-                        Console.WriteLine($"Attempting to loot unit: {unit}");
-                        Thread.Sleep(500);
-                        unitsLooted.Add(unit);
-
-                        var outstandingWork = false;
-                        foreach (var u in unitsToLoot)
-                        {
-                            if (!unitsLooted.Contains(u))
-                                outstandingWork = true;
-                        }
-
-                        if (!outstandingWork) return;
-                    }
-                }
-            }
-
-            _keyboard.SendShiftClick(new Point(1000, 900));
+            
         }
         
         public ulong MouseOverUnit => _reader.ReadUInt64((uint)Offsets.WowGame.MouseOverGuid);

@@ -171,7 +171,7 @@ namespace Aesha.Domain
                    
                     var aura = _reader.ReadInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_AURA + auraPosition);
                     if (aura > 0)
-                        auras.Add(new Spell(aura,"",0));
+                        auras.Add(new Spell(aura,"",0,new MappedKeyAction(char.MinValue)));
 
                     auraPosition += 4;
                 }

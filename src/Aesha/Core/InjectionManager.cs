@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Aesha.Infrastructure;
 using Aesha.Interfaces;
 using Binarysharp.Assemblers.Fasm;
@@ -156,7 +157,7 @@ namespace Aesha.Core
             _processMemoryReader.WriteInt(_injectionAddress, (int) codeCavePtr);
 
             while (_processMemoryReader.ReadInt(_injectionAddress) > 0)
-                Thread.Sleep(5); 
+                Task.Delay(5).Wait();
 
             FreeMemory(codeCavePtr);
         }

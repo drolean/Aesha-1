@@ -1,48 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading.Tasks;
 using Aesha.Core;
 using Aesha.Domain;
+using Aesha.Infrastructure;
 using Aesha.Interfaces;
-using FluentBehaviourTree;
+using Aesha.Robots.Actions;
 using Serilog;
 
 namespace Aesha.Robots
 {
-    public class Warlock : IRobot
+    public class Warlock : BaseRobot, IRobot
     {
         private readonly CommandManager _commandManager;
-        private readonly GenericBehaviour _generic;
         private ILogger _logger;
-        private WowUnit _currentTarget;
+        
+        // ReSharper disable InconsistentNaming
+        private readonly Spell DemonSkin = new Spell(687, "Demon Skin", 1, MappedKeys.ActionBar4);
+        private readonly Spell SummonImp = new Spell(0, "Summon Imp", 1, MappedKeys.ActionBar8,Timings.TenSeconds);
+        private readonly Spell Drink = new Spell(0, "Drink", 1, MappedKeys.ActionBar10, Timings.ThirtySeconds);
+        // ReSharper restore InconsistentNaming
 
-        private Spell _demonSkinRank1 = new Spell(687,"Demon Skin",1);
+        // ReSharper disable InconsistentNaming
+        private readonly SummonPet SummonPet;
+        private readonly CastBuff CastDemonSkin;
+        private readonly CastDrink CastDrink;
+        private readonly AcquireTarget AcquireTarget;
+        private readonly LootUnits LootUnits;
+        // ReSharper restore InconsistentNaming
 
-
-        public Warlock(CommandManager commandManager, WaypointManager waypointManager, List<string> enemyList, ILogger logger)
-
+        public Warlock(CommandManager commandManager, WaypointManager waypointManager, ILogger logger)
+        : base(commandManager,waypointManager,logger)
         {
             _commandManager = commandManager;
             _logger = logger;
-            _generic = new GenericBehaviour(commandManager, waypointManager, logger);
-        }
 
-        private BehaviourTreeStatus SetPetAttack()
-        {
-            _commandManager.SendKey(MappedKey.ActionBar1);
-            return BehaviourTreeStatus.Success;
-        }
+            SummonPet = new SummonPet(SummonImp);
+            CastDemonSkin = new CastBuff(DemonSkin);
+            CastDrink = new CastDrink(Drink);
+            AcquireTarget = new AcquireTarget();
+            LootUnits = new LootUnits();
 
-        private BehaviourTreeStatus WaitForTargetToTargetPet()
-        {
-            _generic.WaitFor(() => ObjectManager.Me.Target.Target == ObjectManager.Me.Pet);
-            return BehaviourTreeStatus.Success;
         }
-
+        
         private void AutoAttack()
         {
-            _commandManager.SendKeyUp(MappedKey.Forward);
-            _commandManager.SendKey(MappedKey.ActionBar1);
+            _commandManager.StopMovingForward();
+            _commandManager.SendKey(MappedKeys.ActionBar1);
         }
 
         private void KillTarget()
@@ -51,50 +53,39 @@ namespace Aesha.Robots
             {
                 if (ObjectManager.Me.Mana.Current >= 25)
                 {
-                    _commandManager.SendKey(MappedKey.ActionBar2);
-                    Thread.Sleep(1700);
+                    _commandManager.SendKey(MappedKeys.ActionBar2);
+                    Task.Delay(2000).Wait();
                 }
             }
         }
 
-
-        private void Buff()
-        {
-            if(!ObjectManager.Me.Auras.Contains(_demonSkinRank1))
-                _commandManager.SendKey(MappedKey.ActionBar3);
-        }
-
-
-
+        
         public void PassiveBehaviour()
         {
-            SummonPet();
-            _generic.LootTargets(); 
-            _generic.GetNextWaypoint();
-            _generic.MoveToNextWaypoint();
+            _commandManager.EvaluateAndPerform(LootUnits);
+            _commandManager.EvaluateAndPerform(SummonPet);
+            _commandManager.EvaluateAndPerform(CastDemonSkin);
+            _commandManager.EvaluateAndPerform(CastDrink);
+            
+            base.GetNextWaypoint();
+            base.MoveToNextWaypoint();
         }
 
-        private void SummonPet()
-        {
-            if (ObjectManager.Me.Pet == null)
-            {
-                _commandManager.SendKeyUp(MappedKey.Forward);
-                _commandManager.SendKey(MappedKey.ActionBar9);
-                Thread.Sleep(11000);
-            }
-        }
 
         public void AttackBehaviour()
         {
-            Buff();
-            _generic.Drink();
-            _generic.SetTarget(_currentTarget);
             AutoAttack();
             KillTarget();
         }
         
-        public void Tick(RobotState state)
+        public void Tick()
         {
+            var state = RobotState.Passive;
+
+            _commandManager.EvaluateAndPerform(AcquireTarget);
+            if (ObjectManager.Me.Target != null)
+                state = RobotState.Combat;
+
             switch (state)
             {
                 case RobotState.Combat:
@@ -104,11 +95,6 @@ namespace Aesha.Robots
                     PassiveBehaviour();
                     break;
             }
-        }
-
-        public void SetTarget(WowUnit target)
-        {
-            _currentTarget = target;
         }
     }
 }

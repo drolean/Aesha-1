@@ -27,8 +27,9 @@ namespace Aesha
         public bool Start(HostControl hostControl)
         {
             var processMemoryReader = new ProcessMemoryReader(_process);
-            var keyboard = new KeyboardCommandDispatcher(_process);
-            var commandManager = new CommandManager(_process, processMemoryReader, keyboard,_logger);
+
+            var keyboard = KeyboardCommandDispatcher.GetKeyboard(_process);
+            var commandManager = CommandManager.GetDefault(_process, processMemoryReader, keyboard,_logger);
 
             _robotManager = new RobotManager(commandManager, _logger);
             _robotManager.Start();

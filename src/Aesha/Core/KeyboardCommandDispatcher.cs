@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Aesha.Domain;
 using Aesha.Infrastructure;
 using Aesha.Interfaces;
 
@@ -90,15 +90,26 @@ namespace Aesha.Core
             {' ', new KeyMap() {ScanCode = 0x39, VirtualKeyCode = ' '}}
         };
         
-        public KeyboardCommandDispatcher(IWowProcess process)
+        private KeyboardCommandDispatcher(IntPtr processWindowHandle)
         {
-            _processWindowHandle = process.MainWindowHandle;
+            _processWindowHandle = processWindowHandle;
         }
+
+        private static KeyboardCommandDispatcher _instance;
+        public static KeyboardCommandDispatcher GetKeyboard(IWowProcess process = null)
+        {
+            if (_instance != null) return _instance;
+            
+            if (process == null)
+                throw new ArgumentNullException(nameof(process),"Keyboard not initialised. Process must be provided");
+
+            _instance = new KeyboardCommandDispatcher(process.MainWindowHandle);
+            return _instance;
+        }
+
 
         private const uint WM_KEYDOWN = 0x100;
         private const uint WM_KEYUP = 0x101;
-        private const uint WM_LBUTTONDOWN = 0x201;
-        private const uint WM_LBUTTONUP = 0x202;
         private const uint WM_RBUTTONDOWN = 0x204;
         private const uint WM_RBUTTONUP = 0x205;
         private const uint WM_MOVEMOUSE = 0x0200;
@@ -106,33 +117,10 @@ namespace Aesha.Core
         [Flags]
         private enum MouseFlags
         {
-            MK_CONTROL = 0x0008,
             MK_LBUTTON = 0x0001,
-            MK_MBUTTON = 0x0010,
-            MK_RBUTTON = 0x0002,
-            MK_SHIFT = 0x0004,
-            MK_XBUTTON1 = 0x0020,
-            MK_XBUTTON2 = 0x0040
+            MK_SHIFT = 0x0004
         }
-
-
-
-        public void SendClick(Point point)
-        {
-            Cursor.Position = point;
-            var lparam = CreateMouseParam(point);
-            Win32Imports.PostMessage(_processWindowHandle, WM_RBUTTONDOWN, 0x01, lparam);
-            Win32Imports.PostMessage(_processWindowHandle, WM_RBUTTONUP, 0x01, lparam);
-        }
-
-        public void MoveMouse(Process process, Point point)
-        {
-            var lparam = CreateMouseParam(point);
-            var flags = MouseFlags.MK_LBUTTON | MouseFlags.MK_SHIFT;
-
-            Win32Imports.PostMessage(process.MainWindowHandle, WM_MOVEMOUSE, 0, lparam);
-            //   PostMessage(process.MainWindowHandle, 0x0020, 0x00050038, 0x02000001);
-        }
+        
 
         public void SendShiftClick(Point point)
         {
@@ -141,14 +129,14 @@ namespace Aesha.Core
             var flags = MouseFlags.MK_LBUTTON | MouseFlags.MK_SHIFT;
 
             Win32Imports.PostMessage(_processWindowHandle, WM_KEYDOWN, 0x10, 0x002A0001);
-            Thread.Sleep(100);
+            Task.Delay(100).Wait();
             Win32Imports.PostMessage(_processWindowHandle, WM_MOVEMOUSE, 0, lparam);
             Win32Imports.PostMessage(_processWindowHandle, 0x0020, 0x00050038, 0x02000001);
-            Thread.Sleep(100);
+            Task.Delay(100).Wait();
             Win32Imports.PostMessage(_processWindowHandle, WM_RBUTTONDOWN, (int)flags, lparam);
-            Thread.Sleep(100);
+            Task.Delay(100).Wait();
             Win32Imports.PostMessage(_processWindowHandle, WM_RBUTTONUP, (int)flags, lparam);
-            Thread.Sleep(100);
+            Task.Delay(100).Wait();
             Win32Imports.PostMessage(_processWindowHandle, WM_KEYUP, 0x10, 0xC02A0001);
         }
 
@@ -165,14 +153,6 @@ namespace Aesha.Core
             InternalSendKeyUp(map.ScanCode, map.VirtualKeyCode);
             InternalSendKeyUp(0x2A,(int)Keys.ShiftKey);
             InternalSetKeyUp((int)Keys.ShiftKey);
-        }
-
-        public void SendKeys(string keys)
-        {
-            foreach (var key in keys)
-            {
-                SendKey(key);
-            }
         }
 
 
@@ -211,7 +191,7 @@ namespace Aesha.Core
             keys[virtualKeyCode] |= 0x80;
             Win32Imports.SetKeyboardState(keys);
 
-            Thread.Sleep(50);
+            Task.Delay(50).Wait();
         }
 
         private void InternalSetKeyUp(int virtualKeyCode)
@@ -225,7 +205,7 @@ namespace Aesha.Core
             var localThreadId = Win32Imports.GetCurrentThreadId();
             Win32Imports.AttachThreadInput(localThreadId, foreignThreadId, false);
 
-            Thread.Sleep(50);
+            Task.Delay(50).Wait();
         }
 
         private void InternalSendKeyDown(int scanCode, int virtualKeyCode)
@@ -233,7 +213,7 @@ namespace Aesha.Core
             var downParam = CreateParam(1, (uint)scanCode, 0, 0, 0, 0);
             Win32Imports.PostMessage(_processWindowHandle, WM_KEYDOWN, virtualKeyCode, downParam);
 
-            Thread.Sleep(50);
+            Task.Delay(50).Wait();
         }
 
 
@@ -242,7 +222,7 @@ namespace Aesha.Core
             var upParam = CreateParam(1, (uint)scanCode, 0, 0, 1, 1);
             Win32Imports.PostMessage(_processWindowHandle, WM_KEYUP, virtualKeyCode, upParam);
 
-            Thread.Sleep(50);
+            Task.Delay(50).Wait();
         }
 
 

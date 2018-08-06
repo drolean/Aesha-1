@@ -2,86 +2,71 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Aesha.Core;
 using Aesha.Domain;
 using Aesha.Infrastructure;
-using FluentBehaviourTree;
 using Serilog;
 
 namespace Aesha.Robots
 {
-    public class GenericBehaviour
+    public abstract class BaseRobot
     {
-        private readonly CommandManager _commandManager;
-        private readonly WaypointManager _waypointManager;
+        protected readonly CommandManager CommandManager;
+        protected readonly WaypointManager WaypointManager;
         private readonly ILogger _logger;
         private Location _nextWaypoint;
 
-        private List<WowUnit> _blacklist = new List<WowUnit>();
+        protected readonly List<WowUnit> Blacklist = new List<WowUnit>();
 
-        public GenericBehaviour(
+        public BaseRobot(
             CommandManager commandManager,
             WaypointManager waypointManager,
             ILogger logger)
         {
-            _commandManager = commandManager;
-            _waypointManager = waypointManager;
+            CommandManager = commandManager;
+            WaypointManager = waypointManager;
             _logger = logger;
         }       
 
-        public BehaviourTreeStatus GetNextWaypoint()
+        public void GetNextWaypoint()
         {
-            _nextWaypoint = _waypointManager.GetNextWaypoint();
+            _nextWaypoint = WaypointManager.GetNextWaypoint();
             _logger.Information($"Found nearest waypoint: {_nextWaypoint}. Current Location: {ObjectManager.Me.Location}. Distance: {ObjectManager.Me.Location.GetDistanceTo(_nextWaypoint)}");
-            _commandManager.SetPlayerFacing(_nextWaypoint);
+            CommandManager.SetPlayerFacing(_nextWaypoint);
             _logger.Information($"Facing waypoint");
-            return BehaviourTreeStatus.Success;
         }
         
-        public BehaviourTreeStatus MoveToNextWaypoint()
+        public void MoveToNextWaypoint()
         {
             _logger.Information($"Moving to nearest waypoint: {_nextWaypoint}. Current Location: {ObjectManager.Me.Location}. Distance: {ObjectManager.Me.Location.GetDistanceTo(_nextWaypoint)}");
-            _waypointManager.MoveToWaypoint(_nextWaypoint);
+            WaypointManager.MoveToWaypoint(_nextWaypoint,20, true);
             _logger.Information($"Arrived at nearest waypoint: {_nextWaypoint}. Current Location: {ObjectManager.Me.Location}. Distance: {ObjectManager.Me.Location.GetDistanceTo(_nextWaypoint)}");
-            return BehaviourTreeStatus.Running;
         }
 
-        public BehaviourTreeStatus SetTarget(WowUnit unit)
+        public void SetTarget(WowUnit unit)
         {
-            _commandManager.SetTarget(unit);
-            return BehaviourTreeStatus.Success;
-        }
-
-
-        public BehaviourTreeStatus Drink()
-        {
-            while (ObjectManager.Me.Mana.Current <= 25)
-            {
-                _commandManager.SendKey(MappedKey.ActionBar10);
-                Thread.Sleep(10000);
-            }
-
-            return BehaviourTreeStatus.Success;
+            CommandManager.SetTarget(unit);
         }
         
         public void WaitFor(Func<bool> condition, int interval = 500)
         {
             while (!condition.Invoke())
-                Thread.Sleep(interval);
+                Task.Delay(interval).Wait();
         }
 
-        public BehaviourTreeStatus LootTargets()
+        public void LootTargets()
         {
             var lootableMobs = ObjectManager.Units.Where(u => 
-                !_blacklist.Contains(u)
+                !Blacklist.Contains(u)
                 && u.Attributes.Lootable 
                 && u.CreatureType != CreatureType.Critter
                 && u.Attributes.TappedByMe
                 && u.Health.Current == 0).ToList();
-            
+
             if (lootableMobs.Count > 0)
-                _commandManager.SendKey(MappedKey.Forward);
-            else return BehaviourTreeStatus.Success;
+                CommandManager.SendKey(MappedKeys.Forward);
+            else return;
             
             _logger.Information($"Looting mobs in the area. Found: {lootableMobs.Count}");
             
@@ -89,14 +74,12 @@ namespace Aesha.Robots
             {
                 _logger.Information($"Looting mob: {mob}");
                 _logger.Information($"Moving to loot location {mob.Location}");
-                _waypointManager.MoveToWaypoint(mob.Location, 1, false);
+                WaypointManager.MoveToWaypoint(mob.Location, 1, false);
                 _logger.Information($"Moved to loot location {mob.Location}");
 
-                _commandManager.Loot(lootableMobs);
-                _blacklist.Add(mob);
+                CommandManager.Loot(lootableMobs);
+                Blacklist.Add(mob);
             }
-
-            return BehaviourTreeStatus.Success;
         }
     }
 }

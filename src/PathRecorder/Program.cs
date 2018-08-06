@@ -17,8 +17,8 @@ namespace PathRecorder
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            
+            Application.SetCompatibleTextRenderingDefault(false);;
+
             var proc = Process.GetProcessesByName("wow").FirstOrDefault();
             var wowProc = new WowProcess(proc);
             Application.Run(new Main(wowProc));

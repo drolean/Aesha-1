@@ -6,7 +6,7 @@ namespace Aesha.Interfaces
     {
         void PassiveBehaviour();
         void AttackBehaviour();
-        void Tick(RobotState state);
+        void Tick();
 
         void SetTarget(WowUnit target);
 

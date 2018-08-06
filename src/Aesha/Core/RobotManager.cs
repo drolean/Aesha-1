@@ -24,19 +24,12 @@ namespace Aesha.Core
         private Task _task;
         private CancellationToken _cancellationToken;
         private CancellationTokenSource _cancellationSource;
-        private List<string> _enemyList;
         private IRobot _robot;
 
         public void Start()
         {
-            _enemyList = new List<string>()
-            {
-                "Forest Spider",
-                "Stonetusk Boar"
-            };
-
-            var waypointManager = new WaypointManager(_commandManager, Path.FromFile("Goldshire.path"), _logger);
-            _robot = new Warlock(_commandManager, waypointManager,_enemyList, _logger);
+            var waypointManager = new WaypointManager(Path.FromFile("Goldshire.path"));
+            _robot = new Warlock(_commandManager, waypointManager, _logger);
 
             _cancellationSource = new CancellationTokenSource();
             _cancellationToken = _cancellationSource.Token;
@@ -44,11 +37,15 @@ namespace Aesha.Core
             {
                 while (!_cancellationToken.IsCancellationRequested)
                 {
-                    _robot.Tick(CheckState());
-                    Thread.Sleep(100);
+                    _robot.Tick();
+                    Task.Delay(100, _cancellationToken).Wait(_cancellationToken);
                 }
 
-            }, _cancellationToken);
+            }, _cancellationToken,TaskCreationOptions.LongRunning).ContinueWith(faultedTask =>
+            {
+                _logger.Error(faultedTask.Exception,"An error occured during runtime of robot");
+                if (faultedTask.Exception != null) throw faultedTask.Exception;
+            },TaskContinuationOptions.OnlyOnFaulted);
 
             _task.Start();
         }
@@ -60,56 +57,6 @@ namespace Aesha.Core
                 _cancellationSource.Cancel();
             }
         }
-
-
-        private RobotState CheckState()
-        {
-            _logger.Information("Checking for enemies attacking me or nearby");
-            var target = GetEnemyAttackingMe() ?? GetNearestUntaggedMob();
-            if (target != null)
-            {
-                _logger.Information($"Found target: {target}");
-                _robot.SetTarget(target);
-                _logger.Information($"Target set: {target}");
-                _logger.Information("Switching to combat");
-                return RobotState.Combat;
-            }
-
-            _logger.Information("No targets found. Remain passive");
-            return RobotState.Passive;
-        }
-
-        private WowUnit GetNearestUntaggedMob()
-        {
-            var enemies = ObjectManager.Units.Where(u =>
-                    u.Attributes.Tapped == false
-                    && u.Health.Percentage == 100
-                    && u.SummonedBy == null
-                    && u.CreatureType != CreatureType.Critter
-                    && u.Distance < 800)
-                .OrderBy(u => u.Distance).ToList();
-
-            var nearest = enemies.FirstOrDefault();
-            return nearest ?? null;
-        }
-
-        private WowUnit GetEnemyAttackingMe()
-        {
-            var enemies = ObjectManager.Units.Where(u =>
-                    u.Target == ObjectManager.Me 
-                 || u.Target == ObjectManager.Me.Pet)
-                .OrderBy(u => u.Distance).ToList();
-
-            foreach (var mob in enemies)
-            {
-                if (!_enemyList.Contains(mob.Name))
-                    _enemyList.Add(mob.Name);
-                _logger.Information($"Adding mob {mob.Name} to enemy list");
-            }
-
-            var nearest = enemies.FirstOrDefault();
-            return nearest ?? null;
-        }
-
+        
     }
 }

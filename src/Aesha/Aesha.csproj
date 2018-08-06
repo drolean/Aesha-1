@@ -66,6 +66,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\MappedKeys.cs" />
+    <Compile Include="Infrastructure\Timings.cs" />
     <Compile Include="Interfaces\IInjectionManager.cs" />
     <Compile Include="Core\InjectionManager.cs" />
     <Compile Include="Core\WowProcess.cs" />
@@ -94,8 +96,13 @@
     <Compile Include="Infrastructure\Win32Imports.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Robots\Hunter.cs" />
-    <Compile Include="Robots\GenericBehaviour.cs" />
+    <Compile Include="Robots\Actions\AcquireTarget.cs" />
+    <Compile Include="Robots\Actions\CastBuff.cs" />
+    <Compile Include="Robots\Actions\CastDrink.cs" />
+    <Compile Include="Robots\Actions\IConditionalAction.cs" />
+    <Compile Include="Robots\Actions\LootUnits.cs" />
+    <Compile Include="Robots\Actions\SummonPet.cs" />
+    <Compile Include="Robots\BaseRobot.cs" />
     <Compile Include="Interfaces\IRobot.cs" />
     <Compile Include="Robots\Warlock.cs" />
     <Compile Include="Service.cs" />
