@@ -18,6 +18,7 @@ namespace Aesha.Core
         private readonly Dictionary<char, KeyMap> _keyMaps = new Dictionary<char, KeyMap>()
         {
 
+            {(char) 0x1B, new KeyMap() {ScanCode = 0x1, VirtualKeyCode = 0x1B, Shifted = true}},
             {'!', new KeyMap() {ScanCode = 0x2, VirtualKeyCode = '1', Shifted = true}},
             {'"', new KeyMap() {ScanCode = 0x3, VirtualKeyCode = '2', Shifted = true}},
             {'£', new KeyMap() {ScanCode = 0x4, VirtualKeyCode = '3', Shifted = true}},
@@ -252,22 +253,7 @@ namespace Aesha.Core
             var map = MapKey(key);
             InternalSendKeyUp(map.ScanCode, map.VirtualKeyCode);
         }
-
-        public void SetPlayerFacing(float newFacing)
-        {
-            var currentFacing = ObjectManager.Me.Rotation;
-            var diff = newFacing - currentFacing;
-            var direction = diff < 0 ? 'D' : 'A';
-            
-            while (diff < -0.1 || diff > 0.1)
-            {
-                SendKeyDown(direction);
-                diff = newFacing - ObjectManager.Me.Rotation;
-            }
-
-            SendKeyUp(direction);
-        }
-
+        
     }
 
     class KeyMap

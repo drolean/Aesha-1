@@ -6,14 +6,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Aesha.Core;
 using Aesha.Domain;
+using Serilog;
+using Serilog.Events;
 
 namespace Aesha.Robots.Actions
 {
     public class LootUnits : IConditionalAction
     {
+        private readonly ILogger _logger;
 
         public readonly List<IWowObject> LootList = new List<IWowObject>();
         public readonly List<IWowObject> UnitsLooted = new List<IWowObject>();
+
+        public LootUnits(ILogger logger)
+        {
+            _logger = logger;
+        }
 
         public bool Evaluate()
         {
@@ -29,7 +37,7 @@ namespace Aesha.Robots.Actions
 
         private IWowObject GetValidUnit(ulong mouseOverUnitGuid)
         {
-            var foundUnit = LootList.SingleOrDefault(u => u.Guid == mouseOverUnitGuid);
+            var foundUnit = LootList.FirstOrDefault(u => u.Guid == mouseOverUnitGuid);
 
             if (foundUnit == null) return null;
             if (foundUnit == ObjectManager.Me.Pet) return null;
@@ -40,11 +48,15 @@ namespace Aesha.Robots.Actions
 
         public void Do()
         {
+            var waypointManager = new WaypointManager(new Path(), _logger);
+
             foreach (var unit in LootList)
             {
-                WaypointManager.MoveToWaypoint(unit.Location, 1);
+                _logger.Information($"Moving to unit for looting: {unit.Location}. Current: {ObjectManager.Me.Location} Distance: {ObjectManager.Me.Location.GetDistanceTo(unit.Location)}");
+                waypointManager.MoveToWaypoint(unit.Location, 5);
                 
-                for (var x = 700; x <= 1150; x += 30)
+                KeyboardCommandDispatcher.GetKeyboard().SendShiftClick(new Point(900,450));
+                for (var x = 900; x <= 1150; x += 30)
                 {
                     for (var y = 450; y <= 850; y += 20)
                     {
@@ -54,8 +66,21 @@ namespace Aesha.Robots.Actions
                             var foundUnit = GetValidUnit(mouseOverUnitGuid);
                             if (foundUnit == null) continue;
                             
+                            _logger.Information($"Attempting to loot unit: {unit}");
                             KeyboardCommandDispatcher.GetKeyboard().SendShiftClick(new Point(x, y));
-                            Task.Delay(500).Wait();
+                            Task.Delay(1000).Wait();
+
+                            var wowUnit = foundUnit as WowUnit;
+                            if (wowUnit != null)
+                            {
+                                if (wowUnit.Attributes.Skinnable)
+                                {
+                                    _logger.Information($"Attempting to skin unit: {unit}");
+                                    KeyboardCommandDispatcher.GetKeyboard().SendShiftClick(new Point(x, y));
+                                    Task.Delay(2000).Wait();
+                                }
+                            }
+
                             UnitsLooted.Add(foundUnit);
 
                             var outstandingWork = false;

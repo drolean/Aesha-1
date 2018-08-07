@@ -98,7 +98,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Robots\Actions\AcquireTarget.cs" />
     <Compile Include="Robots\Actions\CastBuff.cs" />
+    <Compile Include="Robots\Actions\CastDebuff.cs" />
     <Compile Include="Robots\Actions\CastDrink.cs" />
+    <Compile Include="Robots\Actions\CastOffensiveSpell.cs" />
     <Compile Include="Robots\Actions\IConditionalAction.cs" />
     <Compile Include="Robots\Actions\LootUnits.cs" />
     <Compile Include="Robots\Actions\SummonPet.cs" />

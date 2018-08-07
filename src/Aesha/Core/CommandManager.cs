@@ -74,30 +74,41 @@ namespace Aesha.Core
             SendKey(MappedKeys.TargetLastTarget);
         }
 
+        public void ClearTarget()
+        {
+            SendKey(MappedKeys.Esc);
+        }
+
         public void SendKeyDown(MappedKeyAction action)
         {
-            _logger.Information($"Sending key down: '{action}'");
+            _logger.Information($"Sending key down: '{action.Key}'");
             _keyboard.SendKeyDown(action.Key);
         }
 
         public void SendKeyUp(MappedKeyAction action)
         {
-            _logger.Information($"Sending key up: '{action}'");
+            _logger.Information($"Sending key up: '{action.Key}'");
             _keyboard.SendKeyUp(action.Key);
         }
 
         public void StopMovingForward()
         {
-            SendKey(MappedKeys.Forward);
+            SendKeyUp(MappedKeys.Forward);
         }
 
         public void EvaluateAndPerform(IConditionalAction action)
         {
             var task = new Task(() =>
             {
-               if (action.Evaluate()) action.Do();
+                _logger.Information($"Evaulating action: {action.GetType()}");
+                if (action.Evaluate())
+                {
+                    _logger.Information($"Invoking action {action.GetType()}");
+                    action.Do();
+                }
             });
 
+            task.Start();
             task.Wait();
         }
 
@@ -127,10 +138,17 @@ namespace Aesha.Core
         }
 
 
-        public void SetPlayerFacing(Location destination)
+        public void SetPlayerFacing(Location destination, float threshhold = 0.2f)
         {
             var radian = Radian.GetFaceRadian(destination, ObjectManager.Me.Location);
             var nudgeKey = MappedKeys.Left;
+
+            var diff = Math.Abs(ObjectManager.Me.Rotation - radian.Angle);
+            if (diff < threshhold)
+            {
+                _logger.Information($"Not setting facing. Lower than threshold: {diff}");
+                return;
+            }
 
             _logger.Information("Set player facing");
             InternalSetPlayerFacing(radian, nudgeKey);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,25 +29,28 @@ namespace Aesha.Core
 
         public void Start()
         {
-            var waypointManager = new WaypointManager(Path.FromFile("Goldshire.path"));
+            var waypointManager = new WaypointManager(Path.FromFile("Goldshire.path"),_logger);
             _robot = new Warlock(_commandManager, waypointManager, _logger);
 
             _cancellationSource = new CancellationTokenSource();
             _cancellationToken = _cancellationSource.Token;
             _task = new Task(() =>
             {
-                while (!_cancellationToken.IsCancellationRequested)
+                try
                 {
-                    _robot.Tick();
-                    Task.Delay(100, _cancellationToken).Wait(_cancellationToken);
+                    while (!_cancellationToken.IsCancellationRequested)
+                    {
+                        _robot.Tick();
+                        Task.Delay(100, _cancellationToken).Wait(_cancellationToken);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex,"An error occured whilst running Robot");
+                    throw;
                 }
 
-            }, _cancellationToken,TaskCreationOptions.LongRunning).ContinueWith(faultedTask =>
-            {
-                _logger.Error(faultedTask.Exception,"An error occured during runtime of robot");
-                if (faultedTask.Exception != null) throw faultedTask.Exception;
-            },TaskContinuationOptions.OnlyOnFaulted);
-
+            }, _cancellationToken, TaskCreationOptions.LongRunning);
             _task.Start();
         }
 

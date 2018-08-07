@@ -8,7 +8,7 @@ namespace Aesha.Core
 {
     public class Path
     {
-        private readonly Dictionary<int, Location> _entries = new Dictionary<int, Location>();
+        public readonly Dictionary<int, Location> Entries = new Dictionary<int, Location>();
 
         public static Path FromFile(string filename)
         {
@@ -21,7 +21,7 @@ namespace Aesha.Core
             {
                 var location = reader.ReadLine();
                 var locationPoints = location.Split(',');
-                path._entries.Add(idx, new Location(Convert.ToSingle(locationPoints[0]), Convert.ToSingle(locationPoints[1])));
+                path.Entries.Add(idx, new Location(Convert.ToSingle(locationPoints[0]), Convert.ToSingle(locationPoints[1])));
                 idx++;
             }
 
@@ -30,8 +30,8 @@ namespace Aesha.Core
 
         public Location GetNextWaypoint(Location currentWaypoint)
         {
-            var index = _entries.FirstOrDefault(w => Equals(w.Value, currentWaypoint));
-            var nextWaypoint =  _entries.ContainsKey(index.Key + 1) ? _entries[index.Key + 1] : _entries[1];
+            var index = Entries.FirstOrDefault(w => Equals(w.Value, currentWaypoint));
+            var nextWaypoint =  Entries.ContainsKey(index.Key + 1) ? Entries[index.Key + 1] : Entries[1];
             return nextWaypoint;
         }
 
@@ -39,7 +39,7 @@ namespace Aesha.Core
         {
             float nearest = int.MaxValue;
             var nearestWaypoint = new Location(0, 0);
-            foreach (var location in _entries)
+            foreach (var location in Entries)
             {
                 var distance = location.Value.GetDistanceTo(startPosition);
                 if (distance < nearest)

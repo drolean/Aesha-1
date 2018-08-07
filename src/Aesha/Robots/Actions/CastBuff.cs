@@ -15,7 +15,7 @@ namespace Aesha.Robots.Actions
 
         public bool Evaluate()
         {
-            return ObjectManager.Me.HasAura(_spell);
+            return !ObjectManager.Me.HasAura(_spell);
         }
 
         public void Do()

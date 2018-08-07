@@ -4,23 +4,22 @@ using Aesha.Domain;
 
 namespace Aesha.Robots.Actions
 {
-    public class SummonPet : IConditionalAction
+    public class CastDebuff : IConditionalAction
     {
         private readonly Spell _spell;
 
-        public SummonPet(Spell spell)
+        public CastDebuff(Spell spell)
         {
             _spell = spell;
         }
 
         public bool Evaluate()
         {
-            return ObjectManager.Me.Pet == null;
+            return !ObjectManager.Me.Target.HasAura(_spell);
         }
 
         public void Do()
         {
-            CommandManager.GetDefault().SendKey(MappedKeys.Forward);
             CommandManager.GetDefault().SendKey(_spell.KeyAction);
             Task.Delay(_spell.CastTime).Wait();
         }

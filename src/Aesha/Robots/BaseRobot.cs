@@ -29,21 +29,6 @@ namespace Aesha.Robots
             _logger = logger;
         }       
 
-        public void GetNextWaypoint()
-        {
-            _nextWaypoint = WaypointManager.GetNextWaypoint();
-            _logger.Information($"Found nearest waypoint: {_nextWaypoint}. Current Location: {ObjectManager.Me.Location}. Distance: {ObjectManager.Me.Location.GetDistanceTo(_nextWaypoint)}");
-            CommandManager.SetPlayerFacing(_nextWaypoint);
-            _logger.Information($"Facing waypoint");
-        }
-        
-        public void MoveToNextWaypoint()
-        {
-            _logger.Information($"Moving to nearest waypoint: {_nextWaypoint}. Current Location: {ObjectManager.Me.Location}. Distance: {ObjectManager.Me.Location.GetDistanceTo(_nextWaypoint)}");
-            WaypointManager.MoveToWaypoint(_nextWaypoint,20, true);
-            _logger.Information($"Arrived at nearest waypoint: {_nextWaypoint}. Current Location: {ObjectManager.Me.Location}. Distance: {ObjectManager.Me.Location.GetDistanceTo(_nextWaypoint)}");
-        }
-
         public void SetTarget(WowUnit unit)
         {
             CommandManager.SetTarget(unit);
@@ -74,7 +59,7 @@ namespace Aesha.Robots
             {
                 _logger.Information($"Looting mob: {mob}");
                 _logger.Information($"Moving to loot location {mob.Location}");
-                WaypointManager.MoveToWaypoint(mob.Location, 1, false);
+                WaypointManager.MoveToWaypoint(mob.Location, 10, false);
                 _logger.Information($"Moved to loot location {mob.Location}");
 
                 CommandManager.Loot(lootableMobs);

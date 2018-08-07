@@ -157,7 +157,7 @@ namespace Aesha.Domain
 
         public bool HasAura(Spell spell)
         {
-            return Auras.Any(a => a.Equals(spell));
+            return Auras.Any(aura => aura.Id == spell.Id);
         }
 
         public List<Spell> Auras
@@ -191,7 +191,7 @@ namespace Aesha.Domain
 
 
                 var lootable = (_reader.ReadUInt(UnitFieldsAddress + (uint) Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 0x0D) != 0;
-                var skinnable = (_reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 0x4000000) != 0;
+                var skinnable = (_reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_FLAGS) & 0x4000000) != 0;
                 var tapped = (_reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 4) != 0;
                 var tappedByMe = (_reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_DYNAMIC_FLAGS) & 8) != 0;
 
