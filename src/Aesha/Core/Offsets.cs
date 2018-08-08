@@ -85,6 +85,7 @@ namespace Aesha.Core
             GAMEOBJECT_ARTKIT = 0x5C,
             GAMEOBJECT_ANIMPROGRESS = 0x60,
             GAMEOBJECT_PADDING = 0x64,
+            GAMEOBJECT_BOBBING = 0xE8,
             TOTAL_GAMEOBJECT_FIELDS = 0x10
         };
 

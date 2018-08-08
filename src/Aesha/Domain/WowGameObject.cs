@@ -16,8 +16,14 @@ namespace Aesha.Domain
             _objectBaseAddress = objectBaseAddress;
         }
 
-        public override string Name {
-            get { return "unknown :o("; }
+        public override string Name
+        {
+            get
+            {
+                var unitNameAddress1 = _reader.ReadUInt(_objectBaseAddress + (uint) Offsets.WowUnit.UNIT_FIELD_NAME_1);
+                var unitNameAddress2 = _reader.ReadUInt(unitNameAddress1 + (uint) Offsets.WowUnit.UNIT_FIELD_NAME_2);
+                return _reader.ReadString(unitNameAddress2, 50);
+            }
         }
 
         public override Location Location {
@@ -30,11 +36,15 @@ namespace Aesha.Domain
             }
         }
 
-        public float Facing {
-            get
-            {
-                return _reader.ReadFloat(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_FACING);
-            }
-        }
+        public uint CreatedBy => _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowGameObject.OBJECT_FIELD_CREATED_BY);
+        public uint DisplayId => _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_DISPLAYID);
+        public uint Flags => _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_FLAGS);
+        public uint State => _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_STATE);
+        public uint Faction => _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_FACTION);
+        public uint TypeId => _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_TYPE_ID);
+        public uint Level => _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_LEVEL);
+        public uint Artkit => _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_ARTKIT);
+        public ushort Bobbing => _reader.ReadUShort(BaseAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_BOBBING);
+        public uint AnimationProgress => _reader.ReadUInt(UnitFieldsAddress + (uint)Offsets.WowGameObject.GAMEOBJECT_ANIMPROGRESS);
     }
 }

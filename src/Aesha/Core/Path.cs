@@ -25,31 +25,30 @@ namespace Aesha.Core
                 idx++;
             }
 
-            return path;
+            return path; 
         }
 
-        public Location GetNextWaypoint(Location currentWaypoint)
+        public int GetNextWaypointIndex(int currentWaypointIndex)
         {
-            var index = Entries.FirstOrDefault(w => Equals(w.Value, currentWaypoint));
-            var nextWaypoint =  Entries.ContainsKey(index.Key + 1) ? Entries[index.Key + 1] : Entries[1];
-            return nextWaypoint;
+            return Entries.ContainsKey(currentWaypointIndex + 2) ? currentWaypointIndex + 2 : 1;
         }
 
-        public Location FindNearestWaypoint(Location startPosition)
+        public int FindNearestWaypointIndex(Location startPosition)
         {
             float nearest = int.MaxValue;
-            var nearestWaypoint = new Location(0, 0);
+            var waypointIndex = 0;
             foreach (var location in Entries)
             {
                 var distance = location.Value.GetDistanceTo(startPosition);
                 if (distance < nearest)
                 {
                     nearest = distance;
-                    nearestWaypoint = location.Value;
+                    waypointIndex = location.Key;
                 }
             }
 
-            return nearestWaypoint;
+           
+            return waypointIndex;
         }
 
     }

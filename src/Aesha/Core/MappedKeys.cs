@@ -1,4 +1,6 @@
-﻿namespace Aesha.Core
+﻿using System.Windows.Forms;
+
+namespace Aesha.Core
 {
     public static class MappedKeys
     {
@@ -19,6 +21,6 @@
         public static MappedKeyAction ActionBar10 => new MappedKeyAction('0');
         public static MappedKeyAction ActionBar11 => new MappedKeyAction('-');
         public static MappedKeyAction ActionBar12 => new MappedKeyAction('=');
-        public static MappedKeyAction Esc => new MappedKeyAction((char) 33);
+        public static MappedKeyAction PetBar1 => new MappedKeyAction('1',ctrl: true);
     }
 }

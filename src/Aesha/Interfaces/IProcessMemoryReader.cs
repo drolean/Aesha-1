@@ -11,6 +11,7 @@ namespace Aesha.Interfaces
         int ReadRawMemory(uint dwAddress, IntPtr lpBuffer, int nSize);
         string ReadString(uint dwAddress, int length);
         uint ReadUInt(uint dwAddress);
+        ushort ReadUShort(uint dwAddress);
         ulong ReadUInt64(uint dwAddress);
         bool WriteBytes(uint dwAddress, byte[] lpBytes, int nSize);
         bool WriteFloat(uint dwAddress, float value);

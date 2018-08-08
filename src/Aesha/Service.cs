@@ -30,7 +30,7 @@ namespace Aesha
 
             var keyboard = KeyboardCommandDispatcher.GetKeyboard(_process);
             var commandManager = CommandManager.GetDefault(_process, processMemoryReader, keyboard,_logger);
-
+            
             _robotManager = new RobotManager(commandManager, _logger);
             _robotManager.Start();
             

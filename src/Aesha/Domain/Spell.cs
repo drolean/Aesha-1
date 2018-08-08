@@ -5,18 +5,15 @@ namespace Aesha.Domain
     public class Spell
     {
 
-        public Spell(int id, string name, int rank, MappedKeyAction keyAction, int castTime = 0)
+        public Spell(int id, int rank, MappedKeyAction keyAction, int castTime = 0)
         {
             Id = id;
-            Name = name;
             Rank = rank;
             KeyAction = keyAction;
             CastTime = castTime;
         }
 
         public int Id { get; }
-
-        public string Name { get; }
 
         public int Rank { get; }
         public MappedKeyAction KeyAction { get; }
@@ -37,10 +34,6 @@ namespace Aesha.Domain
         {
             return Id;
         }
-
-        public override string ToString()
-        {
-            return $"[{Id}] {Name} (Rank {Rank})";
-        }
+       
     }
 }

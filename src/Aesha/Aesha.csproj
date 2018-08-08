@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Core\MappedKeyAction.cs" />
     <Compile Include="Core\MappedKeys.cs" />
+    <Compile Include="Core\SkinningManager.cs" />
     <Compile Include="Infrastructure\Timings.cs" />
     <Compile Include="Interfaces\IInjectionManager.cs" />
     <Compile Include="Core\WowProcess.cs" />
@@ -96,15 +97,19 @@
     <Compile Include="Infrastructure\Win32Imports.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Robots\Actions\AcquireTarget.cs" />
+    <Compile Include="Robots\Actions\TargetManager.cs" />
     <Compile Include="Robots\Actions\CastBuff.cs" />
     <Compile Include="Robots\Actions\CastDebuff.cs" />
     <Compile Include="Robots\Actions\CastDrink.cs" />
     <Compile Include="Robots\Actions\CastOffensiveSpell.cs" />
+    <Compile Include="Robots\Actions\CastWand.cs" />
     <Compile Include="Robots\Actions\IConditionalAction.cs" />
-    <Compile Include="Robots\Actions\LootUnits.cs" />
+    <Compile Include="Robots\Actions\LocateBobber.cs" />
+    <Compile Include="Core\LootManager.cs" />
+    <Compile Include="Robots\Actions\PetAttack.cs" />
     <Compile Include="Robots\Actions\SummonPet.cs" />
     <Compile Include="Interfaces\IRobot.cs" />
+    <Compile Include="Robots\Fisherman.cs" />
     <Compile Include="Robots\Warlock.cs" />
     <Compile Include="Service.cs" />
   </ItemGroup>
@@ -118,6 +123,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Paths\Northshire-valley.path">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Paths\Dun-Morogh.path">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Paths\LochModan.path">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Paths\Goldshire.path">

@@ -121,6 +121,15 @@ namespace Aesha.Infrastructure
             return (int)bytesWritten;
         }
 
+        public ushort ReadUShort(uint dwAddress)
+        {
+            var buffer = ReadBytes(dwAddress, sizeof(ushort));
+            if (buffer == null)
+                throw new Exception("ReadUShort failed.");
+
+            return BitConverter.ToUInt16(buffer, 0);
+        }
+
         public int ReadInt( uint dwAddress)
         {
             var buffer = ReadBytes(dwAddress, sizeof(int));

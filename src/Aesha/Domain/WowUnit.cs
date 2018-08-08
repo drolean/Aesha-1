@@ -119,7 +119,7 @@ namespace Aesha.Domain
             get
             {
                 var targetGuid = _reader.ReadUInt64(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_TARGET);
-                return (WowUnit)ObjectManager.Objects.SingleOrDefault(u => u.Guid == targetGuid);
+                return (WowUnit)ObjectManager.Objects.FirstOrDefault(u => u.Guid == targetGuid);
             }
         }
 
@@ -128,7 +128,7 @@ namespace Aesha.Domain
             get
             {
                 var summonedBy = _reader.ReadUInt64(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_SUMMONEDBY);
-                return (WowUnit)ObjectManager.Objects.SingleOrDefault(u => u.Guid == summonedBy);
+                return (WowUnit)ObjectManager.Objects.FirstOrDefault(u => u.Guid == summonedBy);
             }
         }
 
@@ -137,7 +137,7 @@ namespace Aesha.Domain
             get
             {
                 var createdBy = _reader.ReadUInt64(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_CREATEDBY);
-                return (WowUnit)ObjectManager.Objects.SingleOrDefault(u => u.Guid == createdBy);
+                return (WowUnit)ObjectManager.Objects.FirstOrDefault(u => u.Guid == createdBy);
             }
         }
 
@@ -146,7 +146,7 @@ namespace Aesha.Domain
             get
             {
                 var charmedBy = _reader.ReadUInt64(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_CHARMEDBY);
-                return (WowUnit)ObjectManager.Objects.SingleOrDefault(u => u.Guid == charmedBy);
+                return (WowUnit)ObjectManager.Objects.FirstOrDefault(u => u.Guid == charmedBy);
             }
         }
 
@@ -171,7 +171,7 @@ namespace Aesha.Domain
                    
                     var aura = _reader.ReadInt(UnitFieldsAddress + (uint)Offsets.WowUnit.UNIT_FIELD_AURA + auraPosition);
                     if (aura > 0)
-                        auras.Add(new Spell(aura,"",0,new MappedKeyAction(char.MinValue)));
+                        auras.Add(new Spell(aura,0,new MappedKeyAction(char.MinValue)));
 
                     auraPosition += 4;
                 }

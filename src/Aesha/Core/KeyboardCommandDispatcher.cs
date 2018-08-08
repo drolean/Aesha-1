@@ -151,6 +151,21 @@ namespace Aesha.Core
         }
 
 
+        public void SendCtrlKey(char key)
+        {
+            var map = MapKey(key);
+            if (map == null) throw new Exception($"Unable to map key: {key}");
+
+            InternalSetKeyDown((int)Keys.ControlKey);
+            InternalSendKeyDown(0x1D, (int)Keys.ControlKey);
+            InternalSendKeyDown(map.ScanCode, map.VirtualKeyCode);
+            InternalSendKeyUp(map.ScanCode, map.VirtualKeyCode);
+            InternalSendKeyUp(0x1D, (int)Keys.ControlKey);
+            InternalSetKeyUp((int)Keys.ControlKey);
+        }
+
+
+
 
         public void SendShiftKey(char key)
         {
@@ -165,6 +180,11 @@ namespace Aesha.Core
             InternalSetKeyUp((int)Keys.ShiftKey);
         }
 
+        public void SendKey(Keys key, int scanCode)
+        {
+            InternalSendKeyDown(scanCode,(int)key);
+            InternalSendKeyUp(scanCode,(int)key);
+        }
 
         public void SendKey(char key)
         {

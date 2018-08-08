@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Aesha.Domain;
 using Aesha.Infrastructure;
 using Aesha.Interfaces;
@@ -15,7 +16,8 @@ namespace Aesha.Core
         private readonly KeyboardCommandDispatcher _keyboard;
         private readonly ILogger _logger;
 
-        private CommandManager(IWowProcess process, IProcessMemoryReader reader, KeyboardCommandDispatcher keyboard, ILogger logger)
+        private CommandManager(IWowProcess process, IProcessMemoryReader reader, KeyboardCommandDispatcher keyboard,
+            ILogger logger)
         {
             _process = process;
             _reader = reader;
@@ -24,15 +26,17 @@ namespace Aesha.Core
         }
 
         private static CommandManager _commandManager;
-        public static CommandManager GetDefault(IWowProcess process = null, IProcessMemoryReader reader = null, KeyboardCommandDispatcher keyboard = null, ILogger logger = null)
+
+        public static CommandManager GetDefault(IWowProcess process = null, IProcessMemoryReader reader = null,
+            KeyboardCommandDispatcher keyboard = null, ILogger logger = null)
         {
             if (_commandManager != null)
                 return _commandManager;
 
-            if (process == null)throw new ArgumentNullException(nameof(process));
-            if (reader == null)throw new ArgumentNullException(nameof(reader));
-            if (keyboard == null)throw new ArgumentNullException(nameof(keyboard));
-            if (logger == null)throw new ArgumentNullException(nameof(logger));
+            if (process == null) throw new ArgumentNullException(nameof(process));
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
+            if (keyboard == null) throw new ArgumentNullException(nameof(keyboard));
+            if (logger == null) throw new ArgumentNullException(nameof(logger));
 
             _commandManager = new CommandManager(process, reader, keyboard, logger);
             return _commandManager;
@@ -40,14 +44,15 @@ namespace Aesha.Core
 
         public void SetTarget(IWowObject unit)
         {
-            _reader.WriteUInt64((uint)Offsets.WowGame.TargetLastTargetGuid, unit.Guid);
+            _reader.WriteUInt64((uint) Offsets.WowGame.TargetLastTargetGuid, unit.Guid);
             SendKey(MappedKeys.TargetLastTarget);
             SetPlayerFacing(unit.Location);
         }
 
         public void ClearTarget()
         {
-            //TODO send ESC key
+            _logger.Information($"Sending key: '{Keys.Escape}'");
+            _keyboard.SendKey(Keys.Escape, 0x01);
         }
 
         public void SendKeyDown(MappedKeyAction action)
@@ -69,16 +74,24 @@ namespace Aesha.Core
 
         public void EvaluateAndPerform(IConditionalAction action)
         {
-            var task = new Task(() =>
-            { 
-                if (action.Evaluate())
+            try
+            {
+                var task = new Task(() =>
                 {
-                    action.Do();
-                }
-            });
+                    if (action.Evaluate())
+                    {
+                        action.Do();
+                    }
+                });
 
-            task.Start();
-            task.Wait();
+                task.Start();
+                task.Wait();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex,$"Failure occured whilst evaluating and performing action {action.GetType()}");
+            }
+          
         }
 
 
@@ -107,8 +120,10 @@ namespace Aesha.Core
         }
 
 
-        public void SetPlayerFacing(Location destination, float threshold = 0.4f)
+        public void SetPlayerFacing(Location destination, float threshold = 0.2f, bool forceMemoryWrite = false)
         {
+            if (destination == null) return;
+
             const float memoryWriteThreshold = 1.5f;
 
             var radian = Radian.GetFaceRadian(destination, ObjectManager.Me.Location);
@@ -118,7 +133,7 @@ namespace Aesha.Core
             var absoluteDifference = Math.Abs(difference);
             if (absoluteDifference < threshold) return;
 
-            if (absoluteDifference > memoryWriteThreshold)
+            if (absoluteDifference > memoryWriteThreshold || forceMemoryWrite)
             {
                 _logger.Information("Set player facing using memory write");
                 InternalSetPlayerFacing(radian, nudgeKey);

@@ -1,4 +1,6 @@
-﻿using Aesha.Core;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Aesha.Core;
 using Aesha.Domain;
 using Aesha.Infrastructure;
 using Aesha.Interfaces;
@@ -12,27 +14,42 @@ namespace Aesha.Robots
         private readonly CommandManager _commandManager;
         private readonly WaypointManager _waypointManager;
         private readonly ILogger _logger;
-        
-        // ReSharper disable InconsistentNaming
-        private readonly Spell DemonSkin = new Spell(687, "Demon Skin", 1, MappedKeys.ActionBar3);
-        private readonly Spell SummonImp = new Spell(0, "Summon Imp", 1, MappedKeys.ActionBar8,Timings.TenSeconds);
-        private readonly Spell Drink = new Spell(0, "Drink", 1, MappedKeys.ActionBar10, Timings.ThirtySeconds);
 
-        private readonly Spell Corruption = new Spell(172, "Corruption", 1, MappedKeys.ActionBar4, 2000);
-        private readonly Spell ShadowBolt = new Spell(0, "Shadow Bolt", 2, MappedKeys.ActionBar2, 2200);
+        private readonly List<IWowObject> _lootList;
+        // ReSharper disable InconsistentNaming
+        
+        private readonly Spell SummonImp = new Spell(0, 1, MappedKeys.ActionBar8,Timings.TenSeconds);
+        private readonly Spell Drink = new Spell(0, 1, MappedKeys.ActionBar10, Timings.ThirtySeconds);
+
+        private readonly Spell Wand = new Spell(0, 1, MappedKeys.ActionBar1, 3000);
+        private readonly Spell ShadowBolt = new Spell(0,2, MappedKeys.ActionBar2, 2200);
+        private readonly Spell DemonSkin = new Spell(696,2, MappedKeys.ActionBar3);
+        private readonly Spell Corruption = new Spell(172,1, MappedKeys.ActionBar4, 2000);
+        private readonly Spell CurseOfAgony = new Spell(980,2, MappedKeys.ActionBar5);
+        private readonly Spell Immolate = new Spell(707,2, MappedKeys.ActionBar6, 2000);
+
+
         // ReSharper restore InconsistentNaming
 
         // ReSharper disable InconsistentNaming
         private readonly SummonPet SummonPet;
-        private readonly CastBuff CastDemonSkin;
         private readonly CastDrink CastDrink;
-        private readonly AcquireTarget AcquireTarget;
-        private readonly LootUnits LootUnits;
+        private readonly TargetManager _targetManager;
+        private readonly LootManager _lootManager;
 
-        private readonly CastDebuff CastCorruption;
+
+        private readonly PetAttack CastPetAttack;
+        private readonly CastWand CastWand;
         private readonly CastOffensiveSpell CastShadowBolt;
+        private readonly CastBuff CastDemonSkin;
+        private readonly CastDebuff CastCorruption;
+        private readonly CastDebuff CastCurseOfAgony;
+        private readonly CastDebuff CastImmolate;
+        
 
         private RobotState _state;
+        private SkinningManager _skinningManager;
+        private Location _currentWaypoint;
         // ReSharper restore InconsistentNaming
 
         public Warlock(CommandManager commandManager, WaypointManager waypointManager, ILogger logger)
@@ -42,36 +59,55 @@ namespace Aesha.Robots
             _logger = logger;
 
             SummonPet = new SummonPet(SummonImp);
-            CastDemonSkin = new CastBuff(DemonSkin);
             CastDrink = new CastDrink(Drink);
-            AcquireTarget = new AcquireTarget();
-            LootUnits = new LootUnits(_logger);
-
-            CastCorruption = new CastDebuff(Corruption);
+            _targetManager = new TargetManager();
+            _lootManager = new LootManager(_logger);
+            _skinningManager = new SkinningManager(_logger);
+            
+            CastPetAttack = new PetAttack();
             CastShadowBolt = new CastOffensiveSpell(ShadowBolt);
+            CastDemonSkin = new CastBuff(DemonSkin);
+            CastCorruption = new CastDebuff(Corruption);
+            CastCurseOfAgony = new CastDebuff(CurseOfAgony);
+            CastImmolate = new CastDebuff(Immolate);
+            CastWand = new CastWand(Wand);
 
             _state = RobotState.Passive;
+            _lootList = new List<IWowObject>();
 
         }
-     
         
+
         public void PassiveBehaviour()
         {
-            _commandManager.EvaluateAndPerform(LootUnits);
-            _commandManager.EvaluateAndPerform(SummonPet);
-            _commandManager.EvaluateAndPerform(CastDemonSkin);
-            _commandManager.EvaluateAndPerform(CastDrink);
+            //_commandManager.EvaluateAndPerform(SummonPet);
+            //_commandManager.EvaluateAndPerform(CastDemonSkin);
+            //_commandManager.EvaluateAndPerform(CastDrink);
 
-            var waypoint = _waypointManager.GetNextWaypoint();
-            _waypointManager.MoveToWaypoint(waypoint, continuousMode: true);
+            _currentWaypoint = _waypointManager.GetNextWaypoint();
+            _waypointManager.MoveToWaypoint(_currentWaypoint, continuousMode: true);
         }
 
 
         public void AttackBehaviour()
         {
-            _commandManager.SetPlayerFacing(ObjectManager.Me.Target.Location);
+            var target = ObjectManager.Me.Target;
+
+            _commandManager.SetPlayerFacing(ObjectManager.Me.Target?.Location);
+            _commandManager.EvaluateAndPerform(CastPetAttack);
             _commandManager.EvaluateAndPerform(CastCorruption);
-            _commandManager.EvaluateAndPerform(CastShadowBolt);
+            _commandManager.EvaluateAndPerform(CastCurseOfAgony);
+            _commandManager.EvaluateAndPerform(CastImmolate);
+             //_commandManager.EvaluateAndPerform(CastShadowBolt);
+            //_commandManager.EvaluateAndPerform(CastWand);
+
+            while (ObjectManager.Me.Target?.Health?.Current > 0)
+            {
+                _commandManager.EvaluateAndPerform(CastShadowBolt);
+            }
+
+            _lootManager.Loot(target);
+            _skinningManager.Skin(target);
         }
         
         public void Tick()
@@ -86,14 +122,15 @@ namespace Aesha.Robots
                     break;
             }
 
-            _commandManager.EvaluateAndPerform(AcquireTarget);
+            _targetManager.UpdateTarget();
+
+
             if (ObjectManager.Me.Target != null && ObjectManager.Me.Target?.Health.Current > 0)
             {
-                _commandManager.StopMovingForward();
-                LootUnits.AddUnit(ObjectManager.Me.Target);
+                _logger.Information($"Target: {ObjectManager.Me.Target}");
 
                 if (_state == RobotState.Combat) return;
-        
+                _commandManager.StopMovingForward();
                 _state = RobotState.Combat;
                 _logger.Information($"Switching to COMBAT state");
             }
@@ -101,7 +138,7 @@ namespace Aesha.Robots
             {
                 if (_state == RobotState.Passive) return;
                 
-                _commandManager.ClearTarget();
+                if (ObjectManager.Me.Target != null) _commandManager.ClearTarget();
                 _logger.Information($"No targets found");
                 _state = RobotState.Passive;
                 _logger.Information($"Switching to PASSIVE state");

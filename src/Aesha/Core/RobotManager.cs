@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Aesha.Domain;
-using Aesha.Infrastructure;
 using Aesha.Interfaces;
 using Aesha.Robots;
 using Serilog;
@@ -30,8 +25,9 @@ namespace Aesha.Core
 
         public void Start()
         {
-            var waypointManager = new WaypointManager(Path.FromFile("Stonefield-Farm.path"),_logger);
+            var waypointManager = new WaypointManager(Path.FromFile("LochModan.path"),_logger);
             _robot = new Warlock(_commandManager, waypointManager, _logger);
+            //_robot = new Fisherman(_commandManager,_logger);
             
             _cancellationSource = new CancellationTokenSource();
             _cancellationToken = _cancellationSource.Token;

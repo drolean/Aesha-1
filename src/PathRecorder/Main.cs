@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -44,7 +43,7 @@ namespace PathRecorder
             {
                 var currentLocation = ObjectManager.Me.Location;
 
-                if (currentLocation.GetDistanceTo(startPosition) > 100)
+                if (currentLocation.GetDistanceTo(startPosition) > 30)
                 {
                     _path.Add(currentLocation);
 

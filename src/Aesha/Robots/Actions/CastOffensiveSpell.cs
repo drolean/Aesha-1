@@ -20,7 +20,13 @@ namespace Aesha.Robots.Actions
         public void Do()
         {
             CommandManager.GetDefault().SendKey(_spell.KeyAction);
-            Task.Delay(_spell.CastTime).Wait();
+            const int globalCooldown = 1500;
+
+            if (_spell.CastTime > globalCooldown)
+                Task.Delay(_spell.CastTime).Wait();
+            else
+                Task.Delay(globalCooldown).Wait();
+
         }
     }
 }

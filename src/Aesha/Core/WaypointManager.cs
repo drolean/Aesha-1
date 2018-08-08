@@ -9,7 +9,7 @@ namespace Aesha.Core
     {
         private readonly Path _path;
         private readonly ILogger _logger;
-        private Location _nextWaypoint;
+        private int _currentWaypointIndex;
 
         public WaypointManager(Path path, ILogger logger)
         {
@@ -17,9 +17,9 @@ namespace Aesha.Core
             _logger = logger;
         }
 
-        public void MoveToWaypoint(Location location, int stopAt = 20, bool continuousMode = false)
+        public void MoveToWaypoint(Location location, int stopAt = 20, bool continuousMode = false, bool forseMemoryWriteFacing = false)
         {
-            CommandManager.GetDefault().SetPlayerFacing(location);
+            CommandManager.GetDefault().SetPlayerFacing(location, forceMemoryWrite: forseMemoryWriteFacing);
 
             var startingDistance = location.GetDistanceTo(ObjectManager.Me.Location);
             _logger.Information($"Starting location: {ObjectManager.Me.Location} Distance: {startingDistance}");
@@ -37,7 +37,6 @@ namespace Aesha.Core
             {
                 distanceToWaypoint = location.GetDistanceTo(ObjectManager.Me.Location);
                 CommandManager.GetDefault().SetPlayerFacing(location);
-                Thread.Sleep(50);
             }
 
             _logger.Information($"Ending location: {ObjectManager.Me.Location} Distance: {distanceToWaypoint}");
@@ -48,15 +47,15 @@ namespace Aesha.Core
 
         public Location GetNextWaypoint()
         {
-            if (_nextWaypoint == null)
+            if (_currentWaypointIndex == 0)
             {
-                _nextWaypoint = _path.Entries.First().Value;
-                _logger.Information($"Distance to start of path: {_nextWaypoint.GetDistanceTo(ObjectManager.Me.Location)}");
-                return _nextWaypoint;
+                _currentWaypointIndex = _path.FindNearestWaypointIndex(ObjectManager.Me.Location);
+                _logger.Information($"Distance to nearest waypoint is: {_path.Entries[_currentWaypointIndex].GetDistanceTo(ObjectManager.Me.Location)}");
+                return _path.Entries[_currentWaypointIndex];
             }
 
-            _nextWaypoint = _path.GetNextWaypoint(_nextWaypoint);
-            return _nextWaypoint;
+            _currentWaypointIndex = _path.GetNextWaypointIndex(_currentWaypointIndex + 2);
+            return _path.Entries[_currentWaypointIndex];
         }
     }
 }
