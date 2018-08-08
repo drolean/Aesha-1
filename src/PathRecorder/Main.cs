@@ -56,7 +56,7 @@ namespace PathRecorder
                     startPosition = currentLocation;
                 }
 
-                await Task.Delay(2000);
+                await Task.Delay(100);
             }
         }
 

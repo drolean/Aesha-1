@@ -8,9 +8,6 @@ namespace Aesha.Interfaces
         void AttackBehaviour();
         void Tick();
 
-        void SetTarget(WowUnit target);
-
-
     }
 
     public enum RobotState

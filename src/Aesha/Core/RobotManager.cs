@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,9 +30,9 @@ namespace Aesha.Core
 
         public void Start()
         {
-            var waypointManager = new WaypointManager(Path.FromFile("Goldshire.path"),_logger);
+            var waypointManager = new WaypointManager(Path.FromFile("Stonefield-Farm.path"),_logger);
             _robot = new Warlock(_commandManager, waypointManager, _logger);
-
+            
             _cancellationSource = new CancellationTokenSource();
             _cancellationToken = _cancellationSource.Token;
             _task = new Task(() =>
@@ -40,6 +41,7 @@ namespace Aesha.Core
                 {
                     while (!_cancellationToken.IsCancellationRequested)
                     {
+                        _commandManager.SetFocus();
                         _robot.Tick();
                         Task.Delay(100, _cancellationToken).Wait(_cancellationToken);
                     }

@@ -5,6 +5,14 @@ namespace Aesha.Infrastructure
 {
     public static class Win32Imports
     {
+        public struct Rect
+        {
+            public int Left { get; set; }
+            public int Top { get; set; }
+            public int Right { get; set; }
+            public int Bottom { get; set; }
+        }
+
         [DllImport("kernel32", EntryPoint = "OpenProcess")]
         public static extern IntPtr OpenProcess(
             uint dwDesiredAccess,
@@ -35,6 +43,10 @@ namespace Aesha.Infrastructure
             IntPtr lpBuffer, 
             int nSize, 
             out IntPtr iBytesWritten);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
+
 
         [DllImport("kernel32")]
         public static extern uint SuspendThread(IntPtr hThread);
@@ -71,9 +83,6 @@ namespace Aesha.Infrastructure
         [DllImport("user32.dll")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
 
         [DllImport("user32.dll")]
         public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);

@@ -66,10 +66,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\MappedKeyAction.cs" />
     <Compile Include="Core\MappedKeys.cs" />
     <Compile Include="Infrastructure\Timings.cs" />
     <Compile Include="Interfaces\IInjectionManager.cs" />
-    <Compile Include="Core\InjectionManager.cs" />
     <Compile Include="Core\WowProcess.cs" />
     <Compile Include="Interfaces\IProcessMemoryReader.cs" />
     <Compile Include="Interfaces\IWowProcess.cs" />
@@ -104,7 +104,6 @@
     <Compile Include="Robots\Actions\IConditionalAction.cs" />
     <Compile Include="Robots\Actions\LootUnits.cs" />
     <Compile Include="Robots\Actions\SummonPet.cs" />
-    <Compile Include="Robots\BaseRobot.cs" />
     <Compile Include="Interfaces\IRobot.cs" />
     <Compile Include="Robots\Warlock.cs" />
     <Compile Include="Service.cs" />
@@ -124,6 +123,9 @@
     <None Include="Paths\Goldshire.path">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Paths\Stonefield-Farm.path">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

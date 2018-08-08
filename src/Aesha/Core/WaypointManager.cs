@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Aesha.Domain;
-using Aesha.Robots.Actions;
 using Serilog;
 
 namespace Aesha.Core
@@ -39,9 +37,6 @@ namespace Aesha.Core
             {
                 distanceToWaypoint = location.GetDistanceTo(ObjectManager.Me.Location);
                 CommandManager.GetDefault().SetPlayerFacing(location);
-
-                _logger.Information($"Current location: {ObjectManager.Me.Location} Distance: {distanceToWaypoint}");
-
                 Thread.Sleep(50);
             }
 

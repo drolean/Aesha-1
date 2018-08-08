@@ -121,12 +121,21 @@ namespace Aesha.Core
             MK_LBUTTON = 0x0001,
             MK_SHIFT = 0x0004
         }
-        
+
+        public Point GetOffsetPoint(Point point)
+        {
+            var windowRect = new Win32Imports.Rect();
+            Win32Imports.GetWindowRect(_processWindowHandle, ref windowRect);
+            return new Point(windowRect.Left + point.X, windowRect.Top + point.Y);
+        }
+
 
         public void SendShiftClick(Point point)
         {
-            Cursor.Position = point;
-            var lparam = CreateMouseParam(point);
+            var offsetPoint = GetOffsetPoint(point);
+            
+            Cursor.Position = offsetPoint;
+            var lparam = CreateMouseParam(offsetPoint);
             var flags = MouseFlags.MK_LBUTTON | MouseFlags.MK_SHIFT;
 
             Win32Imports.PostMessage(_processWindowHandle, WM_KEYDOWN, 0x10, 0x002A0001);

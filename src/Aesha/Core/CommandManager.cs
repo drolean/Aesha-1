@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Aesha.Domain;
 using Aesha.Infrastructure;
 using Aesha.Interfaces;
@@ -13,23 +8,6 @@ using Serilog;
 
 namespace Aesha.Core
 {
-
-    public class MappedKeyAction
-    {
-        public MappedKeyAction(char key, bool shift = false, bool ctrl = false, bool alt = false)
-        {
-            Key = key;
-            Shift = shift;
-            Ctrl = ctrl;
-            Alt = alt;
-        }
-
-        public char Key { get; }
-        public bool Shift { get; }
-        public bool Ctrl { get; }
-        public bool Alt { get; }
-    }
-    
     public class CommandManager
     {
         private readonly IWowProcess _process;
@@ -62,21 +40,14 @@ namespace Aesha.Core
 
         public void SetTarget(IWowObject unit)
         {
-            var radian = Radian.GetFaceRadian(unit.Location, ObjectManager.Me.Location);
-            var rotationDiff = Math.Abs(ObjectManager.Me.Rotation - radian.Angle);
-            if (rotationDiff > 0.5f)
-            {
-                _logger.Information($"Rotation difference greater than tolerance: {rotationDiff}");
-                SetPlayerFacing(unit.Location);
-            }
-
             _reader.WriteUInt64((uint)Offsets.WowGame.TargetLastTargetGuid, unit.Guid);
             SendKey(MappedKeys.TargetLastTarget);
+            SetPlayerFacing(unit.Location);
         }
 
         public void ClearTarget()
         {
-            SendKey(MappedKeys.Esc);
+            //TODO send ESC key
         }
 
         public void SendKeyDown(MappedKeyAction action)
@@ -99,11 +70,9 @@ namespace Aesha.Core
         public void EvaluateAndPerform(IConditionalAction action)
         {
             var task = new Task(() =>
-            {
-                _logger.Information($"Evaulating action: {action.GetType()}");
+            { 
                 if (action.Evaluate())
                 {
-                    _logger.Information($"Invoking action {action.GetType()}");
                     action.Do();
                 }
             });
@@ -138,28 +107,48 @@ namespace Aesha.Core
         }
 
 
-        public void SetPlayerFacing(Location destination, float threshhold = 0.2f)
+        public void SetPlayerFacing(Location destination, float threshold = 0.4f)
         {
+            const float memoryWriteThreshold = 1.5f;
+
             var radian = Radian.GetFaceRadian(destination, ObjectManager.Me.Location);
             var nudgeKey = MappedKeys.Left;
 
-            var diff = Math.Abs(ObjectManager.Me.Rotation - radian.Angle);
-            if (diff < threshhold)
+            var difference = ObjectManager.Me.Rotation - radian.Angle;
+            var absoluteDifference = Math.Abs(difference);
+            if (absoluteDifference < threshold) return;
+
+            if (absoluteDifference > memoryWriteThreshold)
             {
-                _logger.Information($"Not setting facing. Lower than threshold: {diff}");
+                _logger.Information("Set player facing using memory write");
+                InternalSetPlayerFacing(radian, nudgeKey);
                 return;
             }
 
-            _logger.Information("Set player facing");
-            InternalSetPlayerFacing(radian, nudgeKey);
-        }
+            var direction = difference > 0 ? MappedKeys.Right : MappedKeys.Left;
+            while (absoluteDifference > threshold)
+            {
+                SendKeyDown(direction);
 
+                radian = Radian.GetFaceRadian(destination, ObjectManager.Me.Location);
+                absoluteDifference = Math.Abs(ObjectManager.Me.Rotation - radian.Angle);
 
-        public void Loot(IEnumerable<IWowObject> unitsToLoot)
-        {
-            
+                if (absoluteDifference > memoryWriteThreshold)
+                {
+                    _logger.Information("Set player facing using memory write");
+                    InternalSetPlayerFacing(radian, nudgeKey);
+                    break;
+                }
+            }
+
+            SendKeyUp(direction);
         }
         
         public ulong MouseOverUnit => _reader.ReadUInt64((uint)Offsets.WowGame.MouseOverGuid);
+
+        public void SetFocus()
+        {
+            Win32Imports.SetForegroundWindow(_process.MainWindowHandle);
+        }
     }
 }

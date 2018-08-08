@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Aesha.Core;
+﻿using Aesha.Core;
 using Aesha.Domain;
 using Aesha.Infrastructure;
 using Aesha.Interfaces;
@@ -8,11 +7,11 @@ using Serilog;
 
 namespace Aesha.Robots
 {
-    public class Warlock : BaseRobot, IRobot
+    public class Warlock : IRobot
     {
         private readonly CommandManager _commandManager;
         private readonly WaypointManager _waypointManager;
-        private ILogger _logger;
+        private readonly ILogger _logger;
         
         // ReSharper disable InconsistentNaming
         private readonly Spell DemonSkin = new Spell(687, "Demon Skin", 1, MappedKeys.ActionBar3);
@@ -37,7 +36,6 @@ namespace Aesha.Robots
         // ReSharper restore InconsistentNaming
 
         public Warlock(CommandManager commandManager, WaypointManager waypointManager, ILogger logger)
-        : base(commandManager,waypointManager,logger)
         {
             _commandManager = commandManager;
             _waypointManager = waypointManager;
@@ -59,22 +57,19 @@ namespace Aesha.Robots
         
         public void PassiveBehaviour()
         {
-            _logger.Information("Invoking PASSIVE routine");
             _commandManager.EvaluateAndPerform(LootUnits);
             _commandManager.EvaluateAndPerform(SummonPet);
             _commandManager.EvaluateAndPerform(CastDemonSkin);
             _commandManager.EvaluateAndPerform(CastDrink);
 
             var waypoint = _waypointManager.GetNextWaypoint();
-            _waypointManager.MoveToWaypoint(waypoint,20,true);
+            _waypointManager.MoveToWaypoint(waypoint, continuousMode: true);
         }
 
 
         public void AttackBehaviour()
         {
-            _logger.Information("Invoking COMBAT routine");
-            CommandManager.SetPlayerFacing(ObjectManager.Me.Target.Location, 1f);
-
+            _commandManager.SetPlayerFacing(ObjectManager.Me.Target.Location);
             _commandManager.EvaluateAndPerform(CastCorruption);
             _commandManager.EvaluateAndPerform(CastShadowBolt);
         }
@@ -94,14 +89,18 @@ namespace Aesha.Robots
             _commandManager.EvaluateAndPerform(AcquireTarget);
             if (ObjectManager.Me.Target != null && ObjectManager.Me.Target?.Health.Current > 0)
             {
-                CommandManager.StopMovingForward();
-                _logger.Information($"Found target: {ObjectManager.Me.Target}. Adding to loot list");
-                LootUnits.LootList.Add(ObjectManager.Me.Target);
+                _commandManager.StopMovingForward();
+                LootUnits.AddUnit(ObjectManager.Me.Target);
+
+                if (_state == RobotState.Combat) return;
+        
                 _state = RobotState.Combat;
                 _logger.Information($"Switching to COMBAT state");
             }
             else
             {
+                if (_state == RobotState.Passive) return;
+                
                 _commandManager.ClearTarget();
                 _logger.Information($"No targets found");
                 _state = RobotState.Passive;

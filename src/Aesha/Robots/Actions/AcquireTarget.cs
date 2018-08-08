@@ -31,7 +31,7 @@ namespace Aesha.Robots.Actions
                     && u.Health.Current > 0
                     && u.SummonedBy == null
                     && u.CreatureType != CreatureType.Critter
-                    && u.Distance < 800)
+                    && u.Distance < 1000)
                 .OrderBy(u => u.Distance).ToList();
 
             if (enemies.Count > 0)
